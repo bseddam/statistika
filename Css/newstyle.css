@@ -19,13 +19,13 @@
         margin: 0;
     }
 
-    .up2 button {
+    .up2 submit {
         border-radius: 1px;
         margin-top: 10px;
         outline: none;
     }
 
-    .up2 a > button {
+    .up2 a > submit {
         font-size: 13px;
         padding: 5px 9px;
     }

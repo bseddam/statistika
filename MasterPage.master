@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="/css/style.css?v=77" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="/css/newstyle.css" />
+    <style>
+        .btn-default
+        {
+            border-radius:0px;
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -59,10 +65,9 @@
 
 
                                 <asp:Literal ID="ltrLink" Text="" runat="server" />
-                                <a href="http://etsim.az/db/sdg/loginsdg.php">
-                                    <button class="btn btn-login">Daxil ol</button></a>
-                                <a href="http://etsim.az/db/sdg/registration.php">
-                                    <button class="btn btn-register">Qeydiyyat</button></a>
+                                <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
+                                <a href="http://etsim.az/db/sdg/registration.php"><submit class="btn btn-register">Qeydiyyat</submit></a>
+                          
 
                             </ul>
                         </div>
