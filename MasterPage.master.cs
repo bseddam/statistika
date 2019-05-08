@@ -20,14 +20,27 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
 
 
+
+        //if (lang == "en")
+        //{
+        //    ltrLink.Text = string.Format("<input onclick='location.href=&apos;{0}&apos;' type='button' class='btn btn-az' value='AZ' /> " +
+        //        "<input onclick='location.href=&apos;{1}&apos;' type='button' class='btn btn-az' value='EN' />", getURL, getURL);
+        //}
+        //else
+
+        //{
+        //    ltrLink.Text = string.Format("<input onclick='location.href=&apos;{0}&apos;' type='button' class='btn btn-az' value='AZ' /> " +
+        //        "<input onclick='location.href=&apos;{1}&apos;' type='button' class='btn btn-az' value='EN' />", getURL, getURL);
+        //}
+
         if (lang == "en")
         {
-            ltrLink.Text = string.Format("<a  class='btn btn-default' href='{0}'>AZ</a>" +
+            ltrLink.Text = string.Format("<a  class='btn btn-default' href='{0}'>AZ</a> " +
                 "<a class='btn btn-default active' href='{1}' >EN</a>", getURL, getURL);
         }
         else
         {
-            ltrLink.Text = string.Format("<a class='btn btn-default active' href='{0}'>AZ</a>" +
+            ltrLink.Text = string.Format("<a class='btn btn-default active' href='{0}'>AZ</a> " +
                 "<a class='btn btn-default' href='{1}'>EN</a>", getURL, getURL);
         }
         DataTable dtHeader = db.GetMenuClient(Utils.MenuType.Header, lang);
