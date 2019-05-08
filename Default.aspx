@@ -16,7 +16,6 @@
                 </div>
 
                 <div class="row1 clearfix">
-
                     <asp:Repeater ID="rptGoals" runat="server">
                         <ItemTemplate>
                             <div class="col-md-2 col-sm-4 col-xs-6">
@@ -26,7 +25,6 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
-
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <a href="#">
                             <img id="goalimagee" src="/images/goals-<%=Config.getLang(Page) %>/goals-logo.png" class="img-responsive" />
@@ -107,11 +105,11 @@
         <div class="container main-container">
             <div class="news-container">
                 <div class="row">
-                    <div class="col-md-6"  style="margin-right:0px;padding-right:0px;">
+                    <div class="col-md-6">
                         <h5 class="news-title">
                             <a href="<%="/"+Config.getLang(Page)+"/news/list" %>"><%=DALC.GetStaticValue("home_news") %> </a>
                         </h5>
-                        <div class="news-content" >
+                        <div class="news-content" style="border-right:none;" >
                             <ul>
                                 <asp:Repeater ID="rptNews" runat="server">
                                     <ItemTemplate>

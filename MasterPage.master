@@ -60,9 +60,9 @@
 
 
                                 <asp:Literal ID="ltrLink" Text="" runat="server" />
-                                <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
+                             <%--   <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
                                 <a href="http://etsim.az/db/sdg/registration.php"><submit class="btn btn-register">Qeydiyyat</submit></a>
-                          
+                          --%>
 
                             </ul>
                         </div>
@@ -228,8 +228,6 @@
                                         <i class="fa fa-youtube-play"></i>
                                     </asp:HyperLink>
                                 </li>
-
-
                             </ul>
                         </div>
 
@@ -240,7 +238,6 @@
                     <div class="col-md-9">
                         <nav>
                             <ul class="footer-menu">
-
                                 <asp:Repeater ID="rptFooterMenu" runat="server">
                                     <ItemTemplate>
                                         <li>
