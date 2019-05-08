@@ -17,12 +17,7 @@
     <link rel="stylesheet" href="/css/style.css?v=77" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="/css/newstyle.css" />
-    <style>
-        .btn-default
-        {
-            border-radius:0px;
-        }
-    </style>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

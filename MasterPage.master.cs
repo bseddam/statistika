@@ -24,11 +24,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
         if (lang == "en")
         {
             ltrLink.Text = string.Format("<a href='{0}'><submit class='btn btn-az'>AZ</submit></a> " +
-                "<a href='{1}'><submit class='btn btn-en'>EN</submit></a>", getURL, getURL);
+                "<a href='{1}'><submit class='btn btn-en' style='background-color: #026BA2;color:white;'>EN</submit></a>", getURL, getURL);
         }
         else
         {
-            ltrLink.Text = string.Format("<a href='{0}'><submit class='btn btn-az'>AZ</submit></a> " +
+            ltrLink.Text = string.Format("<a href='{0}'><submit class='btn btn-az' style='background-color: #026BA2;color:white;'>AZ</submit></a> " +
                  "<a href='{1}'><submit class='btn btn-en'>EN</submit></a>", getURL, getURL);
         }
 
