@@ -107,11 +107,11 @@
         <div class="container main-container">
             <div class="news-container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6"  style="margin-right:0px;padding-right:0px;">
                         <h5 class="news-title">
                             <a href="<%="/"+Config.getLang(Page)+"/news/list" %>"><%=DALC.GetStaticValue("home_news") %> </a>
                         </h5>
-                        <div class="news-content">
+                        <div class="news-content" >
                             <ul>
                                 <asp:Repeater ID="rptNews" runat="server">
                                     <ItemTemplate>
