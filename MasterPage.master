@@ -1,0 +1,273 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0//css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="/css/style.css?v=77" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="/css/newstyle.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <header class="not-printable">
+            <div class="navbar navbar-mini">
+                <nav class="up2">
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav navbar-nav navbar-right">
+                                <asp:Repeater ID="rptHeaderMenu" runat="server">
+                                    <ItemTemplate>
+
+                                        <li <%#Eval("SubCount").ToParseInt()>0?"class='dropdown'":"" %>>
+                                            <a <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
+                                                href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
+                                                <%#Eval("Name") %>
+
+                                                <%#Eval("SubCount").ToParseInt()>0?" <span class='caret'></span>":"" %>
+
+                                                <%#Eval("SubCount").ToParseInt()>0?" <ul class='dropdown-menu'>":"" %>
+
+                                                <asp:Repeater ID="rptHeaderSub" runat="server">
+                                                    <ItemTemplate>
+                                                        <li>
+                                                            <a href="<%#"/"+Config.getLang(Page)+Eval("URL").ToParseStr() %>">
+                                                                <%#Eval("Name") %>
+                                                            </a>
+                                                        </li>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                                <%#Eval("SubCount").ToParseInt()>0?" </ul>":"" %>
+
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+
+                                <asp:Literal ID="ltrLink" Text="" runat="server" />
+                                <a href="http://etsim.az/db/sdg/loginsdg.php">
+                                    <button class="btn btn-login">Daxil ol</button></a>
+                                <a href="http://etsim.az/db/sdg/registration.php">
+                                    <button class="btn btn-register">Qeydiyyat</button></a>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+            <div class="container">
+
+                <nav class="navbar navbar-first">
+                    <div class="container-fluid" style="padding: 0 20px 0 18px;">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="/<%=Config.getLang(Page) %>/home">
+                                <img src="/images/logo_<%=Config.getLang(Page) %>.png?v=4" class="logo-<%=Config.getLang(Page) %>" />
+                            </a>
+                        </div>
+
+                        <div class="navbar-right">
+                            <a href="https://www.stat.gov.az" target="_blank">
+                                <img src="/images/az-stat-logo.png" alt="az-stat-logo" style="height: 81px; margin-right: 6px; margin-top: 11px;" />
+                            </a>
+                            <a href="http://www.az.undp.org/content/azerbaijan/az/home.html" target="_blank">
+                                <img src="/images/undp_logo.png" alt="undp_logo" style="height: 81px; margin-right: 16px; margin-top: 11px;" />
+
+                            </a>
+                        </div>
+
+                    </div>
+                </nav>
+            </div>
+            <nav class="navbar-second navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse" style="font-size: 20px; padding-left: 5px; padding-right: 20px;">
+                        <ul class="nav navbar-nav">
+                            <asp:Repeater ID="rptMain" runat="server">
+                                <ItemTemplate>
+
+                                    <li <%#Eval("SubCount").ToParseInt()>0?"class='dropdown'":"" %>>
+                                        <a
+                                            <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
+                                            href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
+                                            <%#Eval("Name") %>
+
+                                            <%#Eval("SubCount").ToParseInt()>0?" <span class='caret'></span>":"" %>
+
+                                            <%#Eval("SubCount").ToParseInt()>0?" <ul class='dropdown-menu'>":"" %>
+
+                                            <asp:Repeater ID="rptMainSub" runat="server">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <a href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
+                                                            <%#Eval("Name") %>
+                                                        </a>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <%#Eval("SubCount").ToParseInt()>0?" </ul>":"" %>
+
+                                        </a>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                        <div class="navbar-form navbar-right">
+                            <div class="search-form  ">
+                                <div class="search-form-container clear">
+                                    <div class="arrow-container search-form-item ">
+                                        <div class="form-control arrow-down">
+                                            <i class="fa fa-arrow-down"></i>
+                                        </div>
+                                        <div class="form-control arrow-up">
+                                            <i class="fa fa-arrow-up"></i>
+                                        </div>
+                                    </div>
+                                    <div class="search-form-input  search-form-item">
+                                        <asp:TextBox runat="server" class="form-control" ID="txtSearch" ClientIDMode="Static" />
+                                    </div>
+                                    <div class="input-group-btn  search-form-item">
+                                        <button class="btn btn-default" onclick=" var srctxt=document.getElementById('txtSearch').value; window.location='/az/search/general?q='+srctxt;return false;">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="search-form-menu">
+                                    <ul>
+                                        <li>
+                                            <asp:HyperLink ID="hpSearch" runat="server" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <!--/.container-fluid -->
+            </nav>
+        </header>
+        <div>
+            <asp:ContentPlaceHolder ID="content" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="not-printable">
+            <div class="container site-info main-container">
+                <div class="row">
+
+                    <%-- <ul class="footer-menu-2">
+                        <asp:Repeater ID="rptFooterMenu2" runat="server">
+                            <ItemTemplate>
+                                <li>
+                                    <a href="<%#Eval("URL") %>">
+                                        <%#Eval("Name") %>
+                                    </a>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </ul>--%>
+
+                    <div class="col-md-8">
+                        <ul class="partners">
+                            <asp:Repeater runat="server" ID="rptPartners">
+                                <ItemTemplate>
+                                    <li>
+                                        <a href="<%#Eval("url") %>" title="<%#Eval("title_"+Config.getLang(Page)) %>" target="_blank">
+                                            <img src="/uploads/partners/<%#Eval("image_url") %>" alt="<%#Eval("title_"+Config.getLang(Page)) %>" />
+                                        </a>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-social ">
+                            <div class="footer-social-text" style="margin-bottom: 10px;">
+                                <asp:Literal ID="ltrFollow" Text="" runat="server" />
+                            </div>
+                            <ul class="footer-social-links">
+                                <li class="li-facebook">
+                                    <asp:HyperLink ID="hp_face" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-facebook"></i>
+                                    </asp:HyperLink>
+                                </li>
+                                <li class="li-linkedin">
+                                    <asp:HyperLink ID="hp_linkedin" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-linkedin"></i>
+                                    </asp:HyperLink>
+                                </li>
+                                <li class="li-twitter">
+                                    <asp:HyperLink ID="hp_twt" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-twitter"></i>
+                                    </asp:HyperLink>
+                                </li>
+                                <li class="li-youtube">
+                                    <asp:HyperLink ID="hp_youtube" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </asp:HyperLink>
+                                </li>
+
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="line" style="margin-top: 30px;"></div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <nav>
+                            <ul class="footer-menu">
+
+                                <asp:Repeater ID="rptFooterMenu" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a href="<%#"/"+Config.getLang(Page)+Eval("URL") %>" style="font-size: 12px;">
+                                                <%#Eval("Name") %>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-3 " style="text-align: right">
+                        <%=DateTime.Now.Year %> ©  <%=DALC.GetStaticValue("footer_rights") %>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="/js/script.js?v=81"></script>
+
+        <asp:ContentPlaceHolder ID="script" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

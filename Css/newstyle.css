@@ -1,0 +1,83 @@
+﻿.hovbut:hover a{
+    color: white;
+}
+.fora {
+    color: black;
+}
+    .fora:hover {
+        color: black;
+        text-decoration: none;
+
+    }
+.up2 {
+    width: 100%;
+    background-color: #E2E2E2;
+    box-shadow: 0 2px 15px -2px rgba(0,0,0,.5);
+}
+
+    .up2 ul {
+        margin: 0;
+    }
+
+    .up2 button {
+        border-radius: 1px;
+        margin-top: 10px;
+        outline: none;
+    }
+
+    .up2 a > button {
+        font-size: 13px;
+        padding: 5px 9px;
+    }
+
+    .up2 .btn-az {
+        background-color: #fff;
+        color: #333;
+        border: none;
+        transition-duration: 0.2s;
+        margin-left: 15px;
+    }
+
+        .up2 .btn-az:hover {
+            background-color: #026BA2;
+            color: #fff;
+            border: none;
+        }
+
+    .up2 .btn-en {
+        background-color: #fff;
+        color: #333;
+        border: none;
+        transition-duration: 0.2s;
+    }
+
+        .up2 .btn-en:hover {
+            background-color: #026BA2;
+            color: #fff;
+            border: none;
+        }
+
+    .up2 .btn-login {
+        background-color: #fff;
+        color: #333;
+        border: 1px solid #fff;
+        transition-duration: 0.2s;
+        margin-left: 5px;
+    }
+
+        .up2 .btn-login:hover {
+            background-color: #fff;
+        }
+
+    .up2 .btn-register {
+        color: #fff;
+        border: 1px solid #5F87A8;
+        transition-duration: 0.2s;
+        background-color: #5F87A8;
+    }
+
+        .up2 .btn-register:hover {
+            background-color: #365C7B;
+            border: 1px solid #5F87A8;
+            color: #fff;
+        }

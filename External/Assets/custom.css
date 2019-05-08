@@ -1,0 +1,99 @@
+﻿.pagination .active { background-color: #eee; }
+.pagination .disabled,
+.pagination a[disabled="disabled"] { background-color: #eee; cursor: not-allowed; }
+.search-text { background-color: #FF9632; }
+.close-more { border: 1px solid #808080; padding: 5px; width: 44px; float: right; margin-right: 20px; background-color: #F5F5F5; cursor: pointer; }
+
+/*.masterpage-title
+{
+    color: #fff;
+    padding-top: 5px;
+    font-size: 18px;
+    padding-left: 260px;
+}*/
+
+
+.uni-select-item { color: #000; }
+    .uni-select-item:hover { color: #000; }
+.uni-list .dxeListBoxItemSelected_MetropolisBlue { color: #000; }
+#Uni_B-1 { display: none; }
+.heading { padding: 13px 15px 13px 15px !important; background-color: #EAEAEA; }
+    .heading h3 { color: #708096 !important; margin: 0; padding: 0; font-size: 14px; font-weight: 300; }
+.icons-panel { margin-right: 52px; float: right; }
+    .icons-panel ul li { list-style: none; float: left; margin-left: 30px; }
+        .icons-panel ul li a:link { color: #fff; }
+        .icons-panel ul li a:hover { color: #ddd; text-decoration: none; cursor: pointer; }
+    .icons-panel .dropdown-menu { min-width: 130px !important; width: 130px; }
+        .icons-panel .dropdown-menu a, .icons-panel .dropdown-menu a:hover { color: #000 !important; text-decoration: none; }
+.box-shadow-popover-img { -webkit-box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.25); -moz-box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.25); box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.25); }
+.text-bold { font-weight: bold !important; }
+.uni-row { font: normal 18px Calibri; padding: 9px 10px 9px 16px; background-color: #F7F7F7; margin-right: 45px; margin-bottom: 5px; }
+    .uni-row i { margin-right: 10px; color: #BDBCB9; }
+.uni-title { height: 74px; display: block; font: bold 24px Calibri; }
+.uni-img { height: 312px; border: 1px solid #D2D2D2; padding: 4px; }
+.uni-row-title { display: block; color: rgb(149, 149, 149); }
+.uni-row-content { display: block; }
+.uni-row-rigthTxt { float: right; margin-right: 20px; font-weight: bold; }
+.yubiley { background: url('/pics/yubiley.png') no-repeat; height: 79px; width: 79px; position: absolute; margin: 20px 0 0 20px; }
+.yubiley-year { display: block; font: bold 26px Calibri; color: white; text-align: center; margin-top: 16px; margin-left: -7px; }
+.photo { position: relative; }
+.paddingTop9 { padding-top: 9px; }
+.slimScrollDiv, .page-sidebar-menu { overflow: visible !important; }
+.masterpage-title { color: #fff; padding-top: 5px; font-size: 18px; padding-right: 150px; float: left; }
+.edu-year { font-size: 12px; display: inherit; text-align: center; }
+.caption-menu-column1 { width: 30%; }
+
+@media (max-width: 1300px) {
+    .caption-menu-column1 { width: 15%; }
+}
+
+@media (max-width: 900px) {
+    .caption-menu-column1 { width: 10%; }
+}
+/*begin masterpage-title*/
+@media (min-width: 780px) and (max-width: 900px) {
+    .masterpage-title { padding-right: 10px; font-size: 12px; }
+}
+
+@media (min-width: 900px) and (max-width: 1000px) {
+    .masterpage-title { padding-right: 30px; font-size: 12px; }
+}
+
+@media (min-width: 1000px) and (max-width: 1100px) {
+    .masterpage-title { padding-right: 100px; }
+}
+
+@media (min-width: 1450px) {
+    .masterpage-title { padding-right: 500px; }
+}
+
+@media (max-width: 780px) {
+    .masterpage-title { display: none; }
+}
+/*end masterpage-title*/
+.gridInvalidRow { color: white !important; background-color: rgb(255, 79, 79) !important; }
+    .gridInvalidRow a { color: white !important; }
+input[type="radio"] { vertical-align: top !important; margin: 4px 3px 3px 10px !important; }
+.gridRow { color: white !important; background-color: rgb(242, 114, 114) !important; }
+    .gridRow:hover { color: white !important; background-color: rgb(218, 80, 80) !important; }
+    .gridRow a { color: white !important; }
+.commandtype { color: #1FA1EC; font-size: 18px; }
+.headingHr { border-bottom: 1px solid #000 !important; }
+.page-container {
+margin-top:0px !important;
+}
+
+
+.grid-header {
+
+    background-color: #676767 !important;
+    color: #fff !important;
+}
+.grid-header a,
+.grid-header table{
+     color: #fff !important;
+}
+.grid-header a:hover{
+     color: #fff;
+     text-decoration:underline;
+}
