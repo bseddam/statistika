@@ -2629,6 +2629,57 @@ where i.qurum_id=@orgId and i.isActive=1 ", SqlConn);
             return null;
         }
     }
+    public int indiqatoryoxla(int id)
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            int a = 0;
+            MySqlDataAdapter da = new MySqlDataAdapter(@"
+select * from (select *,concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8)) kodu from indicators i WHERE 
+i.id=@id and i.isActive=1 and i.parent_id=0 ) as indi 
+inner join 
+(
+   SELECT count(*) say,kod from (
+     SELECT concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8)) kod,id
+     from indicators as i
+     where  i.isActive=1 and i.parent_id=0 
+   ) c group by kod HAVING count(*)>1
+) iki
+on indi.kodu=iki.kod where indi.isActive=1", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("id", id);
+            da.Fill(dt);
+
+
+            DataTable dt1 = new DataTable();
+            MySqlDataAdapter da1 = new MySqlDataAdapter(@"SELECT * FROM `hesabat` WHERE indicator_id=@id 
+and is_active=1 and (`value` is not null or footnote_id is not null)", SqlConn);
+            da1.SelectCommand.Parameters.AddWithValue("id", id);
+            da1.Fill(dt1);
+
+
+            if (dt.Rows.Count > 0 && dt1.Rows.Count == 0)
+            {
+                DataTable dt2 = new DataTable();
+                MySqlDataAdapter da2 = new MySqlDataAdapter(@"select *  from indicators i where 
+ i.isActive=1 and i.parent_id=0 and type_id=2 and concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8))=@kodu" , SqlConn);
+                da2.SelectCommand.Parameters.AddWithValue("kodu", dt.Rows[0]["kodu"].ToParseStr());
+                da2.Fill(dt2);
+                a = dt2.Rows[0]["id"].ToParseInt();
+            }
+            else
+                a = id;
+            return a;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("indiqatoryoxla()"), ex.Message, "", true);
+            return 0;
+        }
+    }
+
+
+
     public DataTable GetIndicatorById(int id)
     {
         try
@@ -2700,9 +2751,9 @@ where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  *  from indicators where goal_id=@goal_id and isActive=1 order by indicatorCode(code) ", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select  *  from indicators where goal_id=@goal_id and 
+isActive=1 order by indicatorCode(code) ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
-
             da.Fill(dt);
             return dt;
         }

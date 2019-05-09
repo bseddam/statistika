@@ -20,7 +20,7 @@
                         <asp:Literal ID="lblFilter" runat="server"></asp:Literal>
                     </div>
                     <div class="tools">
-<%--                        <a href="javascript:void(0);" class="close-panel" style="color: #fff" title="Bağla">X</a>--%>
+<%--<a href="javascript:void(0);" class="close-panel" style="color: #fff" title="Bağla">X</a>--%>
                     </div>
                 </div>
                 <div class="portlet-body ">

@@ -82,10 +82,10 @@ public partial class Admin_IndicatorReports_Default : System.Web.UI.Page
         column.PropertiesComboBox.Items.Clear();
         foreach (DataRow item in dt.Rows)
         {
-            column.PropertiesComboBox.Items.Add(new DevExpress.Web.ASPxEditors.ListEditItem(item["name_az"].ToParseStr(), item["id"].ToParseInt()));
+            column.PropertiesComboBox.Items.Add(new DevExpress.Web.ASPxEditors.ListEditItem(item["name_az"].ToParseStr(),
+                item["id"].ToParseInt()));
         }
         column.PropertiesComboBox.Items.Insert(0, new DevExpress.Web.ASPxEditors.ListEditItem(_defaultDropdownRowText1, ""));
-
 
         #endregion
 

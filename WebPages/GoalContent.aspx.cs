@@ -21,7 +21,7 @@ public partial class WebPages_GoalContent : System.Web.UI.Page
         if (dt.Rows.Count > 0)
         {
             lblGoalName.Text = dt.Rows[0]["name_" + lang].ToParseStr();
-            ;
+            
 
             Page.Title = lblGoalName.Text + " - " + Config.GetAppSetting("ProjectName");
 

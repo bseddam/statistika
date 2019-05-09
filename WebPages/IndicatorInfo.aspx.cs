@@ -127,8 +127,18 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     private void _loadGoalInfo(int indicatorid, string lang)
     {
         string goal_value = DALC.GetStaticValue("goal_value");
-        DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
 
+
+        indicatorid = _db.indiqatoryoxla(indicatorid);
+        
+
+
+
+
+        DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
+        
+
+        
         if (dtIndicator == null || dtIndicator.Rows.Count < 1)
         {
             Config.Rd("/error?null");
@@ -176,7 +186,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             lblIndicatorTitle.Font.Size = 13;
         }
-      if(200 > lblIndicatorTitle.Text.Length)
+        if(200 > lblIndicatorTitle.Text.Length)
         {
             lblIndicatorTitle.Font.Size = 14;
         }
@@ -217,7 +227,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             pnlDiaqramTable.Visible = true;
             loadData(lang, new List<int> { indicatorid });
         }
-		   if(lblGoalName.Text.Length > 235)
+		if(lblGoalName.Text.Length > 235)
         {
             lblGoalName.Font.Size = 17;
         }
