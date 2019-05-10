@@ -130,7 +130,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         indicatorid = _db.indiqatoryoxla(indicatorid);
-        
+        //Response.Write(indicatorid);
 
 
 
