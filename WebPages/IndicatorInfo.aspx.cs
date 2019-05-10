@@ -96,13 +96,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     private void _loadMetadata(int indicatorid, string lang)
     {
-        DataTable dtMetadata = _db.GetMetaDataClient(indicatorid, 0, lang);
+        int indicatoridnational = _db.indiqatoryoxla(indicatorid);
+        DataTable dtMetadata = _db.GetMetaDataClient(indicatoridnational, 0, lang);
         rptMetaData.DataSource = dtMetadata;
         rptMetaData.DataBind();
 
         for (int i = 0; i < dtMetadata.Rows.Count; i++)
         {
-            DataTable dtMsub = _db.GetMetaDataClient(indicatorid, dtMetadata.Rows[i]["list_id"].ToParseInt(), lang);
+            DataTable dtMsub = _db.GetMetaDataClient(indicatoridnational, dtMetadata.Rows[i]["list_id"].ToParseInt(), lang);
 
 
             if (dtMsub.Rows.Count > 0)
@@ -129,13 +130,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         string goal_value = DALC.GetStaticValue("goal_value");
 
 
-        indicatorid = _db.indiqatoryoxla(indicatorid);
+        
+        int indicatoridnational = _db.indiqatoryoxla(indicatorid);
         //Response.Write(indicatorid);
 
 
 
 
-        DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
+        DataTable dtIndicator = _db.GetIndicatorById(indicatoridnational);
         
 
         
@@ -192,7 +194,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
 
 
-        _loadSubIndicators(indicatorid, lang, dtIndicator.Rows[0]["code"].ToParseStr(),
+        _loadSubIndicators(indicatoridnational, lang, dtIndicator.Rows[0]["code"].ToParseStr(),
             dtIndicator.Rows[0]["goal_id"].ToParseInt(),
             dtIndicator.Rows[0]["name_" + lang].ToParseStr());
 
@@ -205,7 +207,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         //milli olarsa global metadata olmasin
-        if (dtIndicator.Rows[0]["type_code"].ToParseStr() != "1")
+        //if (dtIndicator.Rows[0]["type_code"].ToParseStr() != "1")
         {
             _loadGlobalMetadata(indicatorid, lang);
         }
@@ -225,7 +227,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             pnlInfo.Visible = false;
             pnlDiaqramTable.Visible = true;
-            loadData(lang, new List<int> { indicatorid });
+            loadData(lang, new List<int> { indicatoridnational });
         }
 		if(lblGoalName.Text.Length > 235)
         {
