@@ -47,46 +47,156 @@
             color: #000;
             text-decoration: none;
         }
+
+
+
+
+           .dxtlSelectionCell_MetropolisBlue {
+            padding-left: 1px;
+        }
+
+        .year-list label {
+            display: inline;
+            font-weight: normal;
+            margin-right: 10px;
+            margin-left: 5px;
+        }
+
+        .info-column {
+            display: inline-block;
+            vertical-align: bottom;
+        }
+
+        .info-column-3 {
+            width: 40%;
+        }
+
+        .info-column-9 {
+            width: 59%;
+        }
+
+        .grid-row:hover {
+            background-color: #fafafa;
+        }
+
+        .dropbtn {
+            background-color: #fff;
+            border: 1px solid #d0d0d0;
+            color: #7a7a7a;
+            border-radius: 5px;
+            font-size: 16px;
+            height: 30px;
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+            /*display: inline-block;*/
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 125px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #fefdfd;
+        }
+
+        .txtSearch {
+            padding-left: 5px;
+            padding-right: 5px;
+            outline: 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 0;
+            height: 30px;
+            background-color: #ededed;
+        }
+
+        .btn-select-all {
+            margin-bottom: 10px;
+            padding: 1px;
+            display: block;
+            text-align: left;
+            padding-left: 44%;
+            background-color: green;
+        }
+
+            .btn-select-all:hover {
+                background-color: #009400;
+            }
+
+        .btn-unselect-all {
+            padding: 1px;
+            display: block;
+            text-align: left;
+            padding-left: 44%;
+            background-color: #a92a2a;
+        }
+
+            .btn-unselect-all:hover {
+                background-color: #d03a3a;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="fdf" ContentPlaceHolderID="script" runat="server">
     <script>
-                    $(document).on('click', '.print-diaqram', function() {
-                        var prtContent = document.getElementById("chart_div");
+        $(document).on('click', '.print-diaqram', function () {
+            var prtContent = document.getElementById("chart_div");
 
-                        var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=400,toolbar=0,scrollbars=0,status=0');
-                        WinPrint.document.write(prtContent.innerHTML);
-                        WinPrint.document.close();
-                        WinPrint.focus();
-                        WinPrint.print();
-                        WinPrint.close();
-                        return false;
-                    });
-                    $(document).on('click', '.metadata-list tr.parent', function() {
-                        var _id = $(this).attr('data-id');
-                        $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
-                    });
+            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=400,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+            return false;
+        });
+        $(document).on('click', '.metadata-list tr.parent', function () {
+            var _id = $(this).attr('data-id');
+            $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
+        });
 
-                    $(document).on('click', '.indicator-nav li', function() {
-                        var _id = $(this).attr('data-content');
-                        var prent = $(this).parents('.indicator-nav-wrapper');
-                        prent.find('.indicator-nav li').removeClass('active');
-                        $(this).addClass('active');
-                        //class="indicator-tab"
-                        prent.find('.indicator-tab').hide();
-                        $(_id).show();
-                        if (_id == '#datatable') {
-                            $('.indicator-size').hide();
-                        } else {
-                            $('.indicator-size').show();
-                        }
+        $(document).on('click', '.indicator-nav li', function () {
+            var _id = $(this).attr('data-content');
+            var prent = $(this).parents('.indicator-nav-wrapper');
+            prent.find('.indicator-nav li').removeClass('active');
+            $(this).addClass('active');
+            //class="indicator-tab"
+            prent.find('.indicator-tab').hide();
+            $(_id).show();
+            if (_id == '#datatable') {
+                $('.indicator-size').hide();
+            } else {
+                $('.indicator-size').show();
+            }
 
-                    });
-                    $(document).on('click', '.chart-btn', function() {
-                        _type = $(this).attr('data-type');
-                        drawChart(_type);
-                        return false;
-                    });
+        });
+        $(document).on('click', '.chart-btn', function () {
+            _type = $(this).attr('data-type');
+            drawChart(_type);
+            return false;
+        });
                     //$(document).on('click', '.chart-down', function () {
                     //    var url = img.src.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
                     //    window.open(url);
@@ -254,32 +364,14 @@
                                                 <div id="chart_div"></div>
                                                 <div class="chart-menu">
                                                     <div class="chart-menu-container">
-                                                        <div class="chart-menu-icon">
-                                                            <i class="fa fa-bars"></i>
-                                                        </div>
-                                                        <div class="chart-menu-list-container">
-                                                            <span>
-                                                                <asp:Literal ID="indicator_download_label" runat="server" />
-                                                            </span>
-                                                            <ul class="chart-menu-list">
-                                                                <li>
-                                                                    <a href="#" class="print-diaqram">
-                                                                        <asp:Literal ID="indicator_download_print" runat="server" />
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="" download="indicator.jpg" class="chart-down-indicator">
-                                                                        <asp:Literal ID="indicator_download_jpg" runat="server" />
+                                                        <div class="dropdown">
+                                                            <button class="dropbtn"><i class='fa fa-download'></i></button>
+                                                            <div class="dropdown-content">
+                                                                <asp:LinkButton ID="LnkExportCsv" Text="CSV" CommandArgument="csv" runat="server" OnClick="LnkExport_Click" />
+                                                                <asp:LinkButton ID="LnkExportPdf" Text="PDF" CommandArgument="pdf" runat="server" OnClick="LnkExport_Click" />
+                                                                <asp:LinkButton ID="LnkExportExc" Text="MS-Excel" CommandArgument="exc" runat="server" OnClick="LnkExport_Click" />
 
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="" download="indicator.png" class="chart-down-indicator">
-                                                                        <asp:Literal ID="indicator_download_png" runat="server" />
-
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

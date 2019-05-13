@@ -76,10 +76,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
 
 
-        indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
-        indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
-        indicator_download_png.Text = DALC.GetStaticValue("indicator_download_png");
-        indicator_download_print.Text = DALC.GetStaticValue("indicator_download_print");
+        //indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
+        //indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
+        //indicator_download_png.Text = DALC.GetStaticValue("indicator_download_png");
+        //indicator_download_print.Text = DALC.GetStaticValue("indicator_download_print");
     }
 
     public string getIndicatorName(string code, string name, int parentId)
