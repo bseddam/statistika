@@ -3202,9 +3202,8 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from targets where goal_id=@goalId and is_active=1 and milli_Priotet=@milliPriotet order by cast(code as unsigned) ", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from targetsnational where goal_id=@goalId and is_active=1 order by cast(code as unsigned) ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goalId", goal_id);
-            da.SelectCommand.Parameters.AddWithValue("milliPriotet", milliPriotet);
             da.Fill(dt);
             return dt;
         }
@@ -3239,17 +3238,32 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
 
 
 
-
-    public Utils.MethodType TargetsUpdate1(int id, string namenational_az, string namenational_en, string code, int goal_id, object milli_priotet)
+    public DataTable GetTargetsFull1(int goal_id)
     {
-        MySqlCommand cmd = new MySqlCommand(@"UPDATE targets SET namenational_az=@namenational_az,namenational_en=@namenational_en,code=@code,goal_id=@goal_id,milli_priotet=@milli_priotet WHERE Id=@id;", SqlConn);
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from targetsnational where goal_id=@goalId and is_active=1 order by code ", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("goalId", goal_id);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargets1()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public Utils.MethodType TargetsUpdate1(int id, string name_az, string name_en, string code, int goal_id, object milli_priotet)
+    {
+        MySqlCommand cmd = new MySqlCommand(@"UPDATE targetsnational SET name_az=@name_az,name_en=@name_en,code=@code,goal_id=@goal_id WHERE Id=@id;", SqlConn);
 
-        cmd.Parameters.AddWithValue("@namenational_en", namenational_en);
-        cmd.Parameters.AddWithValue("@namenational_az", namenational_az);
+        cmd.Parameters.AddWithValue("@name_en", name_en);
+        cmd.Parameters.AddWithValue("@name_az", name_az);
         cmd.Parameters.AddWithValue("@code", code);
         cmd.Parameters.AddWithValue("@goal_id", goal_id);
         cmd.Parameters.AddWithValue("@id", id);
-        cmd.Parameters.AddWithValue("@milli_priotet", milli_priotet);
+  
 
         try
         {
@@ -3259,7 +3273,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.pages, Utils.LogType.update, String.Format("IndicatorSizeUpdate () "), ex.Message, "", true);
+            LogInsert(Utils.Tables.pages, Utils.LogType.update, String.Format("IndicatorSizeUpdate1 () "), ex.Message, "", true);
             return Utils.MethodType.Error;
         }
         finally
@@ -3270,7 +3284,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
     }
     public Utils.MethodType TargetsDelete1(int id)
     {
-        MySqlCommand cmd = new MySqlCommand("UPDATE targets SET is_Active=0 WHERE Id=@id;", SqlConn);
+        MySqlCommand cmd = new MySqlCommand("UPDATE targetsnational SET is_Active=0 WHERE Id=@id;", SqlConn);
 
 
         cmd.Parameters.AddWithValue("@id", id);
@@ -3283,7 +3297,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.pages, Utils.LogType.delete, String.Format("TargetsDelete () "), ex.Message, "", true);
+            LogInsert(Utils.Tables.pages, Utils.LogType.delete, String.Format("TargetsDelete1 () "), ex.Message, "", true);
             return Utils.MethodType.Error;
         }
         finally
@@ -3292,16 +3306,16 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
             cmd.Dispose();
         }
     }
-    public Utils.MethodType TargetsInsert1(string namenational_az, string namenational_en, string code, int goal_id, object milli_priotet)
+    public Utils.MethodType TargetsInsert1(string name_az, string name_en, string code, int goal_id, object milli_priotet)
     {
-        MySqlCommand cmd = new MySqlCommand(@"insert into targets (namenational_az,namenational_en,code,goal_id,milli_priotet) 
-                            values (@namenational_az,@namenational_en,@code,@goal_id,@milli_priotet)  ", SqlConn);
+        MySqlCommand cmd = new MySqlCommand(@"insert into targetsnational (name_az,name_en,code,goal_id) 
+                            values (@name_az,@name_en,@code,@goal_id)  ", SqlConn);
 
-        cmd.Parameters.AddWithValue("@namenational_en", namenational_en);
-        cmd.Parameters.AddWithValue("@namenational_az", namenational_az);
+        cmd.Parameters.AddWithValue("@name_en", name_en);
+        cmd.Parameters.AddWithValue("@name_az", name_az);
         cmd.Parameters.AddWithValue("@code", code);
         cmd.Parameters.AddWithValue("@goal_id", goal_id);
-        cmd.Parameters.AddWithValue("@milli_priotet", milli_priotet);
+
         try
         {
             cmd.Connection.Open();
@@ -3310,7 +3324,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.slider, Utils.LogType.insert, String.Format("IndicatorSizeInsert () "), ex.Message, "", true);
+            LogInsert(Utils.Tables.slider, Utils.LogType.insert, String.Format("IndicatorSizeInsert1 () "), ex.Message, "", true);
             return Utils.MethodType.Error;
         }
         finally

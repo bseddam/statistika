@@ -149,11 +149,11 @@
                                 <EditFormSettings VisibleIndex="0" Visible="true" RowSpan="2" ColumnSpan="2" />
                             </dx:GridViewDataColumn>
 
-                            <dx:GridViewDataMemoColumn Caption="Hədəfin adı (AZ)" FieldName="namenational_az" VisibleIndex="3">
+                            <dx:GridViewDataMemoColumn Caption="Hədəfin adı (AZ)" FieldName="name_az" VisibleIndex="3">
                                 <EditFormSettings VisibleIndex="1" RowSpan="2" ColumnSpan="2" />
                             </dx:GridViewDataMemoColumn>
 
-                            <dx:GridViewDataMemoColumn Caption="Hədəfin adı  (EN)" FieldName="namenational_en" VisibleIndex="4">
+                            <dx:GridViewDataMemoColumn Caption="Hədəfin adı  (EN)" FieldName="name_en" VisibleIndex="4">
                                 <EditFormSettings VisibleIndex="2" RowSpan="2" ColumnSpan="2" />
                             </dx:GridViewDataMemoColumn>
                          <%--   <dx:GridViewDataCheckColumn Caption="Milli priotet" FieldName="milli_priotet" VisibleIndex="4" Visible="false">

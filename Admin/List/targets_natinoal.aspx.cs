@@ -50,7 +50,7 @@ public partial class Admin_List_Targets : System.Web.UI.Page
 
     void _loadGridFromDb()
     {
-        DataTable dt = _db.GetTargetsFull(GoalList.Value.ToParseInt());
+        DataTable dt = _db.GetTargetsFull1(GoalList.Value.ToParseInt());
 
         Grid.DataSource = dt;
         Grid.DataBind();
@@ -140,8 +140,8 @@ public partial class Admin_List_Targets : System.Web.UI.Page
     {
         Utils.MethodType val = _db.TargetsUpdate1(
                              id: e.Keys["id"].ToParseInt(),
-                             namenational_az: e.NewValues["namenational_az"].ToParseStr(),
-                             namenational_en: e.NewValues["namenational_en"].ToParseStr(),
+                             name_az: e.NewValues["name_az"].ToParseStr(),
+                             name_en: e.NewValues["name_en"].ToParseStr(),
                              code: e.NewValues["code"].ToParseStr(),
                              goal_id: GoalList.Value.ToParseInt(),
                              milli_priotet: e.NewValues["milli_priotet"]
@@ -160,8 +160,8 @@ public partial class Admin_List_Targets : System.Web.UI.Page
     protected void Grid_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
     {
         Utils.MethodType val = _db.TargetsInsert1(
-                             namenational_az: e.NewValues["namenational_az"].ToParseStr(),
-                             namenational_en: e.NewValues["namenational_en"].ToParseStr(),
+                             name_az: e.NewValues["name_az"].ToParseStr(),
+                             name_en: e.NewValues["name_en"].ToParseStr(),
                              code: e.NewValues["code"].ToParseStr(),
                              goal_id: GoalList.Value.ToParseInt(),
                              milli_priotet: e.NewValues["milli_priotet"]
