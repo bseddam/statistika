@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="IndicatorInfo.aspx.cs" Inherits="WebPages_IndicatorInfo" %>
 
 
@@ -58,7 +58,7 @@
 
 
 
-           .dxtlSelectionCell_MetropolisBlue {
+        .dxtlSelectionCell_MetropolisBlue {
             padding-left: 1px;
         }
 
@@ -382,79 +382,94 @@
                                                 <div id="chart_div"></div>
                                                 <div class="chart-menu">
                                                     <div class="chart-menu-container">
-                                                        <div class="dropdown">
-                                                            <button class="dropbtn"><i class='fa fa-download'></i></button>
-                                                            <div class="dropdown-content">
+                                                        <div class="chart-menu-icon">
+                                                            <i class="fa fa-bars"></i>
+                                                        </div>
+                                                        <div class="chart-menu-list-container">
+                                                            <span>
+                                                                <asp:Literal ID="indicator_download_label" runat="server" />
+                                                            </span>
+                                                            <ul class="chart-menu-list">
+                                                                <li>
+                                                                    <a href="#" class="print-diaqram">
+                                                                        <asp:Literal ID="indicator_download_print" runat="server" />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="" download="indicator.jpg" class="chart-down-indicator">
+                                                                        <asp:Literal ID="indicator_download_jpg" runat="server" />
 
-                                                                <asp:LinkButton ID="LnkExportCsv" Text="CSV" CommandArgument="csv" runat="server" OnClick="LnkExport_Click" />
-                                                                <asp:LinkButton ID="LnkExportPdf" Text="PDF" CommandArgument="pdf" runat="server" OnClick="LnkExport_Click" />
-                                                                <asp:LinkButton ID="LnkExportExc" Text="MS-Excel" CommandArgument="exc" runat="server" OnClick="LnkExport_Click" />
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="" download="indicator.png" class="chart-down-indicator">
+                                                                        <asp:Literal ID="indicator_download_png" runat="server" />
 
-                                                            </div>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                           
+                                            <asp:Literal ID="chart_script" Text="" runat="server" />
+
+
                                         </div>
                                         <div id="datatable" class="indicator-tab indicator-datatable" style="display: none">
                                             <div class="indicator-datatable-container">
-                                                 <asp:Label ID="lblError" Style="color: red" Text="" runat="server" />
-                                    <asp:CheckBoxList runat="server" ID="chkYears"
-                                        RepeatDirection="Horizontal"
-                                        CssClass="year-list form-control"
-                                        DataTextField="year" DataValueField="year">
-                                    </asp:CheckBoxList>
+                                                <asp:Label ID="lblError" Style="color: red" Text="" runat="server" />
+
                                                 <ul>
-                                        <asp:Literal ID="footnote" Text="" runat="server" />
-                                    </ul> 
-                                                
-                                                
-                                                
+                                                    <asp:Literal ID="footnote" Text="" runat="server" />
+                                                </ul>
+
+
+
                                                 <dx:ASPxGridViewExporter ID="gridExporter" runat="server"
-                                        Landscape="true" PaperKind="A4">
-                                    </dx:ASPxGridViewExporter>
-                                    <dx:ASPxGridView ID="Grid" runat="server"
-                                        AutoGenerateColumns="False"
-                                        Width="100%"
-                                        SettingsBehavior-ConfirmDelete="true"
-                                        KeyFieldName="id">
-                                        <ClientSideEvents  BeginCallback="grid_cell"/>
-                                        <Settings GridLines="Both" />
-                                        <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
-                                        <Columns>
+                                                    Landscape="true" PaperKind="A4">
+                                                </dx:ASPxGridViewExporter>
+                                                <dx:ASPxGridView ID="Grid" runat="server"
+                                                    AutoGenerateColumns="False"
+                                                    Width="100%"
+                                                    SettingsBehavior-ConfirmDelete="true"
+                                                    KeyFieldName="id">
+                                                    <ClientSideEvents BeginCallback="grid_cell" />
+                                                    <Settings GridLines="Both" />
+                                                    <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
+                                                    <Columns>
 
-                                            <dx:GridViewDataColumn Caption="No" FieldName="id" VisibleIndex="1" Width="50">
-                                                <EditFormSettings Visible="False" />
-                                            </dx:GridViewDataColumn>
-                                            <dx:GridViewDataColumn Caption="Kodu" FieldName="code" VisibleIndex="3" Width="100">
-                                                <EditFormSettings ColumnSpan="2" />
-                                            </dx:GridViewDataColumn>
+                                                        <dx:GridViewDataColumn Caption="No" FieldName="id" VisibleIndex="1" Width="50">
+                                                            <EditFormSettings Visible="False" />
+                                                        </dx:GridViewDataColumn>
+                                                        <dx:GridViewDataColumn Caption="Kodu" FieldName="code" VisibleIndex="3" Width="100">
+                                                            <EditFormSettings ColumnSpan="2" />
+                                                        </dx:GridViewDataColumn>
 
-                                        </Columns>
-                                        <Settings
-                                            HorizontalScrollBarMode="Auto"
-                                            GridLines="Both" />
-                                        <SettingsPager>
-                                            <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
-                                        </SettingsPager>
-                                        <SettingsText CommandNew="Yeni"
-                                            CommandDelete="Sil"
-                                            CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla"
-                                            CustomizationWindowCaption="Sütun seçin" ConfirmDelete="Silmək istəditinizə əminsiniz?" />
-                                        <SettingsDataSecurity AllowDelete="true" />
-                                        <Styles Header-CssClass="grid-header">
-                                            <Row CssClass="grid-row"></Row>
-                                            <Cell CssClass="grid-cell"></Cell>
-                                        </Styles>
+                                                    </Columns>
+                                                    <Settings
+                                                        HorizontalScrollBarMode="Auto"
+                                                        GridLines="Both" />
+                                                    <SettingsPager>
+                                                        <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
+                                                    </SettingsPager>
+                                                    <SettingsText CommandNew="Yeni"
+                                                        CommandDelete="Sil"
+                                                        CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla"
+                                                        CustomizationWindowCaption="Sütun seçin" ConfirmDelete="Silmək istəditinizə əminsiniz?" />
+                                                    <SettingsDataSecurity AllowDelete="true" />
+                                                    <Styles Header-CssClass="grid-header">
+                                                        <Row CssClass="grid-row"></Row>
+                                                        <Cell CssClass="grid-cell"></Cell>
+                                                    </Styles>
 
-                                    </dx:ASPxGridView>
+                                                </dx:ASPxGridView>
                                             </div>
                                         </div>
                                         <div>
                                             <br />
-                                           <%-- <div class="indicator-size">
+                                            <%-- <div class="indicator-size">
                                                 <asp:Label ID="lblSizeLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblSize" Text="" runat="server" />
                                             </div>--%>
@@ -478,6 +493,30 @@
                                 </asp:Panel>
                             </div>
                         </asp:Panel>
+                           <div class="row">
+
+                                <div class="col-md-4">
+ 
+                                    <h4>
+                                        <asp:Literal ID="lblYearTitle" Text="" runat="server" />
+                                    </h4>
+                                    <asp:CheckBoxList runat="server" ID="chkYears"
+                                        RepeatDirection="Horizontal"
+                                        CssClass="year-list form-control"
+                                        DataTextField="year" DataValueField="year">
+                                    </asp:CheckBoxList>
+                                       <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_select_all") %>
+                                                </asp:LinkButton>
+                                 <asp:LinkButton ID="LinkButton2" Text="" OnClick="lnkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_unselect_all") %>
+                                                </asp:LinkButton>
+                                </div>
+                            
+                            </div>
+                           <br />
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-warning" role="alert">

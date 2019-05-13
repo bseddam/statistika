@@ -19,7 +19,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             return;
         }
         string lang = Config.getLang(Page);
+        _loadDropdowns(lang);
+
         int indicatorid = Page.RouteData.Values["indicatorid"].ToParseInt();
+  
 
         _loadGoalInfo(indicatorid, lang);
         _loadMetadata(indicatorid, lang);
@@ -60,6 +63,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     private void _loadLabels()
     {
+        lblYearTitle.Text = DALC.GetStaticValue("statistical_database_year_title");
         lblMetaInfo.Text = DALC.GetStaticValue("indicator_metadata_info");
         lblIndicatorName.Text = DALC.GetStaticValue("indicator_name");
         lblNationalMetadata.Text = DALC.GetStaticValue("indicator_national_metadata");
@@ -77,10 +81,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
 
 
-        //indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
-        //indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
-        //indicator_download_png.Text = DALC.GetStaticValue("indicator_download_png");
-        //indicator_download_print.Text = DALC.GetStaticValue("indicator_download_print");
+        indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
+        indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
+        indicator_download_png.Text = DALC.GetStaticValue("indicator_download_png");
+        indicator_download_print.Text = DALC.GetStaticValue("indicator_download_print");
     }
 
     public string getIndicatorName(string code, string name, int parentId)
@@ -674,7 +678,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 break;
         }
     }
-
+    private void _loadDropdowns(string lang)
+    {
+        DataTable dtYears = _db.GetHesabat_Years();
+        chkYears.DataSource = dtYears;
+        chkYears.DataBind();
+    }
     void goster()
     {
         lblError.Text = "";
