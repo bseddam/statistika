@@ -3231,6 +3231,104 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
     }
 
+
+
+
+
+
+
+
+
+
+    public Utils.MethodType TargetsUpdate1(int id, string namenational_az, string namenational_en, string code, int goal_id, object milli_priotet)
+    {
+        MySqlCommand cmd = new MySqlCommand(@"UPDATE targets SET namenational_az=@namenational_az,namenational_en=@namenational_en,code=@code,goal_id=@goal_id,milli_priotet=@milli_priotet WHERE Id=@id;", SqlConn);
+
+        cmd.Parameters.AddWithValue("@namenational_en", namenational_en);
+        cmd.Parameters.AddWithValue("@namenational_az", namenational_az);
+        cmd.Parameters.AddWithValue("@code", code);
+        cmd.Parameters.AddWithValue("@goal_id", goal_id);
+        cmd.Parameters.AddWithValue("@id", id);
+        cmd.Parameters.AddWithValue("@milli_priotet", milli_priotet);
+
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.pages, Utils.LogType.update, String.Format("IndicatorSizeUpdate () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+    public Utils.MethodType TargetsDelete1(int id)
+    {
+        MySqlCommand cmd = new MySqlCommand("UPDATE targets SET is_Active=0 WHERE Id=@id;", SqlConn);
+
+
+        cmd.Parameters.AddWithValue("@id", id);
+
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.pages, Utils.LogType.delete, String.Format("TargetsDelete () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+    public Utils.MethodType TargetsInsert1(string namenational_az, string namenational_en, string code, int goal_id, object milli_priotet)
+    {
+        MySqlCommand cmd = new MySqlCommand(@"insert into targets (namenational_az,namenational_en,code,goal_id,milli_priotet) 
+                            values (@namenational_az,@namenational_en,@code,@goal_id,@milli_priotet)  ", SqlConn);
+
+        cmd.Parameters.AddWithValue("@namenational_en", namenational_en);
+        cmd.Parameters.AddWithValue("@namenational_az", namenational_az);
+        cmd.Parameters.AddWithValue("@code", code);
+        cmd.Parameters.AddWithValue("@goal_id", goal_id);
+        cmd.Parameters.AddWithValue("@milli_priotet", milli_priotet);
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.insert, String.Format("IndicatorSizeInsert () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     public Utils.MethodType TargetsUpdate(int id, string name_az, string name_en, string code, int goal_id, object milli_priotet)
     {
         MySqlCommand cmd = new MySqlCommand(@"UPDATE targets SET name_az=@name_az,name_en=@name_en,code=@code,goal_id=@goal_id,milli_priotet=@milli_priotet WHERE Id=@id;", SqlConn);

@@ -156,9 +156,9 @@
                             <dx:GridViewDataMemoColumn Caption="Hədəfin adı  (EN)" FieldName="name_en" VisibleIndex="4">
                                 <EditFormSettings VisibleIndex="2" RowSpan="2" ColumnSpan="2" />
                             </dx:GridViewDataMemoColumn>
-                            <dx:GridViewDataCheckColumn Caption="Milli priotet" FieldName="milli_priotet" VisibleIndex="4" Visible="false">
+<%--                            <dx:GridViewDataCheckColumn Caption="Milli priotet" FieldName="milli_priotet" VisibleIndex="4" Visible="false">
                                 <EditFormSettings VisibleIndex="2" RowSpan="2" ColumnSpan="2"  Visible="True"/>
-                            </dx:GridViewDataCheckColumn>
+                            </dx:GridViewDataCheckColumn>--%>
                             <dx:GridViewCommandColumn ShowNewButtonInHeader="true" VisibleIndex="5" HeaderStyle-CssClass="treelist-new-column">
                                 <EditButton Visible="True" />
                                 <DeleteButton Visible="True" />
