@@ -1,4 +1,5 @@
-﻿using DevExpress.Web.ASPxHtmlEditor;
+﻿using DevExpress.Web.ASPxGridView;
+using DevExpress.Web.ASPxHtmlEditor;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,7 +27,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         _hide_empty_labels();
-
+        goster();
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -37,7 +38,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     void _hide_empty_labels()
     {
-        _helper_hide_empty_label(lblSize, lblSizeLabel);
+        //_helper_hide_empty_label(lblSize, lblSizeLabel);
         _helper_hide_empty_label(lblSource, lblSourceLabel);
         _helper_hide_empty_label(lblNote, lblNoteLabel);
     }
@@ -73,7 +74,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         lblSourceLabel.Text = lblSourceLabel1.Text = DALC.GetStaticValue("indicator_source");
         lblNoteLabel.Text = lblNoteLabel1.Text = DALC.GetStaticValue("indicator_note");
-        lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
+        //lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
 
 
         //indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
@@ -130,7 +131,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         string goal_value = DALC.GetStaticValue("goal_value");
 
 
-        
+
         int indicatoridnational = _db.indiqatoryoxla(indicatorid);
         //Response.Write(indicatorid);
 
@@ -138,9 +139,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         DataTable dtIndicator = _db.GetIndicatorById(indicatoridnational);
-        
 
-        
+
+
         if (dtIndicator == null || dtIndicator.Rows.Count < 1)
         {
             Config.Rd("/error?null");
@@ -188,7 +189,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             lblIndicatorTitle.Font.Size = 13;
         }
-        if(200 > lblIndicatorTitle.Text.Length)
+        if (200 > lblIndicatorTitle.Text.Length)
         {
             lblIndicatorTitle.Font.Size = 14;
         }
@@ -202,7 +203,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         lblNote.Text = lblNote1.Text = dtIndicator.Rows[0]["note_" + lang].ToParseStr();
         lblSource.Text = lblSource1.Text = dtIndicator.Rows[0]["source_" + lang].ToParseStr();
-        lblSize.Text = _db.GetIndicatorSizeById(dtIndicator.Rows[0]["size_id"].ToParseInt()).Rows[0]["name_" + lang].ToParseStr();
+        //lblSize.Text = _db.GetIndicatorSizeById(dtIndicator.Rows[0]["size_id"].ToParseInt()).Rows[0]["name_" + lang].ToParseStr();
 
 
 
@@ -229,7 +230,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             pnlDiaqramTable.Visible = true;
             loadData(lang, new List<int> { indicatoridnational });
         }
-		if(lblGoalName.Text.Length > 235)
+        if (lblGoalName.Text.Length > 235)
         {
             lblGoalName.Font.Size = 17;
         }
@@ -427,7 +428,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
 
 
-        ltrTable.Text = " <table class='table table-bordered'>" + data + "</table>";
+        //ltrTable.Text = " <table class='table table-bordered'>" + data + "</table>";
+
+
 
     }
     string checkValue(string value)
@@ -632,6 +635,26 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     protected void LnkExport_Click(object sender, EventArgs e)
     {
+        LinkButton btn = sender as LinkButton;
+        Grid.Columns["IndicatorCode"].Visible = true;
+        Grid.Columns["IndicatorCode_html"].Visible = false;
+
+        gridExporter.FileName = DateTime.Now.ToString("ddMMyyyhhmm");
+        switch (btn.CommandArgument)
+        {
+            case "exc": gridExporter.WriteXlsxToResponse(); break;
+            case "csv": gridExporter.WriteCsvToResponse(); break;
+            case "pdf": gridExporter.WritePdfToResponse(); break;
+        }
+        Grid.Columns["IndicatorCode"].Visible = false;
+        Grid.Columns["IndicatorCode_html"].Visible = true;
+
+
+
+
+
+
+
         string val = (sender as LinkButton).CommandArgument;
         string filename = DateTime.Now.Ticks.ToString();
 
@@ -651,6 +674,272 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 break;
         }
     }
+
+    void goster()
+    {
+        lblError.Text = "";
+        string lang = Config.getLang(Page);
+
+        int rowCount = 0;
+        for (int i_year = 0; i_year < chkYears.Items.Count; i_year++)
+        {
+            if (chkYears.Items[i_year].Selected == true)
+            {
+                rowCount++;
+            }
+        }
+
+
+        int indicator_count = 0;
+        string _indicators = "";
+        for (int i = 0; i < treeList1.GetSelectedNodes().Count; i++)
+        {
+            if (treeList1.GetSelectedNodes()[i].Selected)
+            {
+                _indicators += treeList1.GetSelectedNodes()[i].GetValue("Id").ToParseStr() + ",";
+                indicator_count++;
+            }
+        }
+        if (rowCount == 0)
+        {
+            lblError.Text += DALC.GetStaticValue("statistical_database_year_not_selected") + "<br>";
+        }
+        if (indicator_count == 0)
+        {
+            lblError.Text += DALC.GetStaticValue("statistical_database_indicator_not_selected") + "<br>";
+        }
+        if (lblError.Text.Length > 0)
+        {
+            return;
+        }
+        //pnlResult.Visible = true;
+        Grid.Visible = true;
+
+
+        DataTable dtHesabat = new DataTable();
+        dtHesabat.Columns.Add("id", typeof(int));
+        dtHesabat.Columns.Add("parent_id", typeof(int));
+        dtHesabat.Columns.Add("IndicatorCode", typeof(string));
+        dtHesabat.Columns.Add("IndicatorCode_html", typeof(string));
+        dtHesabat.Columns.Add("IndicatorSize", typeof(string));
+
+
+        Grid.Columns.Clear();
+
+        GridViewDataColumn column = new GridViewDataColumn();
+
+        column = new GridViewDataTextColumn();
+        column.Caption = DALC.GetStaticValue("statistical_database_grid_indicator_code");
+        column.FieldName = "IndicatorCode";
+        column.FixedStyle = GridViewColumnFixedStyle.Left;
+        column.PropertiesEdit.EncodeHtml = false;
+        column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
+        column.Width = 700;
+        column.VisibleIndex = 0;
+        Grid.Columns.Add(column);
+
+        column = new GridViewDataTextColumn();
+        column.Caption = DALC.GetStaticValue("statistical_database_grid_indicator_code");
+        column.FieldName = "IndicatorCode_html";
+        column.FixedStyle = GridViewColumnFixedStyle.Left;
+        column.PropertiesEdit.EncodeHtml = false;
+        column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
+        column.Width = 700;
+        column.VisibleIndex = 1;
+        Grid.Columns.Add(column);
+
+        column = new GridViewDataColumn();
+        column.Caption = DALC.GetStaticValue("statistical_database_grid_indicator_size");
+        column.FieldName = "IndicatorSize";
+        column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+        column.Width = 150;
+        column.VisibleIndex = 2;
+        Grid.Columns.Add(column);
+
+        List<int> years = new List<int>();
+
+        string _years = "";
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            if (chkYears.Items[i].Selected)
+            {
+                years.Add(chkYears.Items[i].Value.ToParseInt());
+                _years += chkYears.Items[i].Value + ",";
+            }
+        }
+        years.Sort();
+
+        for (int i_year = 0; i_year < years.Count; i_year++)
+        {
+            dtHesabat.Columns.Add(years[i_year].ToParseStr(), typeof(string));
+
+            column = new GridViewDataTextColumn();
+            column.Caption = years[i_year].ToParseStr();
+            column.FieldName = years[i_year].ToParseStr();
+            column.PropertiesEdit.EncodeHtml = false;
+            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+            Grid.Columns.Add(column);
+
+            dtHesabat.Columns.Add("footnote_" + years[i_year].ToParseStr(), typeof(string));
+
+            GridViewDataTextColumn columnF = new GridViewDataTextColumn();
+            columnF.Caption = " ";
+            columnF.FieldName = "footnote_" + years[i_year].ToParseStr();
+            columnF.PropertiesEdit.EncodeHtml = false;
+            columnF.Visible = false;
+            Grid.Columns.Add(columnF);
+        }
+
+        DataTable dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+        string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
+
+        Footnote_Id1 _footnote_id = new Footnote_Id1();
+
+        for (int i = 0; i < dtH.Rows.Count; i++)
+        {
+            DataRow dr = dtHesabat.NewRow();
+            dr["id"] = dtH.Rows[i]["id"].ToParseInt();
+            int _parent_id = _db.GetIndicatorById(dtH.Rows[i]["indicator_id"].ToParseInt()).Rows[0]["parent_id"].ToParseInt();
+            dr["parent_id"] = _parent_id;
+
+            string __code = Config.ClearIndicatorCode(dtH.Rows[i]["IndicatorCode"].ToParseStr());
+
+            if (__code.Split('.').Length == 3)
+            {
+                dr["IndicatorCode_html"] = string.Format("{0} {1}",
+                __code,
+                dtH.Rows[i]["IndicatorName"].ToParseStr());
+            }
+            else
+            {
+                int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
+                dr["IndicatorCode_html"] = string.Format(" {0}",
+                     generated_space_html(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
+            }
+
+            if (__code.Split('.').Length == 3)
+            {
+                dr["IndicatorCode"] = string.Format("{0} {1}",
+                __code,
+                dtH.Rows[i]["IndicatorName"].ToParseStr());
+            }
+            else
+            {
+                int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
+                dr["IndicatorCode"] = string.Format(" {0}",
+                     generated_space(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
+            }
+            dr["IndicatorSize"] = dtH.Rows[i]["IndicatorSize"].ToParseStr();
+            int footnote_no = 1;
+            for (int i_year = 0; i_year < years.Count; i_year++)
+            {
+                DataTable dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
+
+
+                //DataView dvVal = dtHs.DefaultView;
+                //dvVal.RowFilter = string.Format("region_id={0} and year={1} and indicator_id={2}",
+                //    dtH.Rows[i]["id"].ToParseInt(),
+                //    years[i_year],
+                //    dtH.Rows[i]["indicator_id"].ToParseInt()
+                //    );
+
+
+
+                string footnote = "";
+                if (dtHs.Rows[0]["footnote_id"].ToParseStr() != "")
+                {
+
+                    _footnote_id.Add(dtHs.Rows[0]["footnote_id"].ToParseInt());
+
+                    footnote = string.Format("<sup><a href='#footnote-{0}' title='{1}' data-id='{2}'>[{0}]</a></sup>",
+                                _footnote_id.GetValue(dtHs.Rows[0]["footnote_id"].ToParseInt()),
+                                footnote_title,
+                                dtHs.Rows[0]["footnote_id"].ToParseStr());
+
+                }
+
+
+
+                dr["footnote_" + years[i_year].ToParseStr()] = footnote;
+
+                dr[years[i_year].ToParseStr()] = checkValue(dtHs.Rows[0]["value"].ToParseStr()) + " " + footnote;
+                footnote_no++;
+            }
+            dtHesabat.Rows.Add(dr);
+        }
+
+
+
+        Grid.DataSource = dtHesabat;
+        Grid.DataBind();
+        Grid.Columns["IndicatorCode_html"].Visible = true;
+        Grid.Columns["IndicatorCode"].Visible = false;
+
+        ViewState["Grid"] = Grid.DataSource;
+        //Session["Grid"] = dtHesabat;
+
+        _loadFootnotes(_footnote_id);
+
+        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
+
+    }
+    private void _loadFootnotes(Footnote_Id1 footnote_id)
+    {
+        footnote.Text = "";
+        DataTable dtFootnote = _db.GetFootnotesOrderById();
+        string lang = Config.getLang(Page);
+
+        SortedDictionary<int, string> values = new SortedDictionary<int, string>();
+        for (int i = 0; i < dtFootnote.Rows.Count; i++)
+        {
+            int _id = dtFootnote.Rows[i]["id"].ToParseInt();
+            if (footnote_id.CheckKey(_id))
+            {
+                values.Add(footnote_id.GetValue(_id), dtFootnote.Rows[i]["desc_" + lang].ToParseStr());
+            }
+        }
+
+        foreach (KeyValuePair<int, string> item in values)
+        {
+            footnote.Text += string.Format(@"<li><div id='footnote-{0}'></div>{0}. {1} </li>",
+                                   item.Key,
+                                  item.Value);
+        }
+    }
+    int parent_count(int id, int count)
+    {
+        DataTable dt = _db.GetIndicatorById(id);
+        string _parentId = dt.Rows[0]["parent_id"].ToParseStr();
+
+        if (_parentId != "0")
+        {
+            count++;
+            return parent_count(dt.Rows[0]["parent_id"].ToParseInt(), count);
+        }
+        return count;
+    }
+    string generated_space_html(int count)
+    {
+
+        string _result = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+        for (int i = 0; i < count; i++)
+        {
+            _result += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+
+        return _result;
+    }
+    string generated_space(int count)
+    {
+
+        string _result = "              ";
+        for (int i = 0; i < count; i++)
+        {
+            _result += "     ";
+        }
+
+        return _result;
+    }
     string getExportSource()
     {
         System.IO.StringWriter stringWrite = new System.IO.StringWriter();
@@ -658,6 +947,40 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         PnlExport.RenderControl(htmlWrite);
 
         return stringWrite.ToString();
+    }
+}
+
+class Footnote_Id1
+{
+    Dictionary<int, int> footnote_ids = new Dictionary<int, int>();
+
+    public void Add(int key)
+    {
+        if (!footnote_ids.ContainsKey(key))
+        {
+            int value = GetLastValue() + 1;
+            footnote_ids.Add(key, value);
+        }
+    }
+    public bool CheckKey(int key)
+    {
+        return footnote_ids.ContainsKey(key);
+    }
+    public int GetValue(int key)
+    {
+        return footnote_ids[key];
+    }
+    public Dictionary<int, int> GetList
+    {
+        get
+        {
+            return footnote_ids;
+        }
+    }
+
+    private int GetLastValue()
+    {
+        return footnote_ids.LastOrDefault().Value;
     }
 }
 

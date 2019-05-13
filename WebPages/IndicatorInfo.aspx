@@ -1,8 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="IndicatorInfo.aspx.cs" Inherits="WebPages_IndicatorInfo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" 
+    CodeFile="IndicatorInfo.aspx.cs" Inherits="WebPages_IndicatorInfo" %>
+
+
+<%@ Register Assembly="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxTreeList.Export" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView.Export" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxTreeList" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -209,6 +216,17 @@
             display: unset;
         }
     </style>
+    <script>
+        function grid_cell() {
+            setTimeout(function () {
+                $('.grid-cell').css('border-bottom-width', '');
+            }, 500);
+            setTimeout(function () {
+                $('.grid-cell').css('border-bottom-width', '');
+            }, 500);
+        }
+
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="Server">
     <asp:ScriptManager runat="server" />
@@ -367,6 +385,7 @@
                                                         <div class="dropdown">
                                                             <button class="dropbtn"><i class='fa fa-download'></i></button>
                                                             <div class="dropdown-content">
+
                                                                 <asp:LinkButton ID="LnkExportCsv" Text="CSV" CommandArgument="csv" runat="server" OnClick="LnkExport_Click" />
                                                                 <asp:LinkButton ID="LnkExportPdf" Text="PDF" CommandArgument="pdf" runat="server" OnClick="LnkExport_Click" />
                                                                 <asp:LinkButton ID="LnkExportExc" Text="MS-Excel" CommandArgument="exc" runat="server" OnClick="LnkExport_Click" />
@@ -377,19 +396,68 @@
                                                 </div>
                                             </div>
 
-                                            <asp:Literal ID="chart_script" Text="" runat="server" />
+                                           
                                         </div>
                                         <div id="datatable" class="indicator-tab indicator-datatable" style="display: none">
                                             <div class="indicator-datatable-container">
-                                                <asp:Literal ID="ltrTable" Text="" runat="server" />
+                                                 <asp:Label ID="lblError" Style="color: red" Text="" runat="server" />
+                                    <asp:CheckBoxList runat="server" ID="chkYears"
+                                        RepeatDirection="Horizontal"
+                                        CssClass="year-list form-control"
+                                        DataTextField="year" DataValueField="year">
+                                    </asp:CheckBoxList>
+                                                <ul>
+                                        <asp:Literal ID="footnote" Text="" runat="server" />
+                                    </ul> 
+                                                
+                                                
+                                                
+                                                <dx:ASPxGridViewExporter ID="gridExporter" runat="server"
+                                        Landscape="true" PaperKind="A4">
+                                    </dx:ASPxGridViewExporter>
+                                    <dx:ASPxGridView ID="Grid" runat="server"
+                                        AutoGenerateColumns="False"
+                                        Width="100%"
+                                        SettingsBehavior-ConfirmDelete="true"
+                                        KeyFieldName="id">
+                                        <ClientSideEvents  BeginCallback="grid_cell"/>
+                                        <Settings GridLines="Both" />
+                                        <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
+                                        <Columns>
+
+                                            <dx:GridViewDataColumn Caption="No" FieldName="id" VisibleIndex="1" Width="50">
+                                                <EditFormSettings Visible="False" />
+                                            </dx:GridViewDataColumn>
+                                            <dx:GridViewDataColumn Caption="Kodu" FieldName="code" VisibleIndex="3" Width="100">
+                                                <EditFormSettings ColumnSpan="2" />
+                                            </dx:GridViewDataColumn>
+
+                                        </Columns>
+                                        <Settings
+                                            HorizontalScrollBarMode="Auto"
+                                            GridLines="Both" />
+                                        <SettingsPager>
+                                            <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
+                                        </SettingsPager>
+                                        <SettingsText CommandNew="Yeni"
+                                            CommandDelete="Sil"
+                                            CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla"
+                                            CustomizationWindowCaption="Sütun seçin" ConfirmDelete="Silmək istəditinizə əminsiniz?" />
+                                        <SettingsDataSecurity AllowDelete="true" />
+                                        <Styles Header-CssClass="grid-header">
+                                            <Row CssClass="grid-row"></Row>
+                                            <Cell CssClass="grid-cell"></Cell>
+                                        </Styles>
+
+                                    </dx:ASPxGridView>
                                             </div>
                                         </div>
                                         <div>
                                             <br />
-                                            <div class="indicator-size">
+                                           <%-- <div class="indicator-size">
                                                 <asp:Label ID="lblSizeLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblSize" Text="" runat="server" />
-                                            </div>
+                                            </div>--%>
                                             <div>
                                                 <asp:Label ID="lblSourceLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblSource" Text="" runat="server" />
