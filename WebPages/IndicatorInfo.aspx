@@ -505,15 +505,18 @@
                                         CssClass="year-list form-control"
                                         DataTextField="year" DataValueField="year">
                                     </asp:CheckBoxList>
-                                       <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                       <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
                                                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_select_all") %>
                                                 </asp:LinkButton>
-                                 <asp:LinkButton ID="LinkButton2" Text="" OnClick="lnkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                 <asp:LinkButton ID="LinkButton2" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
                                                     <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
                                                 </asp:LinkButton>
                                 </div>
+                                <div class="col-md-8">
+                                    &nbsp;
+                                    </div>
                             
                             </div>
                            <br />

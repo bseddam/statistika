@@ -508,6 +508,21 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //Page.ClientScript.RegisterClientScriptBlock(Page.GetType(), "", script, true);
         //chart_script.Text = "<script>"+script+"</script>";
     }
+    protected void lnkchkSelectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected=true;
+        }
+
+    }
+    protected void lnkchkUnselectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected = false;
+        }
+    }
     protected void lnkSelectAll_Click(object sender, EventArgs e)
     {
         treeList1.SelectAll();
