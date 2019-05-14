@@ -21,9 +21,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         string lang = Config.getLang(Page);
 
         _loadDropdowns(lang);
-       
+
         int indicatorid = Page.RouteData.Values["indicatorid"].ToParseInt();
-  
+
 
         _loadGoalInfo(indicatorid, lang);
         _loadMetadata(indicatorid, lang);
@@ -36,15 +36,21 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         for (int i = 0; i < chkYears.Items.Count; i++)
         {
-            if (chkYears.Items[i].Text != "2018")
-            { chkYears.Items[i].Selected = true; }
+            chkYears.Items[i].Selected = true;
 
         }
 
-        treeList1.SelectAll();
+        if (treeList1.Nodes.Count > 0)
+        {
+            treeList1.Nodes[0].Selected = true;
+        }
+
+
+
+
 
         btnIndicator_Click(null, null);
-        goster();
+        //goster();
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -724,7 +730,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     void goster()
     {
-        lblError.Text = "";
+        //lblError.Text = "";
         string lang = Config.getLang(Page);
 
         int rowCount = 0;
@@ -750,16 +756,16 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         if (rowCount == 0)
         {
-            lblError.Text += DALC.GetStaticValue("statistical_database_year_not_selected") + "<br>";
+            //lblError.Text += DALC.GetStaticValue("statistical_database_year_not_selected") + "<br>";
         }
         if (indicator_count == 0)
         {
-            lblError.Text += DALC.GetStaticValue("statistical_database_indicator_not_selected") + "<br>";
+            //lblError.Text += DALC.GetStaticValue("statistical_database_indicator_not_selected") + "<br>";
         }
-        if (lblError.Text.Length > 0)
-        {
-            return;
-        }
+        //if (lblError.Text.Length > 0)
+        //{
+        //    return;
+        //}
         //pnlResult.Visible = true;
         Grid.Visible = true;
 
