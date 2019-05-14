@@ -19,8 +19,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             return;
         }
         string lang = Config.getLang(Page);
-        _loadDropdowns(lang);
 
+        _loadDropdowns(lang);
+       
         int indicatorid = Page.RouteData.Values["indicatorid"].ToParseInt();
   
 
@@ -30,6 +31,19 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         _hide_empty_labels();
+
+
+
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            if (chkYears.Items[i].Text != "2018")
+            { chkYears.Items[i].Selected = true; }
+
+        }
+
+        treeList1.SelectAll();
+
+        btnIndicator_Click(null, null);
         goster();
     }
     void _helper_hide_empty_label(Label value, Label label)
@@ -52,6 +66,15 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             treeList1.DataSource = ViewState["treelist"] as DataTable;
             treeList1.DataBind();
+        }
+
+
+
+        if (ViewState["Grid"] != null)
+        {
+            Grid.DataSource = ViewState["Grid"] as DataTable;
+            Grid.DataBind();
+            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
         }
     }
 
@@ -712,6 +735,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 rowCount++;
             }
         }
+       
 
 
         int indicator_count = 0;
@@ -818,7 +842,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
 
         Footnote_Id1 _footnote_id = new Footnote_Id1();
-
+       
         for (int i = 0; i < dtH.Rows.Count; i++)
         {
             DataRow dr = dtHesabat.NewRow();
@@ -827,7 +851,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             dr["parent_id"] = _parent_id;
 
             string __code = Config.ClearIndicatorCode(dtH.Rows[i]["IndicatorCode"].ToParseStr());
-
+            
             if (__code.Split('.').Length == 3)
             {
                 dr["IndicatorCode_html"] = string.Format("{0} {1}",
@@ -854,6 +878,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                      generated_space(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
             }
             dr["IndicatorSize"] = dtH.Rows[i]["IndicatorSize"].ToParseStr();
+            
             int footnote_no = 1;
             for (int i_year = 0; i_year < years.Count; i_year++)
             {
@@ -888,10 +913,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
                 dr[years[i_year].ToParseStr()] = checkValue(dtHs.Rows[0]["value"].ToParseStr()) + " " + footnote;
                 footnote_no++;
+                
             }
             dtHesabat.Rows.Add(dr);
         }
-
+        //Response.Write(dtHesabat.Rows[0][5].ToString());
 
 
         Grid.DataSource = dtHesabat;
@@ -972,6 +998,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         return stringWrite.ToString();
     }
+
+    
 }
 
 class Footnote_Id1

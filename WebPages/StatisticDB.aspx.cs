@@ -113,6 +113,8 @@ public partial class WebPages_StatisticDB : System.Web.UI.Page
         //            dtYears.Rows[i_year]["year"].ToParseInt(),
         //            values.Trim(','));
 
+
+
         //        }
         //        script = script.Trim(',');
         //        script += "]);";

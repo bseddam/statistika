@@ -432,7 +432,7 @@
                                                 </dx:ASPxGridViewExporter>
                                                 <dx:ASPxGridView ID="Grid" runat="server"
                                                     AutoGenerateColumns="False"
-                                                    Width="100%"
+                                                    Width="1000"
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
                                                     <ClientSideEvents BeginCallback="grid_cell" />
@@ -448,12 +448,8 @@
                                                         </dx:GridViewDataColumn>
 
                                                     </Columns>
-                                                    <Settings
-                                                        HorizontalScrollBarMode="Auto"
-                                                        GridLines="Both" />
-                                                    <SettingsPager>
-                                                        <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
-                                                    </SettingsPager>
+                                                
+                                                  
                                                     <SettingsText CommandNew="Yeni"
                                                         CommandDelete="Sil"
                                                         CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla"
