@@ -6061,12 +6061,12 @@ inner join metadata_global_list as ml on m.list_id=ml.id where m.indicator_id=@i
 
     #endregion
 
+
     #region Hesabat1
     public DataTable GetHesabat2(string indicator_ids, string years, string region_ids, string lang)
     {
         try
         {
-            
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(string.Format(@"select h.id,h.indicator_id,h.year,h.value,h.region_id,
 i.code as IndicatorCode,i.name_{0}  as IndicatorName ,
@@ -6121,24 +6121,9 @@ where h.indicator_id =@indicator_id and h.year=@year and h.region_id=@region_id 
 
     public DataTable GetHesabat2(string indicator_ids, string years, string lang)
     {
-        string sqlcumle = @"select h.id,h.indicator_id,h.year,h.value,
-i.code as IndicatorCode,i.name_"+ lang + @"  as IndicatorName ,
-g.name_short_"+lang+ @" as GoalName,
-isx.name_" + lang + @" as IndicatorSize
-from hesabat  as h
-inner join indicators as i on i.id = h.indicator_id
-inner join goals as g on g.id = i.goal_id
-inner join indicator_size as isx on isx.id = i.size_id
-where h.is_active = 1 and length(h.value)> 0 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code";
         try
         {
             DataTable dt = new DataTable();
-            //if (years == "" || years ==null || indicator_ids == "" || indicator_ids==null)
-            //{
-            //    return dt;
-            //}
-
-
             MySqlDataAdapter da = new MySqlDataAdapter(string.Format(@"select h.id,h.indicator_id,h.year,h.value,
 i.code as IndicatorCode,i.name_{0}  as IndicatorName ,
 g.name_short_{0} as GoalName,
@@ -6154,8 +6139,7 @@ where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_i
         }
         catch (Exception ex)
         {
-            //throw new Exception(ex.Message + "(" + sqlcumle + ")");
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2()"), sqlcumle+ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2()"), ex.Message, "", true);
             return null;
         }
     }
@@ -6179,6 +6163,10 @@ where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_i
     }
 
     #endregion
+
+
+
+
     public DataTable GetSubscribers()
     {
 
