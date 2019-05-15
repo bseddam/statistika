@@ -19,34 +19,18 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             return;
         }
         string lang = Config.getLang(Page);
-
         _loadDropdowns(lang);
 
         int indicatorid = Page.RouteData.Values["indicatorid"].ToParseInt();
 
-       
         _loadGoalInfo(indicatorid, lang);
         _loadMetadata(indicatorid, lang);
         _loadLabels();
 
-
         _hide_empty_labels();
 
-
-
-
-
-        if (treeList1.Nodes.Count > 0)
-        {
-            treeList1.Nodes[0].Selected = true;
-        }
-
-
-
-
-
-        btnIndicator_Click(null, null);
-        goster();
+        //btnIndicator_Click(null, null);
+        
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -84,7 +68,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     {
 
         loadChartMutipleIndicator(lang, indicators);
-        loadTableMutipleIndicator(lang, indicators);
+        goster();
+        //loadTableMutipleIndicator(lang, indicators);
     }
 
     private void _loadLabels()
@@ -257,6 +242,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         else
         {
             pnlInfo.Visible = false;
+
             pnlDiaqramTable.Visible = true;
 
             
@@ -304,9 +290,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         treeList1.DataSource = dtFinal;
         treeList1.DataBind();
+        if (treeList1.Nodes.Count > 0)
+        {
+            treeList1.Nodes[0].Selected = true;
+        }
         ViewState["treelist"] = dtFinal;
         if (dt.Rows.Count == 0)
         {
+            
             pnlSubIndicator.Visible = false;
             pnlContent.CssClass = "col-md-12";
         }
@@ -371,7 +362,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         string columns = "data.addColumn('string', 'Year');";
         DataTable dtH = null;
-        if (_years.Trim(',') != "")
+        if (_years.Trim(',') != "" && _years!=null && _indicators.Trim(',') != "" && _indicators != null)
         {
              dtH = _db.GetHesabat2(_indicators.Trim(','), _years, lang);
         }
@@ -598,6 +589,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         loadData(lang, indicators);
+        goster();
     }
 
     private void shareBox(string pageTitle, string PageType, string Description, string image_url)
@@ -753,6 +745,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     void goster()
     {
+
         //lblError.Text = "";
         string lang = Config.getLang(Page);
 
@@ -866,8 +859,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             columnF.Visible = false;
             Grid.Columns.Add(columnF);
         }
-
-        DataTable dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+        DataTable dtH = null;
+        if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
+        {
+            dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+        }
+        if (dtH == null)
+        {
+            // pnlContent.Visible = false;
+            return;
+        }
+       
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
 
         Footnote_Id1 _footnote_id = new Footnote_Id1();
@@ -911,7 +913,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             int footnote_no = 1;
             for (int i_year = 0; i_year < years.Count; i_year++)
             {
-                DataTable dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
+                DataTable dtHs = null;
+                if (_years.Trim(',') != "" && _years != null)
+                {
+                    dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
+                }
+                if (dtHs.Rows.Count==0)
+                {
+                    // pnlContent.Visible = false;
+                    return;
+                }
+                
 
 
                 //DataView dvVal = dtHs.DefaultView;

@@ -6121,9 +6121,24 @@ where h.indicator_id =@indicator_id and h.year=@year and h.region_id=@region_id 
 
     public DataTable GetHesabat2(string indicator_ids, string years, string lang)
     {
+        string sqlcumle = @"select h.id,h.indicator_id,h.year,h.value,
+i.code as IndicatorCode,i.name_"+ lang + @"  as IndicatorName ,
+g.name_short_"+lang+ @" as GoalName,
+isx.name_" + lang + @" as IndicatorSize
+from hesabat  as h
+inner join indicators as i on i.id = h.indicator_id
+inner join goals as g on g.id = i.goal_id
+inner join indicator_size as isx on isx.id = i.size_id
+where h.is_active = 1 and length(h.value)> 0 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code";
         try
         {
             DataTable dt = new DataTable();
+            //if (years == "" || years ==null || indicator_ids == "" || indicator_ids==null)
+            //{
+            //    return dt;
+            //}
+
+
             MySqlDataAdapter da = new MySqlDataAdapter(string.Format(@"select h.id,h.indicator_id,h.year,h.value,
 i.code as IndicatorCode,i.name_{0}  as IndicatorName ,
 g.name_short_{0} as GoalName,
@@ -6139,7 +6154,8 @@ where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_i
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2()"), ex.Message, "", true);
+            //throw new Exception(ex.Message + "(" + sqlcumle + ")");
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2()"), sqlcumle+ex.Message, "", true);
             return null;
         }
     }
