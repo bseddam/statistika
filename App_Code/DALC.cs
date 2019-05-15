@@ -5337,7 +5337,7 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
                 }
             }
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h where year in (" + year + ") group by year", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h where year in (" + year + ") and is_active=1 group by year", SqlConn);
 
             da.Fill(dt);
             return dt;
@@ -5353,7 +5353,7 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h group by year", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h where is_active=1 group by year", SqlConn);
 
             da.Fill(dt);
             return dt;
@@ -6132,14 +6132,15 @@ from hesabat  as h
 inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
-where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
+where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_ids + 
+") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
 
             da.Fill(dt);
             return dt;
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2()"), ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2_2inci()"), ex.Message, "", true);
             return null;
         }
     }
@@ -6157,7 +6158,7 @@ where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_i
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2_value()"), ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat2_value_2ci()"), ex.Message, "", true);
             return null;
         }
     }

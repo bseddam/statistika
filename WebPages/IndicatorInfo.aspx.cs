@@ -30,7 +30,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         _hide_empty_labels();
 
         //btnIndicator_Click(null, null);
-        
+
+        shareBox(lblIndicatorTitle.Text,
+                "indicator",
+                LtrIndicatorInfo.Text,
+                "");
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -90,7 +94,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         lblSourceLabel.Text = lblSourceLabel1.Text = DALC.GetStaticValue("indicator_source");
         lblNoteLabel.Text = lblNoteLabel1.Text = DALC.GetStaticValue("indicator_note");
         //lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
-
+        lblNote12.Text = DALC.GetStaticValue("statistical_database_note");
 
         indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
         indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
@@ -589,7 +593,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         loadData(lang, indicators);
-        goster();
+        
     }
 
     private void shareBox(string pageTitle, string PageType, string Description, string image_url)
@@ -739,7 +743,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         chkYears.DataBind();
         for (int i = 0; i < chkYears.Items.Count; i++)
         {
-            //if(chkYears.Items[i].Value!="2018")
+            if(chkYears.Items[i].Value!="2018")
             chkYears.Items[i].Selected = true;
         }
     }
@@ -863,6 +867,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
         {
             dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+            Label1.Text = dtH.Rows.Count.ToParseStr();
         }
         if (dtH == null)
         {

@@ -265,42 +265,7 @@
                                             <asp:Label ID="lblNoteLabel1" Text="" runat="server" />
                                             <asp:Label ID="lblNote1" Text="" runat="server" />
                                         </div>
-                                        <div class="share-box" style="margin-top: 10px">
-                                            <asp:Literal ID="share_text" Text="" runat="server" />
-                                            <div class="social-icons">
-                                                <ul>
-                                                    <li>
-                                                        <a href="javascript:void(0)" class="print-page">
-                                                            <i class="fa fa-print" aria-hidden="true"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-
-                                                        <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
-                                                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                                                    </asp:HyperLink>
-
-                                                    </li>
-                                                    <li>
-
-                                                        <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
-                                                                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                                                                    </asp:HyperLink>
-
-                                                    </li>
-                                                    <li>
-                                                        <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
-                                                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                                                    </asp:HyperLink>
-                                                    </li>
-                                                    <li>
-                                                        <asp:HyperLink ID="shareMail" runat="server">
-                                                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                                                    </asp:HyperLink>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                       
                                     </asp:Panel>
 
                                 </div>
@@ -354,6 +319,7 @@
 
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="pnlContent" class="col-md-8">
+
                                     <div class="indicator-nav-wrapper">
                                         <ul class="indicator-nav">
                                             <li class="active" data-content="#chart">
@@ -363,7 +329,46 @@
                                                 <asp:Label ID="lblTabTable" Text="" runat="server" />
                                             </li>
                                         </ul>
+
                                         <div id="chart" class="indicator-tab">
+                         <div class="share-box" style="background-color:white;">
+                            <asp:Literal ID="share_text" Text="" runat="server"  Visible="false"/>
+                            <div class="social-icons" style="float:left;">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)" class="print-page">
+                                            <i class="fa fa-print" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+
+                                        <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
+                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+
+                                    </li>
+                                    <li>
+
+                                        <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+
+                                    </li>
+                                    <li>
+                                        <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+                                    </li>
+                                    <li>
+                                        <asp:HyperLink ID="shareMail" runat="server">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ul>
+                            </div>
+                      </div>
+
+
                                             <div class="chart-styles clear">
                                                 <a href="#" class="chart-btn" data-type="1">
                                                     <img src="/images/chart_1.png" alt="" />
@@ -416,12 +421,45 @@
 
                                         </div>
                                         <div id="datatable" class="indicator-tab indicator-datatable" style="display: none">
-                                            <div class="indicator-datatable-container">
-                                                <asp:Label ID="lblError" Style="color: red" Text="" runat="server" />
+                                            <div class="indicator-datatable-container" >
+                        
+                              <div class="share-box" style="background-color:white;">
+                            <div class="social-icons" style="float:left;">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)" class="print-page">
+                                            <i class="fa fa-print" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
 
-                                                <ul>
-                                                    <asp:Literal ID="footnote" Text="" runat="server" />
-                                                </ul>
+                                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank">
+                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+
+                                    </li>
+                                    <li>
+
+                                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+
+                                    </li>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink3" runat="server" Target="_blank">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+                                    </li>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink4" runat="server">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ul>
+                            </div>
+                </div>
+
+                                               
 
 
 
@@ -430,10 +468,10 @@
                                                 </dx:ASPxGridViewExporter>
                                                 <dx:ASPxGridView ID="Grid" runat="server"
                                                     AutoGenerateColumns="False"
-                                                    Width="1000"
+                                                    Width="1000" 
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
-                                                    <ClientSideEvents BeginCallback="grid_cell" />
+                                                   
                                                     <Settings GridLines="Both" />
                                                     <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
                                                     <Columns>
@@ -459,6 +497,10 @@
                                                     </Styles>
 
                                                 </dx:ASPxGridView>
+                                                <b><asp:Label ID="lblNote12" Text="" runat="server" /></b>
+                                                 <ul>
+                                                    <asp:Literal ID="footnote" Text="" runat="server" />
+                                                </ul>
                                             </div>
                                         </div>
                                         <div>
@@ -474,6 +516,7 @@
                                             <div>
                                                 <asp:Label ID="lblNoteLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblNote" Text="" runat="server" />
+                                                
                                             </div>
 
                                         </div>
@@ -508,7 +551,7 @@
                                                     <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
                                                 </asp:LinkButton>
-                                   <%-- <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
+                                    <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
                                 </div>
                                 <div class="col-md-8">
                                     &nbsp;
