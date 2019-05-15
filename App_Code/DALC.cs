@@ -5288,12 +5288,27 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             return null;
         }
     }
-    public DataTable GetHesabatforChart_Years_1(int indicator_id)
+    public DataTable GetHesabatforChart_Years_1(int indicator_id, int[] years)
     {
         try
         {
-            DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  year from hesabat as h where indicator_id=@indicator_id and length(value)>0 group by year", SqlConn);
+            string year = "";
+            for (int i = 0; i < years.Length; i++)
+            {
+                if (i == 0)
+                {
+                    year = years[i].ToParseStr();
+                }
+                else
+                {
+                    year = year + "," + years[i].ToParseStr();
+                }
+            }
+            //year = "2015,2016";
+
+           DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  year from hesabat as h " +
+                "where indicator_id=@indicator_id and length(value)>0 and year in ("+year+") group by year", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
 
             da.Fill(dt);
@@ -5302,6 +5317,34 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
         catch (Exception ex)
         {
             LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabatforChart_Years_1()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetHesabat_Years(int[] years)
+    {
+        try
+        {
+            string year = "";
+            for (int i = 0; i < years.Length; i++)
+            {
+                if (i == 0)
+                {
+                    year = years[i].ToParseStr();
+                }
+                else
+                {
+                    year = year + "," + years[i].ToParseStr();
+                }
+            }
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h where year in (" + year + ") group by year", SqlConn);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat_Years()"), ex.Message, "", true);
             return null;
         }
     }
@@ -6023,6 +6066,7 @@ inner join metadata_global_list as ml on m.list_id=ml.id where m.indicator_id=@i
     {
         try
         {
+            
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(string.Format(@"select h.id,h.indicator_id,h.year,h.value,h.region_id,
 i.code as IndicatorCode,i.name_{0}  as IndicatorName ,

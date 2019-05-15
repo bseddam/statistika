@@ -24,7 +24,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         int indicatorid = Page.RouteData.Values["indicatorid"].ToParseInt();
 
-
+       
         _loadGoalInfo(indicatorid, lang);
         _loadMetadata(indicatorid, lang);
         _loadLabels();
@@ -34,11 +34,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
 
-        for (int i = 0; i < chkYears.Items.Count; i++)
-        {
-            chkYears.Items[i].Selected = true;
 
-        }
 
         if (treeList1.Nodes.Count > 0)
         {
@@ -50,7 +46,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         btnIndicator_Click(null, null);
-        //goster();
+        goster();
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -86,6 +82,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     void loadData(string lang, List<int> indicators)
     {
+
         loadChartMutipleIndicator(lang, indicators);
         loadTableMutipleIndicator(lang, indicators);
     }
@@ -261,6 +258,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             pnlInfo.Visible = false;
             pnlDiaqramTable.Visible = true;
+
+            
+          
+            //Response.Write("aaa" + years[j] + years[j+1] + years[j + 2]);
             loadData(lang, new List<int> { indicatoridnational });
         }
         if (lblGoalName.Text.Length > 235)
@@ -326,16 +327,28 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     void loadChartMutipleIndicator(string lang, List<int> indicators)
     {
+        int j = 0;
+        int[] years = new int[10];
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            if (chkYears.Items[i].Selected == true)
+            {
+                years[j] = chkYears.Items[i].Text.ToParseInt();
+                j++;
+            }
+        }
+
+
 
         string data = "";
         DataTable dtYears;
         if (indicators.Count == 1)
         {
-            dtYears = _db.GetHesabatforChart_Years_1(indicators[0]);
+            dtYears = _db.GetHesabatforChart_Years_1(indicators[0], years);
         }
         else
         {
-            dtYears = _db.GetHesabat_Years();
+            dtYears = _db.GetHesabat_Years(years);
         }
 
         string _years = "";
@@ -344,6 +357,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             _years += item["year"] + ",";
         }
         _years = _years.Trim(',');
+       
 
         string _indicators = "";
         foreach (int item in indicators)
@@ -352,12 +366,15 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         _indicators = _indicators.Trim(',');
 
+         
 
 
         string columns = "data.addColumn('string', 'Year');";
-
-
-        DataTable dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+        DataTable dtH = null;
+        if (_years.Trim(',') != "")
+        {
+             dtH = _db.GetHesabat2(_indicators.Trim(','), _years, lang);
+        }
         if (dtH == null)
         {
             // pnlContent.Visible = false;
@@ -421,7 +438,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         data = data.Trim(',');
         data += " ]);";
-
 
         _loadChart(data, dtYears.Rows.Count);
     }
@@ -543,7 +559,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             chkYears.Items[i].Selected=true;
         }
-
+        btnIndicator_Click(null, null);
     }
     protected void lnkchkUnselectAll_Click(object sender, EventArgs e)
     {
@@ -551,6 +567,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             chkYears.Items[i].Selected = false;
         }
+        btnIndicator_Click(null, null);
     }
     protected void lnkSelectAll_Click(object sender, EventArgs e)
     {
@@ -566,7 +583,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     protected void btnIndicator_Click(object sender, EventArgs e)
     {
-
+        
         string lang = Config.getLang(Page);
 
         List<int> indicators = new List<int>();
@@ -578,6 +595,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 indicators.Add(item.Key.ToParseInt());
             }
         }
+
 
         loadData(lang, indicators);
     }
@@ -727,6 +745,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         DataTable dtYears = _db.GetHesabat_Years();
         chkYears.DataSource = dtYears;
         chkYears.DataBind();
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            //if(chkYears.Items[i].Value!="2018")
+            chkYears.Items[i].Selected = true;
+        }
     }
     void goster()
     {
@@ -1005,7 +1028,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         return stringWrite.ToString();
     }
 
-    
+
+
+    protected void chkYears_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        btnIndicator_Click(null, null);
+    }
 }
 
 class Footnote_Id1

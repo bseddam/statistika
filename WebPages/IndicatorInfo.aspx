@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="IndicatorInfo.aspx.cs" Inherits="WebPages_IndicatorInfo" %>
 
-
 <%@ Register Assembly="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxTreeList.Export" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView.Export" TagPrefix="dx" %>
@@ -9,7 +8,6 @@
 <%@ Register Assembly="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxTreeList" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -496,10 +494,10 @@
                                     <h4>
                                         <asp:Literal ID="lblYearTitle" Text="" runat="server" />
                                     </h4>
-                                    <asp:CheckBoxList runat="server" ID="chkYears"
+                                    <asp:CheckBoxList runat="server" ID="chkYears" 
                                         RepeatDirection="Horizontal"
                                         CssClass="year-list form-control"
-                                        DataTextField="year" DataValueField="year">
+                                        DataTextField="year" DataValueField="year" AutoPostBack="True" OnSelectedIndexChanged="chkYears_SelectedIndexChanged">
                                     </asp:CheckBoxList>
                                        <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
                                                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
@@ -509,6 +507,7 @@
                                                     <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
                                                 </asp:LinkButton>
+                                   <%-- <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
                                 </div>
                                 <div class="col-md-8">
                                     &nbsp;

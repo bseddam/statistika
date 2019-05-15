@@ -8,7 +8,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
     <style>
         /*.dxWeb_edtCheckBoxUnchecked_MetropolisBlue,
         .dxWeb_edtCheckBoxChecked_MetropolisBlue {
