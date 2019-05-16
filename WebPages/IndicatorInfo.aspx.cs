@@ -11,8 +11,10 @@ using System.Web.UI.WebControls;
 public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 {
     DALC _db = new DALC();
+    
     protected void Page_Load(object sender, EventArgs e)
     {
+       
         _loadFromViewState();
         if (IsPostBack)
         {

@@ -215,6 +215,19 @@
         }
     </style>
     <script>
+        //function loadolanda() {
+        //    if (typeof (Storage) !== "undefined") {
+        //        // Store
+        //        sessionStorage.setItem("lastname", "Smith");
+        //        // Retrieve
+        //        document.getElementById("result").innerHTML = sessionStorage.getItem("lastname");
+        //        console.log("aaaa");
+        //    } else {
+        //        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        //        console.log("bbbb");
+        //    }
+        //}
+          
         //function grid_cell() {
         //    setTimeout(function () {
         //        $('.grid-cell').css('border-bottom-width', '');
@@ -225,11 +238,14 @@
         //}
 
     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="Server">
     <asp:ScriptManager runat="server" />
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
+            
+
             <section>
                 <div class="container main-container">
                     <div class="breadcrumb not-printable">
@@ -322,10 +338,10 @@
 
                                     <div class="indicator-nav-wrapper">
                                         <ul class="indicator-nav">
-                                            <li class="active" data-content="#chart">
+                                            <li  class="active" data-content="#chart">
                                                 <asp:Label ID="lblTabChart" Text="" runat="server" />
                                             </li>
-                                            <li data-content="#datatable">
+                                            <li  data-content="#datatable">
                                                 <asp:Label ID="lblTabTable" Text="" runat="server" />
                                             </li>
                                         </ul>
@@ -684,7 +700,7 @@
                     </div>
                 </div>
             </section>
-
+ 
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnExport" />
