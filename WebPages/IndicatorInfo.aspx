@@ -11,7 +11,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
-       
+       .grid-header
+       {
+           text-align:center;
+       }
         .visible-none {
             visibility: collapse;
         }
@@ -506,20 +509,20 @@ min-height: 30px;
 
 
                                                 <dx:ASPxGridView ID="Grid" runat="server"
-                                                    AutoGenerateColumns="False"
-                                                    Width="1000"
+                                                    AutoGenerateColumns="True"
+                                                    Width="100%"
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
 
-                                                    <Settings GridLines="Both" />
+                                                    <Settings GridLines="Both" VerticalScrollBarMode="Auto" HorizontalScrollBarMode="Auto" />
                                                     <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
                                                     <Columns>
 
-                                                        <dx:GridViewDataColumn Caption="No" FieldName="id" VisibleIndex="1" Width="50">
+                                                        <dx:GridViewDataColumn Caption="No" FieldName="id" >
                                                             <EditFormSettings Visible="False" />
                                                         </dx:GridViewDataColumn>
-                                                        <dx:GridViewDataColumn Caption="Kodu" FieldName="code" VisibleIndex="3" Width="100">
-                                                            <EditFormSettings ColumnSpan="2" />
+                                                        <dx:GridViewDataColumn Caption="Kodu" FieldName="code" >
+                                                            <EditFormSettings  />
                                                         </dx:GridViewDataColumn>
 
                                                     </Columns>
