@@ -193,26 +193,26 @@ min-height: 30px;
             WinPrint.close();
             return false;
         });
-        //$(document).on('click', '.metadata-list tr.parent', function () {
-        //    var _id = $(this).attr('data-id');
-        //    $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
-        //});
+        $(document).on('click', '.metadata-list tr.parent', function () {
+            var _id = $(this).attr('data-id');
+            $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
+        });
 
-        //$(document).on('click', '.indicator-nav li', function () {
-        //    var _id = $(this).attr('data-content');
-        //    var prent = $(this).parents('.indicator-nav-wrapper');
-        //    prent.find('.indicator-nav li').removeClass('active');
-        //    $(this).addClass('active');
-        //    //class="indicator-tab"
-        //    prent.find('.indicator-tab').hide();
-        //    $(_id).show();
-        //    if (_id == '#datatable') {
-        //        $('.indicator-size').hide();
-        //    } else {
-        //        $('.indicator-size').show();
-        //    }
+        $(document).on('click', '.indicator-nav li', function () {
+            var _id = $(this).attr('data-content');
+            var prent = $(this).parents('.indicator-nav-wrapper');
+            prent.find('.indicator-nav li').removeClass('active');
+            $(this).addClass('active');
+            //class="indicator-tab"
+            prent.find('.indicator-tab').hide();
+            $(_id).show();
+            if (_id == '#datatable') {
+                $('.indicator-size').hide();
+            } else {
+                $('.indicator-size').show();
+            }
 
-        //});
+        });
         $(document).on('click', '.chart-btn', function () {
             _type = $(this).attr('data-type');
             drawChart(_type);
@@ -537,9 +537,7 @@ min-height: 30px;
 
                                                 </dx:ASPxGridView>
                                           
-                                                <ul>
-                                                    <asp:Literal ID="footnote" Text="" runat="server" />
-                                                </ul>
+                                               
                                             </div>
                                             </div>
 
@@ -563,6 +561,9 @@ min-height: 30px;
 
                                             </div>
                                              <div><b><asp:Label ID="lblNote12" Text="" runat="server" Visible="false"/></b></div>
+                                                 <ul>
+                                                    <asp:Literal ID="footnote" Text="" runat="server" Visible="false" />
+                                                </ul>
                                         </div>
                                     </div>
 

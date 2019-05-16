@@ -1084,6 +1084,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         lblclasschart.Text = "class='active'";
         lblclassdatatable.Text = "";
         lblNote12.Visible = false;
+        footnote.Visible = false;
         lblNote.Visible = true;
         lblNoteLabel.Visible = true;
     }
@@ -1096,6 +1097,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         lblclasschart.Text = "";
         lblclassdatatable.Text = "class='active'";
         lblNote12.Visible = true;
+        footnote.Visible = true;
         lblNote.Visible = false;
         lblNoteLabel.Visible = false;
     }
