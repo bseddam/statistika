@@ -64,7 +64,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             Grid.DataSource = ViewState["Grid"] as DataTable;
             Grid.DataBind();
-            ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
+            //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
         }
     }
 
@@ -606,6 +606,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         shareTwt.NavigateUrl = "https://twitter.com/share?url=" + pageUrl;
         shareMail.NavigateUrl = string.Format("mailto:?subject={0}&body={1}", pageTitle, pageUrl);
         shareLinkedin.NavigateUrl = string.Format("http://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}&source={0}", pageUrl, pageTitle, Description);
+        shareFb1.NavigateUrl = "http://www.facebook.com/sharer.php?u=" + pageUrl;
+        shareTwt1.NavigateUrl = "https://twitter.com/share?url=" + pageUrl;
+        shareMail1.NavigateUrl = string.Format("mailto:?subject={0}&body={1}", pageTitle, pageUrl);
+        shareLinkedin1.NavigateUrl = string.Format("http://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}&source={0}", pageUrl, pageTitle, Description);
 
 
         #region Google
@@ -695,6 +699,22 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         Response.End();
 
     }
+    protected void LnkExport_Click1(object sender, EventArgs e)
+    {
+        LinkButton btn = sender as LinkButton;
+        Grid.Columns["IndicatorCode"].Visible = true;
+        Grid.Columns["IndicatorCode_html"].Visible = false;
+
+        gridExporter.FileName = DateTime.Now.ToString("ddMMyyyhhmm");
+        switch (btn.CommandArgument)
+        {
+            case "exc": gridExporter.WriteXlsxToResponse(); break;
+            case "csv": gridExporter.WriteCsvToResponse(); break;
+            case "pdf": gridExporter.WritePdfToResponse(); break;
+        }
+        Grid.Columns["IndicatorCode"].Visible = false;
+        Grid.Columns["IndicatorCode_html"].Visible = true;
+    }
     protected void LnkExport_Click(object sender, EventArgs e)
     {
         LinkButton btn = sender as LinkButton;
@@ -710,10 +730,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         Grid.Columns["IndicatorCode"].Visible = false;
         Grid.Columns["IndicatorCode_html"].Visible = true;
-
-
-
-
 
 
 
@@ -743,7 +759,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         chkYears.DataBind();
         for (int i = 0; i < chkYears.Items.Count; i++)
         {
-            if(chkYears.Items[i].Value!="2018")
+            //if(chkYears.Items[i].Value!="2018")
             chkYears.Items[i].Selected = true;
         }
     }
@@ -867,7 +883,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
         {
             dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
-            Label1.Text = dtH.Rows.Count.ToParseStr();
+            //Label1.Text = dtH.Rows.Count.ToParseStr();
         }
         if (dtH == null)
         {
@@ -976,7 +992,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         _loadFootnotes(_footnote_id);
 
-        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
+        //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
 
     }
     private void _loadFootnotes(Footnote_Id1 footnote_id)

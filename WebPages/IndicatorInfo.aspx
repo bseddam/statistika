@@ -215,14 +215,14 @@
         }
     </style>
     <script>
-        function grid_cell() {
-            setTimeout(function () {
-                $('.grid-cell').css('border-bottom-width', '');
-            }, 500);
-            setTimeout(function () {
-                $('.grid-cell').css('border-bottom-width', '');
-            }, 500);
-        }
+        //function grid_cell() {
+        //    setTimeout(function () {
+        //        $('.grid-cell').css('border-bottom-width', '');
+        //    }, 500);
+        //    setTimeout(function () {
+        //        $('.grid-cell').css('border-bottom-width', '');
+        //    }, 500);
+        //}
 
     </script>
 </asp:Content>
@@ -265,7 +265,7 @@
                                             <asp:Label ID="lblNoteLabel1" Text="" runat="server" />
                                             <asp:Label ID="lblNote1" Text="" runat="server" />
                                         </div>
-                                       
+
                                     </asp:Panel>
 
                                 </div>
@@ -331,42 +331,42 @@
                                         </ul>
 
                                         <div id="chart" class="indicator-tab">
-                         <div class="share-box" style="background-color:white;">
-                            <asp:Literal ID="share_text" Text="" runat="server"  Visible="false"/>
-                            <div class="social-icons" style="float:left;">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)" class="print-page">
-                                            <i class="fa fa-print" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li>
+                                            <div class="share-box" style="background-color: white;">
+                                                <asp:Literal ID="share_text" Text="" runat="server" Visible="false" />
+                                                <div class="social-icons" style="float: left;">
+                                                    <ul>
+                                                   <%-- <li>
+                                                            <a href="javascript:void(0)" class="print-page">
+                                                                <i class="fa fa-print" aria-hidden="true"></i>
+                                                            </a>
+                                                        </li>--%>
+                                                        <li>
 
-                                        <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
+                                                            <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
                                                 <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                        </asp:HyperLink>
+                                                            </asp:HyperLink>
 
-                                    </li>
-                                    <li>
+                                                        </li>
+                                                        <li>
 
-                                        <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
+                                                            <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
                                                 <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </asp:HyperLink>
+                                                            </asp:HyperLink>
 
-                                    </li>
-                                    <li>
-                                        <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
+                                                        </li>
+                                                        <li>
+                                                            <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
                                             <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </asp:HyperLink>
-                                    </li>
-                                    <li>
-                                        <asp:HyperLink ID="shareMail" runat="server">
+                                                            </asp:HyperLink>
+                                                        </li>
+                                                        <li>
+                                                            <asp:HyperLink ID="shareMail" runat="server">
                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                        </asp:HyperLink>
-                                    </li>
-                                </ul>
-                            </div>
-                      </div>
+                                                            </asp:HyperLink>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
 
                                             <div class="chart-styles clear">
@@ -417,61 +417,76 @@
                                             </div>
 
                                             <asp:Literal ID="chart_script" Text="" runat="server" />
-
-
                                         </div>
-                                        <div id="datatable" class="indicator-tab indicator-datatable" style="display: none">
-                                            <div class="indicator-datatable-container" >
-                        
-                              <div class="share-box" style="background-color:white;">
-                            <div class="social-icons" style="float:left;">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)" class="print-page">
-                                            <i class="fa fa-print" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li>
+                                        <div id="datatable" class="indicator-tab indicator-datatable" style="display: none;">
+                                         <div class="row">
+                                               <div class="col-md-9 col-xs-6">
+                                                <div class="share-box" style="background-color: white;">
+                                                    <div class="social-icons" style="float: left;">
+                                                        <ul>
+                                                            <%--<li>
+                                                                <a href="javascript:void(0)" class="print-page">
+                                                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                                                </a>
+                                                            </li>--%>
+                                                            <li>
 
-                                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank">
+                                                                <asp:HyperLink ID="shareLinkedin1" runat="server" Target="_blank">
                                                 <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                        </asp:HyperLink>
+                                                                </asp:HyperLink>
 
-                                    </li>
-                                    <li>
+                                                            </li>
+                                                            <li>
 
-                                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank">
+                                                                <asp:HyperLink ID="shareFb1" runat="server" Target="_blank">
                                                 <i class="fa fa-facebook" aria-hidden="true"></i>
-                                        </asp:HyperLink>
+                                                                </asp:HyperLink>
 
-                                    </li>
-                                    <li>
-                                        <asp:HyperLink ID="HyperLink3" runat="server" Target="_blank">
+                                                            </li>
+                                                            <li>
+                                                                <asp:HyperLink ID="shareTwt1" runat="server" Target="_blank">
                                             <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </asp:HyperLink>
-                                    </li>
-                                    <li>
-                                        <asp:HyperLink ID="HyperLink4" runat="server">
+                                                                </asp:HyperLink>
+                                                            </li>
+                                                            <li>
+                                                                <asp:HyperLink ID="shareMail1" runat="server">
                                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                        </asp:HyperLink>
-                                    </li>
-                                </ul>
-                            </div>
-                </div>
+                                                                </asp:HyperLink>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6" style="float: right">
+                                                <div class="dropdown">
+                                                    <button class="dropbtn"><i class='fa fa-download'></i></button>
+                                                    <div class="dropdown-content">
+                                                        <asp:LinkButton ID="LnkExportCsv" Text="CSV" CommandArgument="csv" runat="server" OnClick="LnkExport_Click1" />
+                                                        <asp:LinkButton ID="LnkExportPdf" Text="PDF" CommandArgument="pdf" runat="server" OnClick="LnkExport_Click1" />
+                                                        <asp:LinkButton ID="LnkExportExc" Text="MS-Excel" CommandArgument="exc" runat="server" OnClick="LnkExport_Click1" />
 
-                                               
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                             </div> 
+                                            <div class="row">
+                                            <div class="col-md-12" style="max-height: 330px; overflow: auto;">
 
 
                                                 <dx:ASPxGridViewExporter ID="gridExporter" runat="server"
                                                     Landscape="true" PaperKind="A4">
                                                 </dx:ASPxGridViewExporter>
+
+
+
+
                                                 <dx:ASPxGridView ID="Grid" runat="server"
                                                     AutoGenerateColumns="False"
-                                                    Width="1000" 
+                                                    Width="1000"
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
-                                                   
+
                                                     <Settings GridLines="Both" />
                                                     <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
                                                     <Columns>
@@ -484,8 +499,8 @@
                                                         </dx:GridViewDataColumn>
 
                                                     </Columns>
-                                                
-                                                  
+
+
                                                     <SettingsText CommandNew="Yeni"
                                                         CommandDelete="Sil"
                                                         CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla"
@@ -497,11 +512,16 @@
                                                     </Styles>
 
                                                 </dx:ASPxGridView>
-                                                <b><asp:Label ID="lblNote12" Text="" runat="server" /></b>
-                                                 <ul>
+                                                <b>
+                                                    <asp:Label ID="lblNote12" Text="" runat="server" /></b>
+                                                <ul>
                                                     <asp:Literal ID="footnote" Text="" runat="server" />
                                                 </ul>
                                             </div>
+                                            </div>
+
+
+
                                         </div>
                                         <div>
                                             <br />
@@ -516,7 +536,7 @@
                                             <div>
                                                 <asp:Label ID="lblNoteLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblNote" Text="" runat="server" />
-                                                
+
                                             </div>
 
                                         </div>
@@ -531,23 +551,23 @@
                             </div>
 
 
-                                                       <div class="row" id="pnlyears" runat="server">
+                            <div class="row" id="pnlyears" runat="server">
 
                                 <div class="col-md-4">
- 
+
                                     <h4>
                                         <asp:Literal ID="lblYearTitle" Text="" runat="server" />
                                     </h4>
-                                    <asp:CheckBoxList runat="server" ID="chkYears" 
+                                    <asp:CheckBoxList runat="server" ID="chkYears"
                                         RepeatDirection="Horizontal"
                                         CssClass="year-list form-control"
                                         DataTextField="year" DataValueField="year" AutoPostBack="True" OnSelectedIndexChanged="chkYears_SelectedIndexChanged">
                                     </asp:CheckBoxList>
-                                       <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                    <asp:LinkButton ID="LinkButton1" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
                                                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_select_all") %>
                                                 </asp:LinkButton>
-                                 <asp:LinkButton ID="LinkButton2" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                    <asp:LinkButton ID="LinkButton2" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
                                                     <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
                                                 </asp:LinkButton>
@@ -555,12 +575,12 @@
                                 </div>
                                 <div class="col-md-8">
                                     &nbsp;
-                                    </div>
-                            
+                                </div>
+
                             </div>
                         </asp:Panel>
 
-                           <br />
+                        <br />
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-warning" role="alert">
@@ -669,6 +689,9 @@
         <Triggers>
             <asp:PostBackTrigger ControlID="btnExport" />
             <asp:PostBackTrigger ControlID="btnExport2" />
+             <asp:PostBackTrigger ControlID="LnkExportCsv" />
+            <asp:PostBackTrigger ControlID="LnkExportPdf" />
+            <asp:PostBackTrigger ControlID="LnkExportExc" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>

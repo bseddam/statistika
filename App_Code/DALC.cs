@@ -6078,7 +6078,8 @@ inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
 inner join regions as r on r.id=h.region_id
-where h.is_active=1 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") and h.region_id in (" + region_ids + ") group by i.name_az,r.name_az", lang), SqlConn);
+where h.is_active=1 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years +
+") and h.region_id in (" + region_ids + ") group by i.name_az,r.name_az", lang), SqlConn);
 
             da.Fill(dt);
             return dt;
