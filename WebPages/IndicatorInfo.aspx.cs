@@ -1089,7 +1089,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     {
         pnlchart.Visible = false;
         datatable.Visible = true;
-        btnIndicator_Click(null, null);
+        //btnIndicator_Click(null, null);
         lblclasschart.Text = "";
         lblclassdatatable.Text = "class='active'";
     }

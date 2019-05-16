@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeFile="IndicatorInfo.aspx.cs" Inherits="WebPages_IndicatorInfo" %>
 
-<%@ Register Assembly="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxTreeList.Export" TagPrefix="dx" %>
 
 <%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxGridView.Export" TagPrefix="dx" %>
 
@@ -232,18 +231,7 @@ min-height: 30px;
         }
     </style>
     <script>
-        //function loadolanda() {
-        //    if (typeof (Storage) !== "undefined") {
-        //        // Store
-        //        sessionStorage.setItem("lastname", "Smith");
-        //        // Retrieve
-        //        document.getElementById("result").innerHTML = sessionStorage.getItem("lastname");
-        //        console.log("aaaa");
-        //    } else {
-        //        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        //        console.log("bbbb");
-        //    }
-        //}
+
           
         //function grid_cell() {
         //    setTimeout(function () {
