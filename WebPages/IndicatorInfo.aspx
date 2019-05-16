@@ -498,7 +498,7 @@ min-height: 30px;
 
                                              </div> 
                                             <div class="row">
-                                            <div class="col-md-12" style="max-height: 330px; overflow: auto;">
+                                            <div class="col-md-12" >
 
 
                                                 <dx:ASPxGridViewExporter ID="gridExporter" runat="server"

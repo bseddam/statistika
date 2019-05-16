@@ -832,7 +832,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         column.FixedStyle = GridViewColumnFixedStyle.Left;
         column.PropertiesEdit.EncodeHtml = false;
         column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
-        column.Width = 700;
+        column.Width = 1000;
         column.VisibleIndex = 0;
         Grid.Columns.Add(column);
 
@@ -842,7 +842,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         column.FixedStyle = GridViewColumnFixedStyle.Left;
         column.PropertiesEdit.EncodeHtml = false;
         column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
-        column.Width = 700;
+        column.Width = 500;
         column.VisibleIndex = 1;
         Grid.Columns.Add(column);
 
