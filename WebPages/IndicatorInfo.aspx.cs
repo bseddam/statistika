@@ -1083,6 +1083,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         datatable.Visible = false;
         lblclasschart.Text = "class='active'";
         lblclassdatatable.Text = "";
+        lblNote12.Visible = false;
+        lblNote.Visible = true;
+        lblNoteLabel.Visible = true;
     }
 
     protected void lnkbTabTable_Click(object sender, EventArgs e)
@@ -1092,6 +1095,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //btnIndicator_Click(null, null);
         lblclasschart.Text = "";
         lblclassdatatable.Text = "class='active'";
+        lblNote12.Visible = true;
+        lblNote.Visible = false;
+        lblNoteLabel.Visible = false;
     }
 }
 

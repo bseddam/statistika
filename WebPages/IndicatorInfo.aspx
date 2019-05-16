@@ -536,19 +536,19 @@ min-height: 30px;
                                                     </Styles>
 
                                                 </dx:ASPxGridView>
-                                                <b>
-                                                    <asp:Label ID="lblNote12" Text="" runat="server" /></b>
+                                          
                                                 <ul>
                                                     <asp:Literal ID="footnote" Text="" runat="server" />
                                                 </ul>
                                             </div>
                                             </div>
 
-
+                                            
 
                                         </div>
                                         <div>
                                             <br />
+                                           
                                             <%-- <div class="indicator-size">
                                                 <asp:Label ID="lblSizeLabel" Text="" runat="server" />
                                                 <asp:Label ID="lblSize" Text="" runat="server" />
@@ -558,11 +558,11 @@ min-height: 30px;
                                                 <asp:Label ID="lblSource" Text="" runat="server" />
                                             </div>
                                             <div>
-                                                <asp:Label ID="lblNoteLabel" Text="" runat="server" />
-                                                <asp:Label ID="lblNote" Text="" runat="server" />
+                                                <asp:Label ID="lblNoteLabel" Text="" runat="server" Visible="false" />
+                                                <asp:Label ID="lblNote" Text="" runat="server" Visible="false"/>
 
                                             </div>
-
+                                             <div><b><asp:Label ID="lblNote12" Text="" runat="server" Visible="false"/></b></div>
                                         </div>
                                     </div>
 
