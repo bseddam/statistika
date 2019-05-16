@@ -12,6 +12,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <style>
+       
         .visible-none {
             visibility: collapse;
         }
@@ -162,6 +163,22 @@
             .btn-unselect-all:hover {
                 background-color: #d03a3a;
             }
+
+
+
+
+             .aucun
+        {
+            color:black;
+            display: inline-block;
+min-width: 55px;
+min-height: 30px;
+        }
+        .aucun:hover
+        {
+            text-decoration:none;
+
+        }
     </style>
 </asp:Content>
 <asp:Content ID="fdf" ContentPlaceHolderID="script" runat="server">
@@ -177,26 +194,26 @@
             WinPrint.close();
             return false;
         });
-        $(document).on('click', '.metadata-list tr.parent', function () {
-            var _id = $(this).attr('data-id');
-            $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
-        });
+        //$(document).on('click', '.metadata-list tr.parent', function () {
+        //    var _id = $(this).attr('data-id');
+        //    $('.metadata-list tr[data-id="' + _id + '"]').removeClass('visible-none');
+        //});
 
-        $(document).on('click', '.indicator-nav li', function () {
-            var _id = $(this).attr('data-content');
-            var prent = $(this).parents('.indicator-nav-wrapper');
-            prent.find('.indicator-nav li').removeClass('active');
-            $(this).addClass('active');
-            //class="indicator-tab"
-            prent.find('.indicator-tab').hide();
-            $(_id).show();
-            if (_id == '#datatable') {
-                $('.indicator-size').hide();
-            } else {
-                $('.indicator-size').show();
-            }
+        //$(document).on('click', '.indicator-nav li', function () {
+        //    var _id = $(this).attr('data-content');
+        //    var prent = $(this).parents('.indicator-nav-wrapper');
+        //    prent.find('.indicator-nav li').removeClass('active');
+        //    $(this).addClass('active');
+        //    //class="indicator-tab"
+        //    prent.find('.indicator-tab').hide();
+        //    $(_id).show();
+        //    if (_id == '#datatable') {
+        //        $('.indicator-size').hide();
+        //    } else {
+        //        $('.indicator-size').show();
+        //    }
 
-        });
+        //});
         $(document).on('click', '.chart-btn', function () {
             _type = $(this).attr('data-type');
             drawChart(_type);
@@ -335,18 +352,20 @@
 
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="pnlContent" class="col-md-8">
-
+                                    <asp:Label ID="lblclasschart" runat="server" Text="" Visible="false"></asp:Label>
+                                    <asp:Label ID="lblclassdatatable" runat="server" Text="" Visible="false"></asp:Label>
                                     <div class="indicator-nav-wrapper">
                                         <ul class="indicator-nav">
-                                            <li  class="active" data-content="#chart">
-                                                <asp:Label ID="lblTabChart" Text="" runat="server" />
-                                            </li>
-                                            <li  data-content="#datatable">
-                                                <asp:Label ID="lblTabTable" Text="" runat="server" />
+                                         <li  <%=lblclasschart.Text %> data-content="#chart">
+                                           <asp:LinkButton ID="lnkbTabChart" runat="server" OnClick="lnkbTabChart_Click" CssClass="aucun"></asp:LinkButton>
+                                         </li>     
+                                        
+                                            <li <%=lblclassdatatable.Text %> data-content="#datatable">
+                                                <asp:LinkButton ID="lnkbTabTable" runat="server" OnClick="lnkbTabTable_Click" CssClass="aucun"></asp:LinkButton>
                                             </li>
                                         </ul>
-
-                                        <div id="chart" class="indicator-tab">
+                                        <asp:Panel ID="pnlchart" runat="server">
+                                        <div id="chart" class="indicator-tab" runat="server">
                                             <div class="share-box" style="background-color: white;">
                                                 <asp:Literal ID="share_text" Text="" runat="server" Visible="false" />
                                                 <div class="social-icons" style="float: left;">
@@ -434,7 +453,8 @@
 
                                             <asp:Literal ID="chart_script" Text="" runat="server" />
                                         </div>
-                                        <div id="datatable" class="indicator-tab indicator-datatable" style="display: none;">
+                                        </asp:Panel>
+                                        <div id="datatable" class="indicator-tab indicator-datatable" runat="server">
                                          <div class="row">
                                                <div class="col-md-9 col-xs-6">
                                                 <div class="share-box" style="background-color: white;">

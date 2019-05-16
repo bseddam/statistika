@@ -14,7 +14,13 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        if(!IsPostBack)
+        {
+            pnlchart.Visible = true;
+            datatable.Visible = false;
+            lblclasschart.Text = "class='active'";
+            lblclassdatatable.Text = "";
+        }
         _loadFromViewState();
         if (IsPostBack)
         {
@@ -88,8 +94,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         indicator_national_metadata_info.Text = DALC.GetStaticValue("indicator_national_metadata_info");
         indicator_global_metadata_info.Text = DALC.GetStaticValue("indicator_global_metadata_info");
         lblSelectIndicator.Text = DALC.GetStaticValue("indicator_select_text");
-        lblTabChart.Text = DALC.GetStaticValue("indicator_tab_chart");
-        lblTabTable.Text = DALC.GetStaticValue("indicator_tab_table");
+        lnkbTabChart.Text = DALC.GetStaticValue("indicator_tab_chart");
+        lnkbTabTable.Text = DALC.GetStaticValue("indicator_tab_table");
 
         //lblDownload.Text = DALC.GetStaticValue("download");
 
@@ -1068,6 +1074,24 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     protected void chkYears_SelectedIndexChanged(object sender, EventArgs e)
     {
         btnIndicator_Click(null, null);
+    }
+
+    protected void lnkbTabChart_Click(object sender, EventArgs e)
+    {
+        pnlchart.Visible = true;
+        btnIndicator_Click(null, null);
+        datatable.Visible = false;
+        lblclasschart.Text = "class='active'";
+        lblclassdatatable.Text = "";
+    }
+
+    protected void lnkbTabTable_Click(object sender, EventArgs e)
+    {
+        pnlchart.Visible = false;
+        datatable.Visible = true;
+        btnIndicator_Click(null, null);
+        lblclasschart.Text = "";
+        lblclassdatatable.Text = "class='active'";
     }
 }
 
