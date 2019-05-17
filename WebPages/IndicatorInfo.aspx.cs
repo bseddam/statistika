@@ -1,4 +1,5 @@
-﻿using DevExpress.Web.ASPxGridView;
+﻿using DevExpress.Web.ASPxClasses;
+using DevExpress.Web.ASPxGridView;
 using DevExpress.Web.ASPxHtmlEditor;
 using System;
 using System.Collections.Generic;
@@ -785,14 +786,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //lblError.Text = "";
         string lang = Config.getLang(Page);
 
-        int rowCount = 0;
-        for (int i_year = 0; i_year < chkYears.Items.Count; i_year++)
-        {
-            if (chkYears.Items[i_year].Selected == true)
-            {
-                rowCount++;
-            }
-        }
+        //int rowCount = 0;
+        //for (int i_year = 0; i_year < chkYears.Items.Count; i_year++)
+        //{
+        //    if (chkYears.Items[i_year].Selected == true)
+        //    {
+        //        rowCount++;
+        //    }
+        //}
        
 
 
@@ -806,7 +807,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 indicator_count++;
             }
         }
-        if (rowCount == 0)
+        //if (rowCount == 0)
         {
             //lblError.Text += DALC.GetStaticValue("statistical_database_year_not_selected") + "<br>";
         }
@@ -831,6 +832,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         Grid.Columns.Clear();
+
+
 
         GridViewDataColumn column = new GridViewDataColumn();
 
@@ -1007,7 +1010,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //Session["Grid"] = dtHesabat;
 
         _loadFootnotes(_footnote_id);
-        
+        if (Grid.VisibleRowCount < 5)
+            Grid.Settings.VerticalScrollBarMode = ScrollBarMode.Hidden;
+        else
+            Grid.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         int a = 1;
         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
 

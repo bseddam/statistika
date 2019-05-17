@@ -518,21 +518,15 @@ min-height: 30px;
 
                                                 <dx:ASPxGridView ID="Grid" runat="server" 
                                                     AutoGenerateColumns="True" 
-                                                  
                                                     Width="100%"
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
 
-                                                    <Settings GridLines="Both"  VerticalScrollBarMode="Auto" HorizontalScrollBarMode="Auto" />
+                                                    <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="250" HorizontalScrollBarMode="Auto" />
                                                     <SettingsEditing Mode="PopupEditForm" ></SettingsEditing>
                                                     <Columns>
 
-                                                        <dx:GridViewDataColumn Caption="No" FieldName="id" >
-                                                            <EditFormSettings Visible="False" />
-                                                        </dx:GridViewDataColumn>
-                                                        <dx:GridViewDataColumn Caption="Kodu"  FieldName="code" >
-                                                            <EditFormSettings  />
-                                                        </dx:GridViewDataColumn>
+                                                   
 
                                                     </Columns>
 

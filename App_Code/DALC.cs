@@ -5308,7 +5308,8 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
 
            DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  year from hesabat as h " +
-                "where indicator_id=@indicator_id and length(value)>0 and year in ("+year+") group by year", SqlConn);
+                "where indicator_id=@indicator_id and length(value)>0  " +
+                " and value is not null and year in (" + year+ ") and is_active=1 group by year", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
 
             da.Fill(dt);
@@ -6133,7 +6134,7 @@ from hesabat  as h
 inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
-where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_ids + 
+where h.is_active=1  and h.indicator_id in (" + indicator_ids + 
 ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
 
             da.Fill(dt);
