@@ -18,7 +18,11 @@
         .visible-none {
             visibility: collapse;
         }
-
+        .grid-row
+        {
+            border:1px solid;
+        }
+       
         #content_treeList1_HDR th:first-child {
             visibility: hidden;
         }
@@ -166,7 +170,11 @@
                 background-color: #d03a3a;
             }
 
-
+            .grid-cell
+            {
+                border:1px solid;
+                border-color:black;
+            }
 
 
              .aucun
@@ -236,14 +244,14 @@ min-height: 30px;
     <script>
 
           
-        //function grid_cell() {
-        //    setTimeout(function () {
-        //        $('.grid-cell').css('border-bottom-width', '');
-        //    }, 500);
-        //    setTimeout(function () {
-        //        $('.grid-cell').css('border-bottom-width', '');
-        //    }, 500);
-        //}
+        function grid_cell() {
+            setTimeout(function () {
+                $('.grid-cell').css('border-bottom-width', '');
+            }, 500);
+            setTimeout(function () {
+                $('.grid-cell').css('border-bottom-width', '');
+            }, 500);
+        }
 
     </script>
 
@@ -508,14 +516,15 @@ min-height: 30px;
 
 
 
-                                                <dx:ASPxGridView ID="Grid" runat="server"
-                                                    AutoGenerateColumns="True"
+                                                <dx:ASPxGridView ID="Grid" runat="server" 
+                                                    AutoGenerateColumns="True" 
+                                                  
                                                     Width="100%"
                                                     SettingsBehavior-ConfirmDelete="true"
                                                     KeyFieldName="id">
 
-                                                    <Settings GridLines="Both" VerticalScrollBarMode="Auto" HorizontalScrollBarMode="Auto" />
-                                                    <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
+                                                    <Settings GridLines="Both"  VerticalScrollBarMode="Auto" HorizontalScrollBarMode="Auto" />
+                                                    <SettingsEditing Mode="PopupEditForm" ></SettingsEditing>
                                                     <Columns>
 
                                                         <dx:GridViewDataColumn Caption="No" FieldName="id" >

@@ -72,6 +72,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             Grid.DataSource = ViewState["Grid"] as DataTable;
             Grid.DataBind();
+            int a = 1;
             //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
         }
     }
@@ -599,10 +600,15 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             }
         }
 
-        if(pnlchart.Visible==true)
+        if (pnlchart.Visible == true)
         {
-        loadData(lang, indicators);
+            loadData(lang, indicators);
         }
+        else if(datatable.Visible == true)
+        {
+            goster();
+        }
+
         int a = 1;
     }
 
@@ -1001,13 +1007,9 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //Session["Grid"] = dtHesabat;
 
         _loadFootnotes(_footnote_id);
-        string a = "";
-        if(1 == 1)
-        {
-            a = " " ;
-        }
-        a = "1";
-        //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
+        
+        int a = 1;
+        ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
 
     }
     private void _loadFootnotes(Footnote_Id1 footnote_id)
