@@ -2685,7 +2685,8 @@ and is_active=1 and (`value` is not null or footnote_id is not null)", SqlConn);
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT  i.*,it.code as type_code,i_s.code as size_code,i_s.name_az as size_name_az,i_s.name_en as size_name_en  from indicators as i
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select  i.*,it.code as type_code,
+i_s.code as size_code,i_s.name_az as size_name_az,i_s.name_en as size_name_en  from indicators as i
 left join indicators_type as it on it.id=i.type_id
 left join indicator_size as i_s on i_s.id=i.size_id
  where i.id=@id and i.isActive=1 ", SqlConn);
@@ -5308,7 +5309,7 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
 
            DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  year from hesabat as h " +
-                "where indicator_id=@indicator_id and length(value)>0  " +
+                "where indicator_id=@indicator_id and length(value)>0 and value not in ('-','...','x') " +
                 " and value is not null and year in (" + year+ ") and is_active=1 group by year", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
 
@@ -5321,10 +5322,16 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             return null;
         }
     }
-    public DataTable GetHesabat_Years(int[] years)
+    public DataTable GetHesabat_Years(List<int> indicators,int[] years)
     {
         try
         {
+            string _indicators = "0";
+            foreach (int item in indicators)
+            {
+                _indicators += item + ",";
+            }
+            _indicators = _indicators.Trim(',');
             string year = "";
             for (int i = 0; i < years.Length; i++)
             {
@@ -5338,7 +5345,11 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
                 }
             }
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h where year in (" + year + ") and is_active=1 group by year", SqlConn);
+              
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT year from hesabat as h " +
+                "where indicator_id in ("+_indicators + ") " +
+                " and length(value)> 0 and value not in ('-', '...', 'x') and value is not null and year in ("
+                + year + ") and is_active=1 group by year", SqlConn);
 
             da.Fill(dt);
             return dt;
@@ -5371,7 +5382,10 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  IFNULL(value,'-') from hesabat as h where indicator_id=@indicator_id  and year=@year and length(h.value)>0 limit 1", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  IFNULL(value,'-') from hesabat as h " +
+                "where indicator_id=@indicator_id and  h.is_active = 1 and h.value is not null and " +
+                "length(h.value)> 0 and h.value not in ('-', '...', 'x')  and year=@year limit 1", SqlConn);
+            
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.SelectCommand.Parameters.AddWithValue("year", year);
 
@@ -6120,7 +6134,30 @@ where h.indicator_id =@indicator_id and h.year=@year and h.region_id=@region_id 
             return "0";
         }
     }
+    public DataTable GetHesabat21(string indicator_ids, string years, string lang)
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(string.Format(@"select h.id,h.indicator_id,h.year,h.value,
+i.code as IndicatorCode,i.name_{0}  as IndicatorName ,
+g.name_short_{0} as GoalName,
+isx.name_{0} as IndicatorSize
+from hesabat  as h
+inner join indicators as i on i.id=h.indicator_id
+inner join goals as g on g.id=i.goal_id
+inner join indicator_size as isx on isx.id=i.size_id
+where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
 
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat21()"), ex.Message, "", true);
+            return null;
+        }
+    }
     public DataTable GetHesabat2(string indicator_ids, string years, string lang)
     {
         try
@@ -6134,9 +6171,10 @@ from hesabat  as h
 inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
-where h.is_active=1  and h.indicator_id in (" + indicator_ids + 
+where h.is_active=1 and h.value is not null and length(h.value)> 0 and h.value not in ('-', '...', 'x')  and h.indicator_id in (" + indicator_ids + 
 ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
-
+              
+               
             da.Fill(dt);
             return dt;
         }

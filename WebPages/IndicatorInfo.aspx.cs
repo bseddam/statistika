@@ -353,9 +353,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         else
         {
-            dtYears = _db.GetHesabat_Years(years);
+            dtYears = _db.GetHesabat_Years(indicators, years);
         }
-
+        if(dtYears==null)
+        {
+            return;
+        }
         string _years = "";
         foreach (DataRow item in dtYears.Rows)
         {
@@ -607,7 +610,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
         else if(datatable.Visible == true)
         {
-            goster();
+            cedvelgoster();
         }
 
         int a = 1;
@@ -780,7 +783,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             chkYears.Items[i].Selected = true;
         }
     }
-    void goster()
+    void cedvelgoster()
     {
 
         //lblError.Text = "";
@@ -901,13 +904,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         DataTable dtH = null;
         if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
         {
-            dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+            dtH = _db.GetHesabat21(_indicators.Trim(','), _years.Trim(','), lang);
             //Label1.Text = dtH.Rows.Count.ToParseStr();
         }
+        int b = 1;
         if (dtH == null)
         {
-            // pnlContent.Visible = false;
-            return;
+            //pnlContent.Visible = false;
+            //return;
         }
        
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
@@ -958,10 +962,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 {
                     dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
                 }
+               
                 if (dtHs.Rows.Count==0)
                 {
                     // pnlContent.Visible = false;
-                    return;
+                    //return;
                 }
                 
 
@@ -1014,9 +1019,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             Grid.Settings.VerticalScrollBarMode = ScrollBarMode.Hidden;
         else
             Grid.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
-        int a = 1;
+
         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
 
+    
     }
     private void _loadFootnotes(Footnote_Id1 footnote_id)
     {
@@ -1116,7 +1122,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         footnote.Visible = true;
         lblNote.Visible = false;
         lblNoteLabel.Visible = false;
-        goster();
+        cedvelgoster();
     }
 }
 
