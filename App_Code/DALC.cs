@@ -6147,7 +6147,7 @@ from hesabat  as h
 inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
-where h.is_active=1 and length(h.value)>0 and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
+where h.is_active=1  and h.indicator_id in (" + indicator_ids + ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
 
             da.Fill(dt);
             return dt;
@@ -6194,6 +6194,19 @@ where h.is_active=1 and h.value is not null and length(h.value)> 0 and h.value n
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.SelectCommand.Parameters.AddWithValue("year", year);
             da.Fill(dt);
+            string a = "";
+            if (dt.Rows.Count == 0)
+            {
+                a = "error";
+                DataRow dr = dt.NewRow();
+                dr["value"] = "" ;
+                dr["footnote_id"] = DBNull.Value;
+                dt.Rows.Add(dr);
+            }
+            else
+            {
+                a = dt.Rows[0]["value"].ToParseStr();
+            }
             return dt;
         }
         catch (Exception ex)

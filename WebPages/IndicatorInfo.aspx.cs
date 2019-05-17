@@ -907,21 +907,28 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             dtH = _db.GetHesabat21(_indicators.Trim(','), _years.Trim(','), lang);
             //Label1.Text = dtH.Rows.Count.ToParseStr();
         }
-        int b = 1;
+        int b = 0;
         if (dtH == null)
         {
-            //pnlContent.Visible = false;
-            //return;
+                //pnlContent.Visible = false;
+                return;
+        }
+        else
+        {
+            
+          
         }
        
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
 
         Footnote_Id1 _footnote_id = new Footnote_Id1();
-       
+        int c = 0;
         for (int i = 0; i < dtH.Rows.Count; i++)
         {
+            b++;
             DataRow dr = dtHesabat.NewRow();
             dr["id"] = dtH.Rows[i]["id"].ToParseInt();
+            c = dtH.Rows[i]["id"].ToParseInt();
             int _parent_id = _db.GetIndicatorById(dtH.Rows[i]["indicator_id"].ToParseInt()).Rows[0]["parent_id"].ToParseInt();
             dr["parent_id"] = _parent_id;
 
@@ -958,15 +965,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             for (int i_year = 0; i_year < years.Count; i_year++)
             {
                 DataTable dtHs = null;
+                int kk=0;
                 if (_years.Trim(',') != "" && _years != null)
                 {
+                    kk = dtH.Rows[i]["indicator_id"].ToParseInt();
                     dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
                 }
                
                 if (dtHs.Rows.Count==0)
                 {
                     // pnlContent.Visible = false;
-                    //return;
+                    return;
                 }
                 
 
@@ -997,6 +1006,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
                 dr["footnote_" + years[i_year].ToParseStr()] = footnote;
 
+                //illeri burdan elave edir
                 dr[years[i_year].ToParseStr()] = checkValue(dtHs.Rows[0]["value"].ToParseStr()) + " " + footnote;
                 footnote_no++;
                 
