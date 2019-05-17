@@ -80,7 +80,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     {
 
         loadChartMutipleIndicator(lang, indicators);
-        goster();
+       
         //loadTableMutipleIndicator(lang, indicators);
     }
 
@@ -599,9 +599,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             }
         }
 
-
+        if(pnlchart.Visible==true)
+        {
         loadData(lang, indicators);
-        
+        }
+        int a = 1;
     }
 
     private void shareBox(string pageTitle, string PageType, string Description, string image_url)
@@ -833,7 +835,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         column.PropertiesEdit.EncodeHtml = false;
         column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
         column.Width = 1000;
-        column.VisibleIndex = 0;
+     
         Grid.Columns.Add(column);
 
         column = new GridViewDataTextColumn();
@@ -843,7 +845,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         column.PropertiesEdit.EncodeHtml = false;
         column.CellStyle.HorizontalAlign = HorizontalAlign.Left;
         column.Width = 500;
-        column.VisibleIndex = 1;
+       
         Grid.Columns.Add(column);
 
         column = new GridViewDataColumn();
@@ -851,7 +853,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         column.FieldName = "IndicatorSize";
         column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
         column.Width = 150;
-        column.VisibleIndex = 2;
+     
         Grid.Columns.Add(column);
 
         List<int> years = new List<int>();
@@ -999,7 +1001,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //Session["Grid"] = dtHesabat;
 
         _loadFootnotes(_footnote_id);
-
+        string a = "";
+        if(1 == 1)
+        {
+            a = " " ;
+        }
+        a = "1";
         //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
 
     }
@@ -1091,6 +1098,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     protected void lnkbTabTable_Click(object sender, EventArgs e)
     {
+        
         pnlchart.Visible = false;
         datatable.Visible = true;
         //btnIndicator_Click(null, null);
@@ -1100,6 +1108,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         footnote.Visible = true;
         lblNote.Visible = false;
         lblNoteLabel.Visible = false;
+        goster();
     }
 }
 

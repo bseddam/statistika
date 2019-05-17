@@ -521,7 +521,7 @@ min-height: 30px;
                                                         <dx:GridViewDataColumn Caption="No" FieldName="id" >
                                                             <EditFormSettings Visible="False" />
                                                         </dx:GridViewDataColumn>
-                                                        <dx:GridViewDataColumn Caption="Kodu" FieldName="code" >
+                                                        <dx:GridViewDataColumn Caption="Kodu"  FieldName="code" >
                                                             <EditFormSettings  />
                                                         </dx:GridViewDataColumn>
 
