@@ -835,7 +835,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
         Grid.Columns.Clear();
-
+        
 
 
         GridViewDataColumn column = new GridViewDataColumn();
@@ -879,142 +879,157 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 _years += chkYears.Items[i].Value + ",";
             }
         }
-        years.Sort();
-
-        for (int i_year = 0; i_year < years.Count; i_year++)
-        {
-            dtHesabat.Columns.Add(years[i_year].ToParseStr(), typeof(string));
-
-            column = new GridViewDataTextColumn();
-            column.Caption = years[i_year].ToParseStr();
-            column.FieldName = years[i_year].ToParseStr();
-            column.PropertiesEdit.EncodeHtml = false;
-            column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
-            Grid.Columns.Add(column);
-
-            dtHesabat.Columns.Add("footnote_" + years[i_year].ToParseStr(), typeof(string));
-
-            GridViewDataTextColumn columnF = new GridViewDataTextColumn();
-            columnF.Caption = " ";
-            columnF.FieldName = "footnote_" + years[i_year].ToParseStr();
-            columnF.PropertiesEdit.EncodeHtml = false;
-            columnF.Visible = false;
-            Grid.Columns.Add(columnF);
-        }
-        DataTable dtH = null;
-        if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
-        {
-            dtH = _db.GetHesabat21(_indicators.Trim(','), _years.Trim(','), lang);
-            //Label1.Text = dtH.Rows.Count.ToParseStr();
-        }
-        int b = 0;
-        if (dtH == null)
-        {
-                //pnlContent.Visible = false;
-                return;
-        }
-        else
-        {
-            
-          
-        }
-       
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
 
         Footnote_Id1 _footnote_id = new Footnote_Id1();
-        int c = 0;
-        for (int i = 0; i < dtH.Rows.Count; i++)
+        if (_years!="" && treeList1.GetSelectedNodes().Count != 0)
         {
-            b++;
-            DataRow dr = dtHesabat.NewRow();
-            dr["id"] = dtH.Rows[i]["id"].ToParseInt();
-            c = dtH.Rows[i]["id"].ToParseInt();
-            int _parent_id = _db.GetIndicatorById(dtH.Rows[i]["indicator_id"].ToParseInt()).Rows[0]["parent_id"].ToParseInt();
-            dr["parent_id"] = _parent_id;
+            years.Sort();
 
-            string __code = Config.ClearIndicatorCode(dtH.Rows[i]["IndicatorCode"].ToParseStr());
-            
-            if (__code.Split('.').Length == 3)
-            {
-                dr["IndicatorCode_html"] = string.Format("{0} {1}",
-                __code,
-                dtH.Rows[i]["IndicatorName"].ToParseStr());
-            }
-            else
-            {
-                int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
-                dr["IndicatorCode_html"] = string.Format(" {0}",
-                     generated_space_html(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
-            }
-
-            if (__code.Split('.').Length == 3)
-            {
-                dr["IndicatorCode"] = string.Format("{0} {1}",
-                __code,
-                dtH.Rows[i]["IndicatorName"].ToParseStr());
-            }
-            else
-            {
-                int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
-                dr["IndicatorCode"] = string.Format(" {0}",
-                     generated_space(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
-            }
-            dr["IndicatorSize"] = dtH.Rows[i]["IndicatorSize"].ToParseStr();
-            
-            int footnote_no = 1;
             for (int i_year = 0; i_year < years.Count; i_year++)
             {
-                DataTable dtHs = null;
-                int kk=0;
-                if (_years.Trim(',') != "" && _years != null)
-                {
-                    kk = dtH.Rows[i]["indicator_id"].ToParseInt();
-                    dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
-                }
-               
-                if (dtHs.Rows.Count==0)
-                {
-                    // pnlContent.Visible = false;
-                    return;
-                }
-                
+                dtHesabat.Columns.Add(years[i_year].ToParseStr(), typeof(string));
 
+                column = new GridViewDataTextColumn();
+                column.Caption = years[i_year].ToParseStr();
+                column.FieldName = years[i_year].ToParseStr();
+                column.PropertiesEdit.EncodeHtml = false;
+                column.CellStyle.HorizontalAlign = HorizontalAlign.Center;
+                Grid.Columns.Add(column);
 
-                //DataView dvVal = dtHs.DefaultView;
-                //dvVal.RowFilter = string.Format("region_id={0} and year={1} and indicator_id={2}",
-                //    dtH.Rows[i]["id"].ToParseInt(),
-                //    years[i_year],
-                //    dtH.Rows[i]["indicator_id"].ToParseInt()
-                //    );
+                dtHesabat.Columns.Add("footnote_" + years[i_year].ToParseStr(), typeof(string));
 
-
-
-                string footnote = "";
-                if (dtHs.Rows[0]["footnote_id"].ToParseStr() != "")
-                {
-
-                    _footnote_id.Add(dtHs.Rows[0]["footnote_id"].ToParseInt());
-
-                    footnote = string.Format("<sup><a href='#footnote-{0}' title='{1}' data-id='{2}'>[{0}]</a></sup>",
-                                _footnote_id.GetValue(dtHs.Rows[0]["footnote_id"].ToParseInt()),
-                                footnote_title,
-                                dtHs.Rows[0]["footnote_id"].ToParseStr());
-
-                }
-
-
-
-                dr["footnote_" + years[i_year].ToParseStr()] = footnote;
-
-                //illeri burdan elave edir
-                dr[years[i_year].ToParseStr()] = checkValue(dtHs.Rows[0]["value"].ToParseStr()) + " " + footnote;
-                footnote_no++;
-                
+                GridViewDataTextColumn columnF = new GridViewDataTextColumn();
+                columnF.Caption = " ";
+                columnF.FieldName = "footnote_" + years[i_year].ToParseStr();
+                columnF.PropertiesEdit.EncodeHtml = false;
+                columnF.Visible = false;
+                Grid.Columns.Add(columnF);
             }
-            dtHesabat.Rows.Add(dr);
-        }
-        //Response.Write(dtHesabat.Rows[0][5].ToString());
 
+
+
+
+            DataTable dtH = null;
+            if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
+            {
+                dtH = _db.GetHesabat21(_indicators.Trim(','), _years.Trim(','), lang);
+                //Label1.Text = dtH.Rows.Count.ToParseStr();
+            }
+            int b = 0;
+            if (dtH == null)
+            {
+                //pnlContent.Visible = false;
+                return;
+            }
+            else
+            {
+
+
+            }
+
+
+            int c = 0;
+            for (int i = 0; i < dtH.Rows.Count; i++)
+            {
+                b++;
+                DataRow dr = dtHesabat.NewRow();
+                dr["id"] = dtH.Rows[i]["id"].ToParseInt();
+                c = dtH.Rows[i]["id"].ToParseInt();
+                int _parent_id = _db.GetIndicatorById(dtH.Rows[i]["indicator_id"].ToParseInt()).Rows[0]["parent_id"].ToParseInt();
+                dr["parent_id"] = _parent_id;
+
+                string __code = Config.ClearIndicatorCode(dtH.Rows[i]["IndicatorCode"].ToParseStr());
+
+                if (__code.Split('.').Length == 3)
+                {
+                    dr["IndicatorCode_html"] = string.Format("{0} {1}",
+                    __code,
+                    dtH.Rows[i]["IndicatorName"].ToParseStr());
+                }
+                else
+                {
+                    int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
+                    dr["IndicatorCode_html"] = string.Format(" {0}",
+                         generated_space_html(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
+                }
+
+                if (__code.Split('.').Length == 3)
+                {
+                    dr["IndicatorCode"] = string.Format("{0} {1}",
+                    __code,
+                    dtH.Rows[i]["IndicatorName"].ToParseStr());
+                }
+                else
+                {
+                    int _count = parent_count(dtH.Rows[i]["indicator_id"].ToParseInt(), 0);
+                    dr["IndicatorCode"] = string.Format(" {0}",
+                         generated_space(_count) + dtH.Rows[i]["IndicatorName"].ToParseStr());
+                }
+                dr["IndicatorSize"] = dtH.Rows[i]["IndicatorSize"].ToParseStr();
+
+                int footnote_no = 1;
+                for (int i_year = 0; i_year < years.Count; i_year++)
+                {
+                    DataTable dtHs = null;
+                    int kk = 0;
+                    if (_years.Trim(',') != "" && _years != null)
+                    {
+                        kk = dtH.Rows[i]["indicator_id"].ToParseInt();
+                        dtHs = _db.GetHesabat2_value(dtH.Rows[i]["indicator_id"].ToParseInt(), years[i_year]);
+                    }
+
+                    if (dtHs.Rows.Count == 0)
+                    {
+                        // pnlContent.Visible = false;
+                        return;
+                    }
+
+
+
+                    //DataView dvVal = dtHs.DefaultView;
+                    //dvVal.RowFilter = string.Format("region_id={0} and year={1} and indicator_id={2}",
+                    //    dtH.Rows[i]["id"].ToParseInt(),
+                    //    years[i_year],
+                    //    dtH.Rows[i]["indicator_id"].ToParseInt()
+                    //    );
+
+
+
+                    string footnote = "";
+                    if (dtHs.Rows[0]["footnote_id"].ToParseStr() != "")
+                    {
+
+                        _footnote_id.Add(dtHs.Rows[0]["footnote_id"].ToParseInt());
+
+                        footnote = string.Format("<sup><a href='#footnote-{0}' title='{1}' data-id='{2}'>[{0}]</a></sup>",
+                                    _footnote_id.GetValue(dtHs.Rows[0]["footnote_id"].ToParseInt()),
+                                    footnote_title,
+                                    dtHs.Rows[0]["footnote_id"].ToParseStr());
+
+                    }
+
+
+
+                    dr["footnote_" + years[i_year].ToParseStr()] = footnote;
+
+                    //illeri burdan elave edir
+                    dr[years[i_year].ToParseStr()] = checkValue(dtHs.Rows[0]["value"].ToParseStr()) + " " + footnote;
+                    footnote_no++;
+
+                }
+                dtHesabat.Rows.Add(dr);
+            }
+            //Response.Write(dtHesabat.Rows[0][5].ToString());
+
+
+            
+        }
+        else
+        {
+            dtHesabat = null;
+        }
+       
 
         Grid.DataSource = dtHesabat;
         Grid.DataBind();
