@@ -29,7 +29,7 @@ public partial class Admin_Pages_MechanismProgress : System.Web.UI.Page
         lblFilter.Text = "Axtarış";
         ltrPageTitle.Text = "Milli inkişaf gündəliyi";
 
-
+        pnlContent.Style["display"] = "none";
         //_dataPermission();
 
         _loadDropDowns();
@@ -37,7 +37,7 @@ public partial class Admin_Pages_MechanismProgress : System.Web.UI.Page
 
 
         lnkSearch.Visible = false;
-        PnlSearch.Visible = false;
+        PnlSearch.Visible = true;
     }
 
     private void _loadDropDowns()
@@ -71,7 +71,8 @@ public partial class Admin_Pages_MechanismProgress : System.Web.UI.Page
     void _loadGridFromDb()
     {
 
-        DataTable dt = _db.GetPages(getPageType);
+        //DataTable dt = _db.GetPages(getPageType);
+        DataTable dt = _db.GetPagesByGoalId(getPageType, GoalList.Value.ToParseInt());
 
         Grid.DataSource = dt;
         Grid.DataBind();

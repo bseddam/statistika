@@ -21,6 +21,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             datatable.Visible = false;
             lblclasschart.Text = "class='active'";
             lblclassdatatable.Text = "";
+            _hide_empty_labels();
         }
         _loadFromViewState();
         if (IsPostBack)
@@ -36,7 +37,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         _loadMetadata(indicatorid, lang);
         _loadLabels();
 
-        _hide_empty_labels();
+        
 
         //btnIndicator_Click(null, null);
 
@@ -44,10 +45,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 "indicator",
                 LtrIndicatorInfo.Text,
                 "");
+   
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
-        if (value.Text.Length == 0)
+        if (value.Text.Length == 0 || value==null)
         {
             label.Visible = false;
         }
@@ -57,6 +59,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         //_helper_hide_empty_label(lblSize, lblSizeLabel);
         _helper_hide_empty_label(lblSource, lblSourceLabel);
         _helper_hide_empty_label(lblNote, lblNoteLabel);
+        _helper_hide_empty_label(lblFootNote, lblFootNoteLabel);
+        
     }
 
     private void _loadFromViewState()
@@ -104,7 +108,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         lblSourceLabel.Text = lblSourceLabel1.Text = DALC.GetStaticValue("indicator_source");
         lblNoteLabel.Text = lblNoteLabel1.Text = DALC.GetStaticValue("indicator_note");
         //lblSizeLabel.Text = DALC.GetStaticValue("indicator_olcu_vahidi");
-        lblNote12.Text = DALC.GetStaticValue("statistical_database_note");
+        lblFootNoteLabel.Text = DALC.GetStaticValue("statistical_database_note");
 
         indicator_download_label.Text = DALC.GetStaticValue("indicator_download_label");
         indicator_download_jpg.Text = DALC.GetStaticValue("indicator_download_jpg");
@@ -606,14 +610,30 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         if (pnlchart.Visible == true)
         {
+            datatable.Visible = false;
+            lblclasschart.Text = "class='active'";
+            lblclassdatatable.Text = "";
+            lblFootNoteLabel.Visible = false;
+            lblFootNote.Visible = false;
+            lblNote.Visible = true;
+            lblNoteLabel.Visible = true;
             loadData(lang, indicators);
+            _hide_empty_labels();
         }
         else if(datatable.Visible == true)
         {
+            pnlchart.Visible = false;
+            lblclasschart.Text = "";
+            lblclassdatatable.Text = "class='active'";
+            lblFootNoteLabel.Visible = true;
+            lblFootNote.Visible = true;
+            lblNote.Visible = false;
+            lblNoteLabel.Visible = false;
             cedvelgoster();
+            _hide_empty_labels();
         }
 
-        int a = 1;
+       
     }
 
     private void shareBox(string pageTitle, string PageType, string Description, string image_url)
@@ -1051,7 +1071,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
     private void _loadFootnotes(Footnote_Id1 footnote_id)
     {
-        footnote.Text = "";
+        lblFootNote.Text = "";
         DataTable dtFootnote = _db.GetFootnotesOrderById();
         string lang = Config.getLang(Page);
 
@@ -1067,7 +1087,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
         foreach (KeyValuePair<int, string> item in values)
         {
-            footnote.Text += string.Format(@"<li><div id='footnote-{0}'></div>{0}. {1} </li>",
+            lblFootNote.Text += string.Format(@"<li><div id='footnote-{0}'></div>{0}. {1} </li>",
                                    item.Key,
                                   item.Value);
         }
@@ -1125,29 +1145,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     protected void lnkbTabChart_Click(object sender, EventArgs e)
     {
         pnlchart.Visible = true;
-        btnIndicator_Click(null, null);
         datatable.Visible = false;
-        lblclasschart.Text = "class='active'";
-        lblclassdatatable.Text = "";
-        lblNote12.Visible = false;
-        footnote.Visible = false;
-        lblNote.Visible = true;
-        lblNoteLabel.Visible = true;
+        btnIndicator_Click(null, null);
+       
     }
 
     protected void lnkbTabTable_Click(object sender, EventArgs e)
     {
-        
-        pnlchart.Visible = false;
         datatable.Visible = true;
-        //btnIndicator_Click(null, null);
-        lblclasschart.Text = "";
-        lblclassdatatable.Text = "class='active'";
-        lblNote12.Visible = true;
-        footnote.Visible = true;
-        lblNote.Visible = false;
-        lblNoteLabel.Visible = false;
-        cedvelgoster();
+        pnlchart.Visible = false;
+        btnIndicator_Click(null, null);
+       
     }
 }
 

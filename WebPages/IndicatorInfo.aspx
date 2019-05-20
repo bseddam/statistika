@@ -589,10 +589,10 @@
                                                 <asp:Label ID="lblNote" Text="" runat="server" Visible="false" />
 
                                             </div>
-                                            <div><b>
-                                                <asp:Label ID="lblNote12" Text="" runat="server" Visible="false" /></b></div>
+                                            <div>
+                                                <asp:Label ID="lblFootNoteLabel" Text="" runat="server" Visible="false" /></div>
                                             <ul>
-                                                <asp:Literal ID="footnote" Text="" runat="server" Visible="false" />
+                                                <asp:Label ID="lblFootNote" Text="" runat="server" Visible="false" />
                                             </ul>
                                         </div>
                                     </div>
