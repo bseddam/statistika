@@ -27,8 +27,8 @@ public partial class WebPages_Law : System.Web.UI.Page
 
 
         ltrPageName.Text = DALC.GetStaticValue("laws_page_title");
-
-        rptContent.DataSource = _db.GetPagesByGoalIdOrderby(Utils.PageType.Laws, goalId);
+        
+        rptContent.DataSource = _db.GetPagesByGoalIdOrderby(Utils.PageType.MechanismGundelik, goalId);
         rptContent.DataBind();
 
 
@@ -36,16 +36,10 @@ public partial class WebPages_Law : System.Web.UI.Page
 
         rptGoals.DataSource = dt;
         rptGoals.DataBind();
-
-        ltrBreadCrumb.Text = string.Format("<a href=\"/{0}/home\"> {1}</a> / {2} ", lang,
-         DALC.GetStaticValue("home_breadcrumb_title"),
-        Config.HtmlRemoval.StripTagsRegex(ltrPageName.Text));
-
-
-
-
-        rptContent.DataSource = _db.GetPagesOrderBy(Utils.PageType.MechanismGundelik);
-        rptContent.DataBind();
+        ltrPageName.Text = DALC.GetStaticValue("national_mechanism_progress_text"); ;
+        //ltrBreadCrumb.Text = string.Format("<a href=\"/{0}/home\"> {1}</a> / {2} ", lang,
+        // DALC.GetStaticValue("home_breadcrumb_title"),
+        //Config.HtmlRemoval.StripTagsRegex(ltrPageName.Text));
         loadBreadCrumb(lang, DALC.GetStaticValue("national_mechanism_progress_text"));
 
 
@@ -63,4 +57,5 @@ public partial class WebPages_Law : System.Web.UI.Page
                  Config.HtmlRemoval.StripTagsRegex(dtTitle.Rows[0]["title"].ToParseStr()),
                   Config.HtmlRemoval.StripTagsRegex(category));
     }
+
 }
