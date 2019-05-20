@@ -2375,9 +2375,10 @@ group by GoalName , GoalId order by g.priority", SqlConn);
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("select g.priority, g.name_" + Config.getLang(p) + @" as GoalName, s.* from slider as s
+            MySqlDataAdapter da = new MySqlDataAdapter("select g.priority, g.name_" + Config.getLang(p) +
+                @" as GoalName, s.* from slider as s
                     inner join goals g on g.id=s.goal_id 
-                    where  g.id=@id", SqlConn);
+                    where  g.id=@id order by indicatorCode(title_az)", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("id", goal_id);
 
             da.Fill(dt);

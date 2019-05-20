@@ -91,7 +91,6 @@ public partial class Admin_Pages_Add : System.Web.UI.Page
             if (pageType == Utils.PageType.MechanismGundelik)
             { 
                 pnlLaw.Visible = true;
-                pnlMoreUrl.Visible = true;
             }
         }
 

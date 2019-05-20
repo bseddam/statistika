@@ -87,6 +87,7 @@
                         <div class="owl-carousel owl-theme">
                             <asp:Repeater ID="rptSlider" runat="server">
                                 <ItemTemplate>
+                                    
                                     <div class="item">
                                         <div class="content-title" style="margin-top: 10px;">
                                             <%#Eval("title_"+Config.getLang(Page)) %>

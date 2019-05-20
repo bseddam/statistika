@@ -93,9 +93,9 @@
                                             <div class="panel-body">
                                                 <%#Eval("content_"+Config.getLang(Page)) %>
 
-                                                <div style="text-align: right">
+           <%--                                     <div style="text-align: right">
                                                     <a target="_blank" href="<%#Eval("more_url") %>"><%=DALC.GetStaticValue("law_more_info") %></a>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                         </div>
                                     </div>
