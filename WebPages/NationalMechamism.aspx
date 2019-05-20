@@ -55,12 +55,13 @@
                                 </ItemTemplate>
                             </asp:Repeater>
                             <li class='<%=getPageId==MechanismGundelikKod?"active":"" %>'>
-                                <a href="<%=string.Format("/{0}/national-implementation-mechanism/{1}/s",Config.getLang(Page),MechanismGundelikKod) %>">
+                                <a href="<%=string.Format("/{0}/national-implementation-mechanism1/1",Config.getLang(Page)) %>">
                                     <div>
                                         <asp:Literal ID="ltrGundelik" Text="" runat="server" />
                                     </div>
                                 </a>
                             </li>
+
                         </ul>
                     </div>
                 </div>

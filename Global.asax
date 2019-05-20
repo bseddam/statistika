@@ -12,14 +12,14 @@
 
         routes.MapPageRoute("page", "{lang}/page/{pageid}", "~/webpages/page.aspx");
         routes.MapPageRoute("pageOptional", "page/{pageid}", "~/webpages/page.aspx");
-        
+
         routes.MapPageRoute("error", "error", "~/webpages/error.aspx");
         routes.MapPageRoute("SummaryGoals", "{lang}/summary-goals", "~/webpages/SummaryGoals.aspx");
-        
+
         routes.MapPageRoute("about", "{lang}/about", "~/webpages/about.aspx");
         routes.MapPageRoute("contact", "{lang}/contact", "~/webpages/contact.aspx");
-        
-        
+
+
         routes.MapPageRoute("compare", "{lang}/compare", "~/webpages/compare.aspx");
 
 
@@ -36,14 +36,15 @@
         routes.MapPageRoute("newsContent2", "{lang}/order/{pageid}", "~/webpages/order.aspx");
         routes.MapPageRoute("newsContent13", "{lang}/order/{pageid}/{page_slug}", "~/webpages/order.aspx");
 
-        
-        
-        
+
+
+
         routes.MapPageRoute("sliderContent", "{lang}/content/{goalId}", "~/webpages/content.aspx");
         routes.MapPageRoute("sliderContentOpt", "{lang}/content/{goalId}/{goalName}", "~/webpages/content.aspx");
 
         routes.MapPageRoute("law", "{lang}/law/{pageid}/{page_slug}", "~/webpages/law.aspx");
         routes.MapPageRoute("law1", "{lang}/law/{pageid}", "~/webpages/law.aspx");
+
 
 
         routes.MapPageRoute("goalContent", "{lang}/goals/{goalid}/{goalname}/indicators", "~/webpages/goalcontent.aspx");
@@ -58,16 +59,28 @@
         routes.MapPageRoute("constitution", "{lang}/constitution", "~/webpages/constitution.aspx");
         routes.MapPageRoute("constitution2", "{lang}/constitution/{id}/{name}", "~/webpages/constitution.aspx");
 
-        
-        
+
+
         routes.MapPageRoute("national-priority", "{lang}/national-priority/{goalId}", "~/webpages/nationalpriority.aspx");
         routes.MapPageRoute("national-priority1", "{lang}/national-priority/{goalId}/{goalname}", "~/webpages/nationalpriority.aspx");
 
         routes.MapPageRoute("goal-info", "{lang}/goal-info/{goalId}", "~/webpages/goalinfo.aspx");
         routes.MapPageRoute("goal-info1", "{lang}/goal-info/{goalId}/{goalname}", "~/webpages/goalinfo.aspx");
 
+        //routes.MapPageRoute("mechanismDefault", "{lang}/national-implementation-mechanism", "~/webpages/MechanismProgress.aspx");
+        //routes.MapPageRoute("mechanism", "{lang}/national-implementation-mechanism/{id}/{slug}", "~/webpages/MechanismProgress.aspx");
+
+        //routes.MapPageRoute("mechanismDefault", "{lang}/national-implementation-mechanism/{pageid}/{page_slug}/{id}", "~/webpages/MechanismProgress.aspx");
+        //routes.MapPageRoute("mechanism", "{lang}/national-implementation-mechanism/{pageid}/{id}", "~/webpages/MechanismProgress.aspx");
+
         routes.MapPageRoute("mechanismDefault", "{lang}/national-implementation-mechanism", "~/webpages/nationalmechamism.aspx");
         routes.MapPageRoute("mechanism", "{lang}/national-implementation-mechanism/{id}/{slug}", "~/webpages/nationalmechamism.aspx");
+
+        routes.MapPageRoute("mechanismDefault1", "{lang}/national-implementation-mechanism1/{pageid}/{page_slug}", "~/webpages/MechanismProgress.aspx");
+        routes.MapPageRoute("mechanism1", "{lang}/national-implementation-mechanism1/{pageid}", "~/webpages/MechanismProgress.aspx");
+
+
+
 
         routes.MapPageRoute("interesting-sides", "{lang}/interesting-sides", "~/webpages/interestingsides.aspx");
         routes.MapPageRoute("interesting-sides-cat", "{lang}/interesting-sides/{catId}/{catname}", "~/webpages/interestingsides.aspx");
@@ -98,31 +111,31 @@
 
         routes.MapPageRoute("searchGeneral", "{lang}/search/general", "~/webpages/searchgeneral.aspx");
         routes.MapPageRoute("searchDetailed", "{lang}/search/detailed", "~/webpages/searchdetailed.aspx");
-        
-        
-        
+
+
+
 
     }
-    
-    void Application_End(object sender, EventArgs e) 
+
+    void Application_End(object sender, EventArgs e)
     {
         //  Code that runs on application shutdown
 
     }
-        
-    void Application_Error(object sender, EventArgs e) 
-    { 
+
+    void Application_Error(object sender, EventArgs e)
+    {
         // Code that runs when an unhandled error occurs
 
     }
 
-    void Session_Start(object sender, EventArgs e) 
+    void Session_Start(object sender, EventArgs e)
     {
         // Code that runs when a new session is started
 
     }
 
-    void Session_End(object sender, EventArgs e) 
+    void Session_End(object sender, EventArgs e)
     {
         // Code that runs when a session ends. 
         // Note: The Session_End event is raised only when the sessionstate mode
@@ -130,5 +143,5 @@
         // or SQLServer, the event is not raised.
 
     }
-       
+
 </script>

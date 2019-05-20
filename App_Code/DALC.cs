@@ -1881,7 +1881,9 @@ public class DALC
     public Utils.MethodType PageUpdate(int id, int typeid, string title_az, string slug_az, string title_en, string slug_en,
         string content_az, string content_en, DateTime page_dt, string videoURl, int goalId, int parentId, string more_url, int orderBy)
     {
-        MySqlCommand cmd = new MySqlCommand(@"UPDATE pages SET orderBy=@orderBy,video_url=@videoURL,type_id=@typeid,title_az=@title_az,slug_az=@slug_az,title_en=@title_en,slug_en=@slug_en,content_az=@content_az,content_en=@content_en,page_dt=@page_dt,page_id=@page_id,more_url=@more_url WHERE Id=@id;", SqlConn);
+        MySqlCommand cmd = new MySqlCommand(@"UPDATE pages SET goal_id=@goal_id,orderBy=@orderBy,video_url=@videoURL,
+type_id=@typeid,title_az=@title_az,slug_az=@slug_az,title_en=@title_en,slug_en=@slug_en,content_az=@content_az,
+content_en=@content_en,page_dt=@page_dt,page_id=@page_id,more_url=@more_url WHERE Id=@id;", SqlConn);
         cmd.Parameters.AddWithValue("@videoURL", videoURl);
         cmd.Parameters.AddWithValue("@page_id", parentId);
         cmd.Parameters.AddWithValue("@more_url", more_url);

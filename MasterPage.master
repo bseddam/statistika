@@ -109,8 +109,7 @@
                                 <ItemTemplate>
 
                                     <li <%#Eval("SubCount").ToParseInt()>0?"class='dropdown'":"" %>>
-                                        <a
-                                            <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
+                                        <a <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
                                             href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
                                             <%#Eval("Name") %>
 

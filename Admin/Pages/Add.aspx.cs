@@ -88,6 +88,10 @@ public partial class Admin_Pages_Add : System.Web.UI.Page
             pageType == Utils.PageType.Konstitusiya)
         {
             PnlOrderBy.Visible = true;
+            if (pageType == Utils.PageType.MechanismGundelik)
+            { 
+                pnlLaw.Visible = true;
+            }
         }
 
 
