@@ -28,6 +28,32 @@ public partial class WebPages_Law : System.Web.UI.Page
         rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
         rptIndicators.DataBind();
 
+        DataTable dt = _db.GetIndicatorsReportingStatusSum();
+        if (dt != null)
+        {
+            lblgostericicemi.Text = dt.Rows[0]["say"].ToParseStr();
+        }
+        DataTable dt1 = _db.GetIndicatorsReportingStatusSumMovcud();
+        if (dt1 != null)
+        {
+            lblmovcuddur.Text = dt1.Rows[0]["say"].ToParseStr();
+            lblmovcuddurfaiz.Text = dt1.Rows[0]["faiz"].ToParseStr();
+            lblmovcuddurnote.Text = dt1.Rows[0]["name_" + lang].ToParseStr();
+        }
+        DataTable dt2 = _db.GetIndicatorsReportingStatusSumPlan();
+        if (dt2 != null)
+        {
+            lblplan.Text = dt2.Rows[0]["say"].ToParseStr();
+            lblplanfaiz.Text = dt2.Rows[0]["faiz"].ToParseStr();
+            lblplannote.Text = dt2.Rows[0]["name_" + lang].ToParseStr();
+        }
+        DataTable dt3 = _db.GetIndicatorsReportingStatusSumArasdirilir();
+        if (dt3 != null)
+        {
+            lblmelumatyoxdur.Text = dt3.Rows[0]["say"].ToParseStr();
+            lblmelumatyoxdurfaiz.Text = dt3.Rows[0]["faiz"].ToParseStr();
+            lblmelumatyoxdurnote.Text = dt3.Rows[0]["name_"+ lang].ToParseStr(); ;
+        }
     }
    
 

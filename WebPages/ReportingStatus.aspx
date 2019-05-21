@@ -48,37 +48,45 @@
                     <div id="globlandnationl" class="tab-pane fade active in">
                         <!--GLOBAL/NATIONAL STARTS-->
                         <div class="re1">
-                            <div class="row ">
-                                <div class="col-md-12 ">
-                                    <h5>Cəmi <span class="label dddd">245 göstərici</span></h5>
-                                    <p><span class="label label-success">129</span> Məlumat mövcuddur <b>53% </b></p>
-                                    <p><span class="label label-warning">31</span> Məlumat toplanması  planlaşdırılır <b>13% </b></p>
-                                    <p><span class="label label-danger">84</span> Məlumat mənbəyi araşdırlır <b>34% </b></p>
-                                </div>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 53%">
-                                </div>
-                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style="width: 13%">
-                                </div>
-                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width: 34%">
-                                </div>
-                            </div>
+                         
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <h5>Cəmi <span class="label dddd">
+                                                <asp:Label ID="lblgostericicemi" runat="server" Text=""></asp:Label> göstərici</span></h5>
+                                            <p><span class="label label-success">
+                                                <asp:Label ID="lblmovcuddur" runat="server" Text=""></asp:Label></span> <asp:Label ID="lblmovcuddurnote" runat="server" Text=""></asp:Label> <b><asp:Label ID="lblmovcuddurfaiz" runat="server" Text=""></asp:Label>% </b></p>
+                                            <p><span class="label label-warning">
+                                                <asp:Label ID="lblplan" runat="server" Text=""></asp:Label></span> <asp:Label ID="lblplannote" runat="server" Text=""></asp:Label> <b><asp:Label ID="lblplanfaiz" runat="server" Text=""></asp:Label>% </b></p>
+                                            <p><span class="label label-danger">
+                                                <asp:Label ID="lblmelumatyoxdur" runat="server" Text=""></asp:Label></span> <asp:Label ID="lblmelumatyoxdurnote" runat="server" Text=""></asp:Label> <b><asp:Label ID="lblmelumatyoxdurfaiz" runat="server" Text=""></asp:Label>% </b></p>
+                                        </div>
+                                    </div>
+                              
+                                    <div class="progress">
+                                      
+                                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%=lblmovcuddurfaiz.Text+"%"%>'>
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style='width: <%=lblplanfaiz.Text+"%"%>'>
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%=lblmelumatyoxdurfaiz.Text+"%"%>'>
+                                        </div>
+                                    </div>
+                           
                         </div>
                         <div class="reporg_logos">
-                                  <div class="row">
-                                        <div class="col-md-12">
-                                            <h2>Məqsədlər üzrə cari vəziyyət</h2>
-                                        </div>
-                                   </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2>Məqsədlər üzrə cari vəziyyət</h2>
+                                </div>
+                            </div>
                             <!--repeater-->
                             <asp:Repeater ID="rptIndicators" runat="server">
                                 <ItemTemplate>
                                     <div class="row">
                                         <!-- ROW STARTS -->
-                                        <div class="col-md-1 col-xs-12" style="padding:0px;">
-                                            <img style="margin-left:15px;" src="/images/goals-<%=Config.getLang(Page) %>/goal-<%#Eval("goal_id").ToParseStr().PadLeft(2,'0') %>.png" alt=""  />
-                                           <%-- <img src="./Portal Test_files/1..png" alt="" width="100"--%>
+                                        <div class="col-md-1 col-xs-12" style="padding: 0px;">
+                                            <img style="margin-left: 15px;" src="/images/goals-<%=Config.getLang(Page) %>/goal-<%#Eval("goal_id").ToParseStr().PadLeft(2,'0') %>.png" alt="" />
+                                            <%-- <img src="./Portal Test_files/1..png" alt="" width="100"--%>
                                         </div>
                                         <!--   	 -->
                                         <div class="col-md-11 col-xs-12 re">
@@ -90,11 +98,11 @@
                                             </div>
                                             <div class="progress">
 
-                                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width:<%#Eval("faizmovcud")+"%"%>'>
+                                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizmovcud")+"%"%>'>
                                                 </div>
-                                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style='width:<%#Eval("faizplan")+"%"%>'>
+                                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizplan")+"%"%>'>
                                                 </div>
-                                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width:<%#Eval("faizarasdirilir")+"%"%>'>
+                                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizarasdirilir")+"%"%>'>
                                                 </div>
                                             </div>
                                         </div>

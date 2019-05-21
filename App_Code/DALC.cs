@@ -1403,6 +1403,7 @@ public class DALC
         }
 
     }
+    
 
     public static string GetStaticValue_Url(string key)
     {
@@ -2870,8 +2871,103 @@ on i.goal_id=i3.goal_id", SqlConn);
             return null;
         }
     }
+    public DataTable GetIndicatorsReportingStatusSum()
+    {
+        try
+        {
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say FROM `indicators` where type_id=1 and 
+parent_id=0 and isActive=1", SqlConn);
+            //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
+            //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
+            //da.SelectCommand.Parameters.AddWithValue("typeid", typeid);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSum()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetIndicatorsReportingStatusSumMovcud()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say,s.name_az,s.name_en,
+cast(count(*)*100/(SELECT count(*) say FROM `indicators` where type_id=1 and 
+parent_id=0 and isActive=1) as decimal(6,1)) faiz
 
 
+FROM `indicators` i
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and i.status_id=3 group by s.name_az,s.name_en", SqlConn);
+            //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
+            //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
+            //da.SelectCommand.Parameters.AddWithValue("typeid", typeid);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSumMovcud()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetIndicatorsReportingStatusSumPlan()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say,s.name_az,s.name_en,
+cast(count(*)*100/(SELECT count(*) say FROM `indicators` where type_id=1 and 
+parent_id=0 and isActive=1) as decimal(6,1)) faiz
+
+FROM `indicators` i
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and i.status_id=2 group by s.name_az,s.name_en", SqlConn);
+            //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
+            //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
+            //da.SelectCommand.Parameters.AddWithValue("typeid", typeid);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSumPlan()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetIndicatorsReportingStatusSumArasdirilir()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say,s.name_az,s.name_en,
+cast(count(*)*100/(SELECT count(*) say FROM `indicators` where type_id=1 and 
+parent_id=0 and isActive=1) as decimal(6,1)) faiz
+
+FROM `indicators` i
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and i.status_id=1 group by s.name_az,s.name_en", SqlConn);
+            //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
+            //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
+            //da.SelectCommand.Parameters.AddWithValue("typeid", typeid);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSumArasdirilir()"), ex.Message, "", true);
+            return null;
+        }
+    }
 
     public DataTable GetIndicatorsByParentId(int goal_id, int parent_id, int typeid = 0)
     {
