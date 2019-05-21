@@ -70,19 +70,19 @@
                 console.log(rowValues[i]);
                 if (rowValues[i] == 35) {
                     alert('<%=DALC.GetStaticValue("statistical_database_keyfiyyet")%>');
-                g_sender.SelectNode(g_sender.GetVisibleSelectedNodeKeys(), false);
-                break;
+                    g_sender.SelectNode(g_sender.GetVisibleSelectedNodeKeys(), false);
+                    break;
+                }
             }
-        }
-        console.log(rowValues);
+            console.log(rowValues);
 
-    }
-    var g_sender;
-    function treeReports_NodeDblClick(sender, eventArgs) {
-        var colNames = "size_code";
-        g_sender = sender;
-        sender.GetSelectedNodeValues(colNames, treeReports_GetNodeValues);
-    }
+        }
+        var g_sender;
+        function treeReports_NodeDblClick(sender, eventArgs) {
+            var colNames = "size_code";
+            g_sender = sender;
+            sender.GetSelectedNodeValues(colNames, treeReports_GetNodeValues);
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content" runat="Server">
@@ -202,7 +202,7 @@
                         </asp:Panel>
 
                         <asp:Panel ID="pnlResult" runat="server" CssClass="row">
-                            <div class="col-md-12">
+                            <%--   <div class="col-md-12">
                                 <asp:Label ID="lblMuqayiseEdilenlerLabel" Text="" runat="server" Style="font-weight: bold; margin-bottom: 10px; display: inline-block; font-size: 16px;" />
                                 <br />
 
@@ -228,18 +228,20 @@
                             </div>
                             <div class="col-md-4">
                             </div>
+                            --%>
                             <div class="col-md-12">
                                 <br />
                                 <div class="chart-styles clear">
                                     <a href="#" class="chart-btn" data-type="1">
                                         <img src="/images/chart_1.png" alt="" />
                                     </a>
-                                    <a href="#" class="chart-btn" data-type="2 ">
+                                    <a href="#" class="chart-btn" data-type="3">
                                         <img src="/images/chart_2.png" alt="" />
                                     </a>
-                                    <a href="#" class="chart-btn" data-type="3">
+                                    <a href="#" class="chart-btn" data-type="2">
                                         <img src="/images/chart_3.png" alt="" />
                                     </a>
+
                                 </div>
                                 <div class="chart-container">
                                     <div id="chart_div"></div>
@@ -259,12 +261,13 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="" download="compare.jpg" class="chart-down-compare">
+                                                        <a href="" download="indicator.jpg" class="chart-down-indicator">
                                                             <asp:Literal ID="compare_download_jpg" runat="server" />
+
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="" download="compare.png" class="chart-down-compare">
+                                                        <a href="" download="indicator.png" class="chart-down-indicator">
                                                             <asp:Literal ID="compare_download_png" runat="server" />
 
                                                         </a>
@@ -274,6 +277,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <%--  <asp:Literal ID="chart_script" Text="" runat="server" />--%>
                                 <%-- <a href="" download="compare.jpg" class="chart-down" id="chart-down" style="display: none;">
                                     <asp:Label ID="lblDownload" Text="" runat="server" />
                                 </a>--%>

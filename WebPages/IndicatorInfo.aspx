@@ -221,6 +221,7 @@
             }
 
         });
+
         $(document).on('click', '.chart-btn', function () {
             _type = $(this).attr('data-type');
             drawChart(_type);
@@ -476,7 +477,7 @@
                                                     </div>
                                                 </div>
 
-                                                <asp:Literal ID="chart_script" Text="" runat="server" />
+                                                <%--<asp:Literal ID="chart_script" Text="" runat="server" />--%>
                                             </div>
                                         </asp:Panel>
                                         <div id="datatable" class="indicator-tab indicator-datatable" runat="server">

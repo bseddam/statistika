@@ -142,7 +142,8 @@ public partial class WebPages_Compare : System.Web.UI.Page
 
     protected void btn_Click(object sender, EventArgs e)
     {
-        lblMuqayise1.Text = lblMuqayise2.Text = lblError.Text = "";
+        //lblMuqayise1.Text = lblMuqayise2.Text = lblError.Text = "";
+        lblError.Text = "";
         string lang = Config.getLang(Page);
 
         int rowCount = 0;
@@ -177,22 +178,22 @@ public partial class WebPages_Compare : System.Web.UI.Page
 
         if (indicator_count != 2)
         {
-            lblError.Text += DALC.GetStaticValue("compare_indicator_not_selected") + "<br>";
+            //lblError.Text += DALC.GetStaticValue("compare_indicator_not_selected") + "<br>";
         }
 
         if (lblError.Text.Length > 0)
         {
-            lblMuqayise1.Text = lblMuqayise2.Text = "";
+            //lblMuqayise1.Text = lblMuqayise2.Text = "";
             pnlResult.Visible = false;
             return;
         }
-        lblSelectedGoal.Text = ddlGoals.SelectedItem.Text;
-        lblMuqayise1.Text = secilenGosderici.Split(';')[0];
-        lblMuqayise2.Text = secilenGosderici.Split(';')[1];
+        //lblSelectedGoal.Text = ddlGoals.SelectedItem.Text;
+        //lblMuqayise1.Text = secilenGosderici.Split(';')[0];
+        //lblMuqayise2.Text = secilenGosderici.Split(';')[1];
 
         pnlResult.Visible = true;
         //lblDownload.Text = DALC.GetStaticValue("download");
-        lblMuqayiseEdilenlerLabel.Text = DALC.GetStaticValue("compare_text");
+        //lblMuqayiseEdilenlerLabel.Text = DALC.GetStaticValue("compare_text");
         compare_download_label.Text = DALC.GetStaticValue("compare_download_label");
         compare_download_jpg.Text = DALC.GetStaticValue("compare_download_jpg");
         compare_download_png.Text = DALC.GetStaticValue("compare_download_png");
@@ -203,50 +204,126 @@ public partial class WebPages_Compare : System.Web.UI.Page
 
     void loadChartMutipleIndicator(string lang, List<int> indicators)
     {
+        int j = 0;
+        int[] years = new int[10];
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            if (chkYears.Items[i].Selected == true)
+            {
+                years[j] = chkYears.Items[i].Text.ToParseInt();
+                j++;
+            }
+        }
 
         string data = "";
+        DataTable dtYears;
+        if (indicators.Count == 1)
+        {
+            dtYears = _db.GetHesabatforChart_Years_1(indicators[0], years);
+        }
+        else
+        {
+            dtYears = _db.GetHesabat_Years(indicators, years);
+        }
+        if (dtYears == null)
+        {
+            return;
+        }
+        string _years = "";
+        foreach (DataRow item in dtYears.Rows)
+        {
+            _years += item["year"] + ",";
+        }
+        _years = _years.Trim(',');
+
+
+        string _indicators = "";
+        foreach (int item in indicators)
+        {
+            _indicators += item + ",";
+        }
+        _indicators = _indicators.Trim(',');
+
+
+
 
         string columns = "data.addColumn('string', 'Year');";
-        for (int i = 0; i < indicators.Count; i++)
+        DataTable dtH = null;
+        if (_years.Trim(',') != "" && _years != null && _indicators.Trim(',') != "" && _indicators != null)
         {
-            DataTable dtIndicator = _db.GetIndicatorById(indicators[i]);
-            columns += string.Format("data.addColumn('number', '{0}');", dtIndicator.Rows[0]["name_" + lang]);
+            dtH = _db.GetHesabat2(_indicators.Trim(','), _years, lang);
+        }
+        if (dtH == null)
+        {
+            // pnlContent.Visible = false;
+            return;
+        }
+        for (int i = 0; i < dtH.Rows.Count; i++)
+        {
+            columns += string.Format("data.addColumn('number', '{0}');", dtH.Rows[i]["IndicatorName"]);
+            columns += "data.addColumn({type: 'string', role: 'tooltip','p': {'html': true}});";
         }
 
         data += columns.Trim(',');
         //data += "[" + columns.Trim(',') + "],";
-        int rowCount = 0;
+
+
         data += "data.addRows([";
-        for (int i_year = 0; i_year < chkYears.Items.Count; i_year++)
+        for (int i_year = 0; i_year < dtYears.Rows.Count; i_year++)
         {
-            if (chkYears.Items[i_year].Selected == true)
+            string values = "";
+            string _tooltip = "";
+            string value = "";
+            foreach (int indicatorid in indicators)
             {
-                string values = "";
-                foreach (int indicatorid in indicators)
+                DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
+
+                value = _db.GetHesabatforChart_Value(indicatorid, dtYears.Rows[i_year]["year"].ToParseInt());
+
+
+                if (Config.IsNumeric_double(value))
                 {
-                    string value = _db.GetHesabatforChart_Value(indicatorid, chkYears.Items[i_year].Text.ToParseInt());
-                    if (!value.Contains("...") && !value.Contains("-"))
-                    {
-                        values += string.Format("{0},", value);
-                    }
+                    //value = "null";
+                    //continue;
+
+                    _tooltip = string.Format("<div>{5}: <b>{0}</b><br/><span>{1}:<b>{2}</b></span><br/>{4}<b>{3}</b></div>",
+                            dtYears.Rows[i_year]["year"].ToParseInt(),
+                            removeNewLine(dtIndicator.Rows[0]["name_" + lang].ToString()).Trim(),
+                            removeNewLine(value.Replace('.', ',')),
+                            removeNewLine(dtIndicator.Rows[0]["size_name_" + lang].ToString()).Trim(),
+                            Config.HtmlRemoval.StripTagsRegex(DALC.GetStaticValue("indicator_olcu_vahidi")).Trim(),
+                            Config.HtmlRemoval.StripTagsRegex(DALC.GetStaticValue("indicator_table_column_year")).Trim()
+                            );
+
+                    values += string.Format("{0},'{1}',", value, _tooltip);
                 }
-                if (values != "")
+                else
                 {
-                    data += string.Format(" ['{0}',{1}],",
-                             chkYears.Items[i_year].Text.ToParseInt(),
-                            values.Trim(','));
+                    values += string.Format("null,' ',", value, _tooltip);
+                    //values += "";
                 }
-                rowCount++;
             }
+
+            if (values != "")
+            {
+                data += string.Format(" ['{0}',{1}],",
+                   dtYears.Rows[i_year]["year"].ToParseInt(),
+                   values.Trim(','));
+            }
+
+
+
         }
         data = data.Trim(',');
         data += " ]);";
 
-
-
-        _loadChart(data, rowCount);
+        _loadChart(data, dtYears.Rows.Count);
     }
-
+    string removeNewLine(string s)
+    {
+        //return s.Replace(Environment.NewLine, "");
+        return System.Text.RegularExpressions.Regex.Replace(s, @"\t|\n|\r", "");
+    }
     void _loadChart(string data, int row_count)
     {
         string script = @"google.charts.load('current', { 'packages': ['corechart'] });
@@ -255,14 +332,25 @@ public partial class WebPages_Compare : System.Web.UI.Page
         function drawChart(type) {
             var data = new google.visualization.DataTable();
                " + data + @"
-            var options = {
-            title: '',hAxis: {
-            format: ' ',
-            gridlines: {
-            count: " + row_count + @"
-            },
-            },
-            curveType: 'function',legend: { position: 'bottom',maxLines: 3  }, pointSize: 5
+            var options = 
+            {
+                tooltip: {isHtml: true},
+                title: '',
+                hAxis: {
+                    format: ' ',
+                    gridlines: 
+                    {
+                        count: " + row_count + @"
+                    },
+                },
+                curveType: 'function',
+                legend: 
+                { 
+                    position: 'bottom',
+                    alignment: 'center' ,
+                    maxLines: 5
+                }, 
+                pointSize: 5
             };
 
             var chart;
@@ -273,17 +361,22 @@ public partial class WebPages_Compare : System.Web.UI.Page
                 chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             }
             else if (type=='3') {
-                chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            }
+            else if (type=='4') {
+                chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             }else {
-               chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+               chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             }
             chart.draw(data, options);
-        $('.chart-down-compare').attr('href',chart.getImageURI());
-            }";
+        $('.chart-down-indicator').attr('href',chart.getImageURI());
+            };";
+
         ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "", script, true);
         //Page.ClientScript.RegisterClientScriptBlock(Page.GetType(), "", script, true);
         //chart_script.Text = "<script>"+script+"</script>";
     }
+
 
 
 
