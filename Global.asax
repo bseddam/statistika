@@ -13,6 +13,9 @@
         routes.MapPageRoute("page", "{lang}/page/{pageid}", "~/webpages/page.aspx");
         routes.MapPageRoute("pageOptional", "page/{pageid}", "~/webpages/page.aspx");
 
+        routes.MapPageRoute("reportingstatus", "{lang}/reportingstatus", "~/webpages/ReportingStatus.aspx");
+        routes.MapPageRoute("reportingstatusOptional", "reportingstatus", "~/webpages/ReportingStatus.aspx");
+
         routes.MapPageRoute("error", "error", "~/webpages/error.aspx");
         routes.MapPageRoute("SummaryGoals", "{lang}/summary-goals", "~/webpages/SummaryGoals.aspx");
 

@@ -2830,7 +2830,8 @@ where code like @code and goal_id=@goal_id and id<>@indicatorId and isActive=1 o
         {
 
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(@"select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,
+i1.name_en movcudname_en,i2.name_en planname_en,i3.name_en arasdirilirname_en,i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
 cast(i1.movcuddur*100/i.cemisay as decimal(6,1)) faizmovcud,cast(i2.plan*100/i.cemisay as decimal(6,1)) faizplan,
 cast(i3.arasdirilir*100/i.cemisay as decimal(6,1))  faizarasdirilir
 
