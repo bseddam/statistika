@@ -83,10 +83,10 @@
                                         <!--   	 -->
                                         <div class="col-md-11 col-xs-12 re">
                                             <div class="dfdfd">
-                                                <h5><%#Eval("name_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> göstərici</span></h5>
-                                                <p><span class="label label-success"><%#Eval("movcuddur")%></span> Məlumat mövcuddur <b><%#Eval("faizmovcud")%>% </b></p>
-                                                <p><span class="label label-warning"><%#Eval("plan")%></span> Məlumat toplanması  planlaşdırılır <b><%#Eval("faizplan")%>% </b></p>
-                                                <p><span class="label label-danger"><%#Eval("arasdirilir")%></span> Məlumat mənbəyi araşdırlır <b><%#Eval("faizarasdirilir")%>% </b></p>
+                                                <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> göstərici</span></h5>
+                                                <p><span class="label label-success"><%#Eval("movcuddur")%></span> <%#Eval("movcudname_"+Config.getLang(Page)) %> <b><%#Eval("faizmovcud")%>% </b></p>
+                                                <p><span class="label label-warning"><%#Eval("plan")%></span> <%#Eval("planname_"+Config.getLang(Page)) %> <b><%#Eval("faizplan")%>% </b></p>
+                                                <p><span class="label label-danger"><%#Eval("arasdirilir")%></span> <%#Eval("arasdirilirname_"+Config.getLang(Page)) %> <b><%#Eval("faizarasdirilir")%>% </b></p>
                                             </div>
                                             <div class="progress">
 

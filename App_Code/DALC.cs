@@ -2829,23 +2829,31 @@ where code like @code and goal_id=@goal_id and id<>@indicatorId and isActive=1 o
         {
 
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(@"select i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
 cast(i1.movcuddur*100/i.cemisay as decimal(6,1)) faizmovcud,cast(i2.plan*100/i.cemisay as decimal(6,1)) faizplan,
 cast(i3.arasdirilir*100/i.cemisay as decimal(6,1))  faizarasdirilir
 
-from (SELECT i.goal_id,g.name_az,g.name_en,count(*) cemisay FROM `indicators` i inner join goals g on i.goal_id=g.id 
-where i.type_id=1 and i.parent_id=0 and i.isActive=1 group by i.goal_id,g.name_az,g.name_en) as i 
+from (SELECT i.goal_id,g.name_short_az,g.name_short_en,count(*) cemisay FROM `indicators` i 
+inner join goals g on i.goal_id=g.id 
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 
+group by i.goal_id,g.name_short_az,g.name_short_en) as i 
 
-inner join (SELECT goal_id,count(*) movcuddur FROM `indicators`  where type_id=1 and parent_id=0 and isActive=1 and 
-status_id=3 group by goal_id) as i1 
+inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) movcuddur FROM `indicators` as i 
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
+i.status_id=3 group by i.goal_id,s.name_az,s.name_en) as i1 
 on i.goal_id=i1.goal_id
 
-inner join (SELECT goal_id,count(*) plan FROM `indicators`  where type_id=1 and parent_id=0 and isActive=1 and 
-status_id=2 group by goal_id) as i2 
+inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) plan FROM `indicators` as i 
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
+i.status_id=2 group by i.goal_id,s.name_az,s.name_en) as i2 
 on i.goal_id=i2.goal_id
 
-inner join (SELECT goal_id,count(*) arasdirilir FROM `indicators`  where type_id=1 and parent_id=0 and isActive=1 and 
-status_id=1 group by goal_id) as i3 
+inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) arasdirilir FROM `indicators` as i 
+inner join indicators_status as s on i.status_id=s.id
+where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
+i.status_id=1 group by i.goal_id,s.name_az,s.name_en) as i3 
 on i.goal_id=i3.goal_id", SqlConn);
             //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
             //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
