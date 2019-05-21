@@ -32,9 +32,9 @@ public partial class WebPages_Law : System.Web.UI.Page
         rptContent.DataBind();
 
 
-        DataTable dt = _db.GetGoals();
+        
 
-        rptGoals.DataSource = dt;
+        rptGoals.DataSource = _db.GetGoals();
         rptGoals.DataBind();
         ltrPageName.Text = DALC.GetStaticValue("national_mechanism_progress_text"); ;
         //ltrBreadCrumb.Text = string.Format("<a href=\"/{0}/home\"> {1}</a> / {2} ", lang,
