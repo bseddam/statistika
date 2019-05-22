@@ -77,7 +77,8 @@
                         <div class="reporg_logos">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h2>Məqsədlər üzrə cari vəziyyət</h2>
+                                    <h2>
+                                        <asp:Label ID="lblmeqseduzrenote" runat="server" Text=""></asp:Label></h2>
                                 </div>
                             </div>
                             <!--repeater-->

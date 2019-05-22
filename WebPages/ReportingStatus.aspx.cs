@@ -32,7 +32,7 @@ public partial class WebPages_Law : System.Web.UI.Page
         
         lblgostericinote.Text= DALC.GetStaticValue("indicator_value") ;
         lblcemi.Text= DALC.GetStaticValue("reportingstatuscemi_value");
-      
+        lblmeqseduzrenote.Text= DALC.GetStaticValue("reportingstatuspurpose_value");
 
         DataTable dt = _db.GetIndicatorsReportingStatusSum();
         if (dt != null)
