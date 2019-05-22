@@ -2418,7 +2418,7 @@ group by GoalName , GoalId order by g.priority", SqlConn);
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  * from slider order by id desc ", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT  * from slider order by goal_id,indicatorCode(title_az) ", SqlConn);
 
             da.Fill(dt);
             return dt;
