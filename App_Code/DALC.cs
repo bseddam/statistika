@@ -3006,7 +3006,6 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id an
     {
         try
         {
-
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"
 SELECT  i.*,s.name_az as status_name_az,s.name_en as status_name_en,s.`key`  from indicators as i
@@ -3016,9 +3015,6 @@ where (i.parent_id=@parent_id or i.id=@parent_id) and i.isActive=1 and length(h.
 group by i.id
 order by code", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
-
-
-
             da.Fill(dt);
             return dt;
         }

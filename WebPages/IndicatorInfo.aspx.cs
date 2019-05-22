@@ -14,7 +14,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     DALC _db = new DALC();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             pnlchart.Visible = true;
             datatable.Visible = false;
@@ -35,20 +35,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         _loadGoalInfo(indicatorid, lang);
         _loadMetadata(indicatorid, lang);
         _loadLabels();
-
-        
-
         //btnIndicator_Click(null, null);
 
         shareBox(lblIndicatorTitle.Text,
                 "indicator",
                 LtrIndicatorInfo.Text,
                 "");
-   
+
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
-        if (value.Text.Length == 0 || value==null)
+        if (value.Text.Length == 0 || value == null)
         {
             label.Visible = false;
         }
@@ -59,7 +56,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         _helper_hide_empty_label(lblSource, lblSourceLabel);
         _helper_hide_empty_label(lblNote, lblNoteLabel);
         _helper_hide_empty_label(lblFootNote, lblFootNoteLabel);
-        
+
     }
 
     private void _loadFromViewState()
@@ -76,7 +73,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             Grid.DataSource = ViewState["Grid"] as DataTable;
             Grid.DataBind();
-            int a = 1;
+
             //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
         }
     }
@@ -156,23 +153,21 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     {
         string goal_value = DALC.GetStaticValue("goal_value");
 
-
-
         int indicatoridnational = _db.indiqatoryoxla(indicatorid);
         //Response.Write(indicatorid);
 
-
-
-
         DataTable dtIndicator = _db.GetIndicatorById(indicatoridnational);
-
-
 
         if (dtIndicator == null || dtIndicator.Rows.Count < 1)
         {
             Config.Rd("/error?null");
             return;
         }
+
+        
+
+
+
         DataTable dtGoal = _db.GetGoalById(dtIndicator.Rows[0]["goal_id"].ToParseInt());
         if (dtGoal.Rows.Count > 0)
         {
@@ -244,6 +239,14 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             pnlDiaqramTable.Visible = false;
             pnlInfo.Visible = true;
 
+
+
+          
+
+
+
+
+
             shareBox(lblIndicatorTitle.Text,
                     "indicator",
                     LtrIndicatorInfo.Text,
@@ -253,9 +256,34 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         else
         {
             pnlInfo.Visible = false;
-
             pnlDiaqramTable.Visible = true;
 
+
+            DataTable dt = null;
+            dt = _db.GetIndicatorsByParentId_2(indicatorid);
+            DataTable dtN = null;
+            foreach (DataRow item in dt.Rows)
+            {
+                int id = item["id"].ToParseInt();
+                if (id == indicatorid)
+                {
+                    continue;
+                }
+                dtN = _db.GetIndicatorsByParentId_3(id);
+                if (dtN == null)
+                {
+                    continue;
+                }
+            }
+
+            if (dt.Rows.Count == 0 && dtN == null)
+            {
+                pnlDiaqramTable.Visible = false;
+            }
+            else
+            {
+                pnlDiaqramTable.Visible = true;
+            }
 
 
             //Response.Write("aaa" + years[j] + years[j+1] + years[j + 2]);
