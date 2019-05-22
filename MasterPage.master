@@ -76,7 +76,7 @@
                     <div class="container-fluid" style="padding: 0 20px 0 18px;">
                         <div class="navbar-header">
                             <a class="navbar-brand" href="/<%=Config.getLang(Page) %>/home">
-                                <img src="/images/logo_<%=Config.getLang(Page) %>.png?v=4" class="logo-<%=Config.getLang(Page) %>" />
+                                <img src="/images/logo_<%=Config.getLang(Page) %>.png" class="logo-<%=Config.getLang(Page) %>" />
                             </a>
                         </div>
 
