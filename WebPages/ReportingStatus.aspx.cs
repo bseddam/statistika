@@ -18,15 +18,21 @@ public partial class WebPages_Law : System.Web.UI.Page
         }
 
         string lang = Config.getLang(Page);
-        Page.Title  = DALC.GetStaticValue("compare_page_title");
-       
+        
+        string title = DALC.GetStaticValue("reportingstatus_page_title");
+        //Page.Title = title + " " + Config.GetAppSetting("ProjectName");
+        Page.Title = title ;
         ltrBreadCrumb.Text = string.Format("<a href='/{0}/home'> {1}</a> / {2}  ",
              lang,
              DALC.GetStaticValue("home_breadcrumb_title"),
-             DALC.GetStaticValue("compare_page_title"));
+             DALC.GetStaticValue("reportingstatus_page_title"));
 
         rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
         rptIndicators.DataBind();
+        
+        lblgostericinote.Text= DALC.GetStaticValue("indicator_value") ;
+        lblcemi.Text= DALC.GetStaticValue("reportingstatuscemi_value");
+      
 
         DataTable dt = _db.GetIndicatorsReportingStatusSum();
         if (dt != null)
@@ -56,5 +62,7 @@ public partial class WebPages_Law : System.Web.UI.Page
         }
     }
    
+   
+
 
 }

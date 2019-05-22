@@ -51,8 +51,9 @@
                          
                                     <div class="row ">
                                         <div class="col-md-12 ">
-                                            <h5>Cəmi <span class="label dddd">
-                                                <asp:Label ID="lblgostericicemi" runat="server" Text=""></asp:Label> göstərici</span></h5>
+                                            <h5>
+                                                <asp:Label ID="lblcemi" runat="server" Text=""></asp:Label> <span class="label dddd">
+                                                <asp:Label ID="lblgostericicemi" runat="server" Text=""></asp:Label> <asp:Label ID="lblgostericinote" runat="server" Text=""></asp:Label></span></h5>
                                             <p><span class="label label-success">
                                                 <asp:Label ID="lblmovcuddur" runat="server" Text=""></asp:Label></span> <asp:Label ID="lblmovcuddurnote" runat="server" Text=""></asp:Label> <b><asp:Label ID="lblmovcuddurfaiz" runat="server" Text=""></asp:Label>% </b></p>
                                             <p><span class="label label-warning">
@@ -91,7 +92,7 @@
                                         <!--   	 -->
                                         <div class="col-md-11 col-xs-12 re">
                                             <div class="dfdfd">
-                                                <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> göstərici</span></h5>
+                                                <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> <%#DALC.GetStaticValue("indicator_value") %></span></h5>
                                                 <p><span class="label label-success"><%#Eval("movcuddur")%></span> <%#Eval("movcudname_"+Config.getLang(Page)) %> <b><%#Eval("faizmovcud")%>% </b></p>
                                                 <p><span class="label label-warning"><%#Eval("plan")%></span> <%#Eval("planname_"+Config.getLang(Page)) %> <b><%#Eval("faizplan")%>% </b></p>
                                                 <p><span class="label label-danger"><%#Eval("arasdirilir")%></span> <%#Eval("arasdirilirname_"+Config.getLang(Page)) %> <b><%#Eval("faizarasdirilir")%>% </b></p>

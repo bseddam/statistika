@@ -48,8 +48,12 @@ public partial class Admin_PersonInfo_ChangePass : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         _hidePanel();
-        string _infoText = "";
         Utils.MethodType _type = Utils.MethodType.Error;
+        if(txtlogin.Text.Trim().Length < 4)
+        {
+            _showPanel(" - Login ən azı 4 simvol olmalıdır <br/>", _type);
+            return;
+        }
 
         if (Pass.Text.Trim().Length < 4)
         {
@@ -62,7 +66,7 @@ public partial class Admin_PersonInfo_ChangePass : System.Web.UI.Page
             return;
         }
 
-        Utils.MethodType returnVal = _db.ManagerPassUpdate(Pass.Text.Trim());
+        Utils.MethodType returnVal = _db.ManagerPassUpdate(Pass.Text.Trim(),txtlogin.Text.Trim());
 
 
         if (returnVal == Utils.MethodType.Error)

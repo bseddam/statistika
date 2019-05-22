@@ -443,10 +443,11 @@ public class DALC
 
 
 
-    public Utils.MethodType ManagerPassUpdate(string Pass)
+    public Utils.MethodType ManagerPassUpdate(string Pass,string Login)
     {
-        MySqlCommand cmd = new MySqlCommand("UPDATE Managers   SET Password =@Password    WHERE id=@ID", SqlConn);
+        MySqlCommand cmd = new MySqlCommand("UPDATE Managers   SET login=@login, Password =@Password    WHERE id=@ID", SqlConn);
         cmd.Parameters.AddWithValue("@Password", Config.Sha1(Pass));
+        cmd.Parameters.AddWithValue("@login", Login);
         cmd.Parameters.AddWithValue("@ID", DALC.ManagerInfo.ID);
         try
         {

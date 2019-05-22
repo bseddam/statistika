@@ -19,7 +19,15 @@
                     <div class="form-horizontal">
 
                         <div class="form-body">
+                              <div class="form-group">
+                                <label class="col-md-3 control-label">
+                                    <asp:Literal ID="Literal1" runat="server">Login<span class="required" aria-required="true">* </span></asp:Literal>
+                                </label>
+                                <div class="col-md-4">
+                                    <asp:TextBox ID="txtlogin" runat="server" CssClass="form-control" MaxLength="20"></asp:TextBox>
 
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label">
                                     <asp:Literal ID="Literal4" runat="server">Şifrə<span class="required" aria-required="true">* </span></asp:Literal>
