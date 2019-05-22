@@ -81,13 +81,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         }
     }
 
-    void loadData(string lang, List<int> indicators)
-    {
 
-        loadChartMutipleIndicator(lang, indicators);
-       
-        //loadTableMutipleIndicator(lang, indicators);
-    }
 
     private void _loadLabels()
     {
@@ -262,10 +256,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
             pnlDiaqramTable.Visible = true;
 
-            
-          
+
+
             //Response.Write("aaa" + years[j] + years[j+1] + years[j + 2]);
-            loadData(lang, new List<int> { indicatoridnational });
+            loadChartMutipleIndicator(lang, new List<int> { indicatoridnational });
         }
         if (lblGoalName.Text.Length > 235)
         {
@@ -614,7 +608,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblFootNote.Visible = false;
             lblNote.Visible = true;
             lblNoteLabel.Visible = true;
-            loadData(lang, indicators);
+            loadChartMutipleIndicator(lang, indicators);
             _hide_empty_labels();
         }
         else if(datatable.Visible == true)
