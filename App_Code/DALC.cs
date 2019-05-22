@@ -2670,7 +2670,12 @@ and is_active=1 and (`value` is not null or footnote_id is not null)", SqlConn);
  i.isActive=1 and i.parent_id=0 and type_id=2 and concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8))=@kodu" , SqlConn);
                 da2.SelectCommand.Parameters.AddWithValue("kodu", dt.Rows[0]["kodu"].ToParseStr());
                 da2.Fill(dt2);
-                a = dt2.Rows[0]["id"].ToParseInt();
+                if (dt2.Rows.Count!=0)
+                {
+                    a = dt2.Rows[0]["id"].ToParseInt();
+                }
+                else
+                    a = id;
             }
             else
                 a = id;
