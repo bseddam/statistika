@@ -260,12 +260,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
             DataTable dt = null;
-            dt = _db.GetIndicatorsByParentId_2(indicatorid);
+            dt = _db.GetIndicatorsByParentId_2(indicatoridnational);
             DataTable dtN = null;
             foreach (DataRow item in dt.Rows)
             {
                 int id = item["id"].ToParseInt();
-                if (id == indicatorid)
+                if (id == indicatoridnational)
                 {
                     continue;
                 }
