@@ -5443,6 +5443,40 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             return null;
         }
     }
+
+    public DataTable GetHesabatforChart_Indicators_1(int indicator_id, int[] years)
+    {
+        try
+        {
+            string year = "";
+            for (int i = 0; i < years.Length; i++)
+            {
+                if (i == 0)
+                {
+                    year = years[i].ToParseStr();
+                }
+                else
+                {
+                    year = year + "," + years[i].ToParseStr();
+                }
+            }
+            //year = "2015,2016";
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT indicator_id from hesabat as h " +
+                "where indicator_id=@indicator_id and length(value)>0 and value not in ('-','...','x') " +
+                " and value is not null and year in (" + year + ") and is_active=1 group by indicator_id", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabatforChart_Indicators_1()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
     public DataTable GetHesabatforChart_Years_1(int indicator_id, int[] years)
     {
         try
@@ -5473,6 +5507,44 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
         catch (Exception ex)
         {
             LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabatforChart_Years_1()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetHesabat_Indicators(List<int> indicators, int[] years)
+    {
+        try
+        {
+            string _indicators = "0";
+            foreach (int item in indicators)
+            {
+                _indicators += item + ",";
+            }
+            _indicators = _indicators.Trim(',');
+            string year = "";
+            for (int i = 0; i < years.Length; i++)
+            {
+                if (i == 0)
+                {
+                    year = years[i].ToParseStr();
+                }
+                else
+                {
+                    year = year + "," + years[i].ToParseStr();
+                }
+            }
+            DataTable dt = new DataTable();
+
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT indicator_id from hesabat as h " +
+                "where indicator_id in (" + _indicators + ") " +
+                " and length(value)> 0 and value not in ('-', '...', 'x') and value is not null and year in ("
+                + year + ") and is_active=1 group by indicator_id", SqlConn);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetHesabat_Years()"), ex.Message, "", true);
             return null;
         }
     }

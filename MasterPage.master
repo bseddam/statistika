@@ -58,8 +58,8 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
 
-
-                                <asp:Literal ID="ltrLink" Text="" runat="server" />
+                                <asp:Label ID="ltrLink" runat="server" Text="" style="margin-right:12px;"></asp:Label>
+                              
                              <%--   <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
                                 <a href="http://etsim.az/db/sdg/registration.php"><submit class="btn btn-register">Qeydiyyat</submit></a>
                           --%>

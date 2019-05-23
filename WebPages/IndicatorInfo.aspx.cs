@@ -41,7 +41,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 "indicator",
                 LtrIndicatorInfo.Text,
                 "");
-
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -56,7 +55,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         _helper_hide_empty_label(lblSource, lblSourceLabel);
         _helper_hide_empty_label(lblNote, lblNoteLabel);
         _helper_hide_empty_label(lblFootNote, lblFootNoteLabel);
-
     }
 
     private void _loadFromViewState()
@@ -66,18 +64,13 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             treeList1.DataSource = ViewState["treelist"] as DataTable;
             treeList1.DataBind();
         }
-
-
-
         if (ViewState["Grid"] != null)
         {
             Grid.DataSource = ViewState["Grid"] as DataTable;
             Grid.DataBind();
-
             //ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "script", " setTimeout(function(){$('.grid-cell').css('border-bottom-width', '');},100);", true);
         }
     }
-
 
 
     private void _loadLabels()
@@ -163,10 +156,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             Config.Rd("/error?null");
             return;
         }
-
-        
-
-
 
         DataTable dtGoal = _db.GetGoalById(dtIndicator.Rows[0]["goal_id"].ToParseInt());
         if (dtGoal.Rows.Count > 0)
@@ -297,9 +286,6 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             lblGoalName.Font.Size = 16;
         }
-
-
-
     }
     public int _noM = 0;
     public int _noM_Sub = 1;
@@ -340,18 +326,13 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             pnlSubIndicator.Visible = false;
             pnlContent.CssClass = "col-md-12";
         }
-
-
     }
 
 
     string getCode(string code)
     {
         string[] arr = code.Split('.');
-
-
         return arr[arr.Length - 1];
-
     }
 
 
@@ -388,14 +369,39 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             _years += item["year"] + ",";
         }
         _years = _years.Trim(',');
-       
+
+
+
+
+        DataTable dtindicators=new DataTable();
+        if (indicators.Count == 1)
+        {
+            dtindicators = _db.GetHesabatforChart_Indicators_1(indicators[0], years);
+        }
+        else
+        {
+            dtindicators = _db.GetHesabat_Indicators(indicators, years);
+        }
+        if (dtindicators == null)
+        {
+            return;
+        }
+
+
+
+
+
+
 
         string _indicators = "";
-        foreach (int item in indicators)
+        foreach (DataRow item in dtindicators.Rows)
         {
-            _indicators += item + ",";
+            _indicators += item["indicator_id"] + ",";
         }
         _indicators = _indicators.Trim(',');
+
+
+      
 
          
 
@@ -427,13 +433,13 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             string values = "";
             string _tooltip = "";
             string value = "";
-            foreach (int indicatorid in indicators)
+            foreach (DataRow indicatorid in dtindicators.Rows)
             {
-                DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
+                DataTable dtIndicator = _db.GetIndicatorById(indicatorid[0].ToParseInt());
 
-                value = _db.GetHesabatforChart_Value(indicatorid, dtYears.Rows[i_year]["year"].ToParseInt());
-
-
+                value = _db.GetHesabatforChart_Value(indicatorid[0].ToParseInt(), dtYears.Rows[i_year]["year"].ToParseInt());
+                int bb = dtYears.Rows[i_year]["year"].ToParseInt();
+                string aa = value;
                 if (Config.IsNumeric_double(value))
                 {
                     //value = "null";
