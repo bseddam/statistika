@@ -438,8 +438,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 DataTable dtIndicator = _db.GetIndicatorById(indicatorid[0].ToParseInt());
 
                 value = _db.GetHesabatforChart_Value(indicatorid[0].ToParseInt(), dtYears.Rows[i_year]["year"].ToParseInt());
-                int bb = dtYears.Rows[i_year]["year"].ToParseInt();
-                string aa = value;
+
                 if (Config.IsNumeric_double(value))
                 {
                     //value = "null";
