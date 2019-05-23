@@ -237,12 +237,37 @@ public partial class WebPages_Compare : System.Web.UI.Page
         _years = _years.Trim(',');
 
 
-        string _indicators = "";
-        foreach (int item in indicators)
+
+
+        DataTable dtindicators = new DataTable();
+        if (indicators.Count == 1)
         {
-            _indicators += item + ",";
+            dtindicators = _db.GetHesabatforChart_Indicators_1(indicators[0], years);
+        }
+        else
+        {
+            dtindicators = _db.GetHesabat_Indicators(indicators, years);
+        }
+        if (dtindicators == null)
+        {
+            return;
+        }
+
+
+
+
+
+
+
+        string _indicators = "";
+        foreach (DataRow item in dtindicators.Rows)
+        {
+            _indicators += item["indicator_id"] + ",";
         }
         _indicators = _indicators.Trim(',');
+
+
+
 
 
 
@@ -274,12 +299,11 @@ public partial class WebPages_Compare : System.Web.UI.Page
             string values = "";
             string _tooltip = "";
             string value = "";
-            foreach (int indicatorid in indicators)
+            foreach (DataRow indicatorid in dtindicators.Rows)
             {
-                DataTable dtIndicator = _db.GetIndicatorById(indicatorid);
+                DataTable dtIndicator = _db.GetIndicatorById(indicatorid[0].ToParseInt());
 
-                value = _db.GetHesabatforChart_Value(indicatorid, dtYears.Rows[i_year]["year"].ToParseInt());
-
+                value = _db.GetHesabatforChart_Value(indicatorid[0].ToParseInt(), dtYears.Rows[i_year]["year"].ToParseInt());
 
                 if (Config.IsNumeric_double(value))
                 {
