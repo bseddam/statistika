@@ -187,22 +187,23 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             lblIndicatorTitle.Font.Size = 10;
         }
-        if (400 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 500)
+        else if (400 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 500)
         {
             lblIndicatorTitle.Font.Size = 11;
         }
-        if (300 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 400)
+        else if(300 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 400)
         {
             lblIndicatorTitle.Font.Size = 12;
         }
-        if (200 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 300)
+        else if(200 < lblIndicatorTitle.Text.Length && lblIndicatorTitle.Text.Length < 300)
         {
             lblIndicatorTitle.Font.Size = 13;
         }
-        if (200 > lblIndicatorTitle.Text.Length)
+        else if(200 > lblIndicatorTitle.Text.Length)
         {
             lblIndicatorTitle.Font.Size = 14;
         }
+
 
 
         _loadSubIndicators(indicatoridnational, lang, dtIndicator.Rows[0]["code"].ToParseStr(),
@@ -285,6 +286,10 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         if (210 < lblGoalName.Text.Length && lblGoalName.Text.Length < 235)
         {
             lblGoalName.Font.Size = 16;
+        }
+        if (lblGoalName.Text.Length > 250)
+        {
+            lblGoalName.Font.Size = 12;
         }
     }
     public int _noM = 0;

@@ -186,6 +186,8 @@
             .aucun:hover {
                 text-decoration: none;
             }
+
+
     </style>
 </asp:Content>
 <asp:Content ID="fdf" ContentPlaceHolderID="script" runat="server">
@@ -278,8 +280,7 @@
                                                 <asp:Label ID="lblGoalName" Text="text" runat="server" />
                                             </span>
                                             <br />
-                                            <asp:Label ID="lblIndicatorTitle" Font-Bold="false" Text="text"
-                                                runat="server" />
+                                            <asp:Label ID="lblIndicatorTitle" Font-Bold="false" Text="text" runat="server" />
                                         </div>
                                     </div>
                                     <br />
