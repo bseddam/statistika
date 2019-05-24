@@ -6153,8 +6153,8 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  m.*,ml.name_" + lang + @" as l_name from metadata_global  as m 
                 inner join metadata_global_list as ml on m.list_id=ml.id 
-                where  m.indicator_id=@indicator_id
-                order by list_id ", SqlConn);
+                where  m.indicator_id=@indicator_id and ml.is_active=1 and m.is_active=1
+                order by cast( ml.code as unsigned ) ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.Fill(dt);
             return dt;
@@ -6201,7 +6201,10 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
         {
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT m.*,ml.code FROM metadata_global as m 
-inner join metadata_global_list as ml on m.list_id=ml.id where m.indicator_id=@indicator_id and m.is_active=1 order by cast( ml.code as unsigned ) ", SqlConn);
+inner join metadata_global_list as ml on m.list_id=ml.id where m.indicator_id=@indicator_id and m.is_active=1 
+and ml.is_active=1 
+
+order by cast( ml.code as unsigned ) ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.Fill(dt);
             return dt;
