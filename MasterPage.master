@@ -144,8 +144,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-4">
-                                <div style="padding:6px;padding-left:20px;">
-<%--                                    <div class="footer-social-text" style="margin-bottom: 10px;">
+                                <div style="padding: 6px; padding-left: 20px;">
+                                    <%--                                    <div class="footer-social-text" style="margin-bottom: 10px;">
                                         <asp:Literal ID="ltrFollow" Text="" runat="server" />
                                     </div>--%>
                                     <ul class="footer-social-links">
@@ -320,29 +320,17 @@
             <div class="container site-info main-container">
                 <div class="row">
                     <div class="col-md-12">
-                        <section class="customer-logos slider">
-                            <div class="slide">
-                                <a href="http://etsim.az/" target="_blank">
-                                    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></a>
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
-                            <div class="slide">
-                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                            </div>
+                        <section class="customer-logos slider" style="padding:0;margin:0;">
+                            <asp:Repeater runat="server" ID="rptPartners">
+                                <ItemTemplate>
+                                    <div class="slide">
+                                        <a href="<%#Eval("url") %>" title="<%#Eval("title_"+Config.getLang(Page)) %>" target="_blank">
+                                            <img src="/uploads/partners/<%#Eval("image_url") %>" alt="<%#Eval("title_"+Config.getLang(Page)) %>" />
+                                        </a>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+
                         </section>
 
                     </div>
@@ -357,21 +345,6 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </ul>--%>
-
-                    <div class="col-md-12">
-                        <ul class="partners">
-                            <asp:Repeater runat="server" ID="rptPartners">
-                                <ItemTemplate>
-                                    <li>
-                                        <a href="<%#Eval("url") %>" title="<%#Eval("title_"+Config.getLang(Page)) %>" target="_blank">
-                                            <img src="/uploads/partners/<%#Eval("image_url") %>" alt="<%#Eval("title_"+Config.getLang(Page)) %>" />
-                                        </a>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </ul>
-                    </div>
-
                 </div>
                 <div class="line" style="margin-top: 30px;"></div>
                 <div class="row">
