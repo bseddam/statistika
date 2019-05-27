@@ -42,9 +42,9 @@ public partial class WebPages_NationalReports : System.Web.UI.Page
 
                 linkDownloadReport.Text = DALC.GetStaticValue("download_report");
 
-                linkTamMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["full_material"]);
+                linkTamMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["full_material_"+lang]);
                 linkTamMaterial.Text = DALC.GetStaticValue("full_material");
-                linkShortMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["short_material"]);
+                linkShortMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["short_material_" + lang]);
                 linkShortMaterial.Text = DALC.GetStaticValue("short_material");
 
                 ltrBreadCrumb.Text = string.Format("<a href='/{0}/home'> {1}</a> / <a href='/{0}/national-reports'>{2}</a> / {3}  ",
@@ -60,12 +60,12 @@ public partial class WebPages_NationalReports : System.Web.UI.Page
                         lblContent.Text,
                         WebSiteURL + imgContent.ImageUrl);
 
-                if (dtContent.Rows[0]["full_material"].ToParseStr().Length != 0)
+                if (dtContent.Rows[0]["full_material_"+lang].ToParseStr().Length != 0)
                 {
                     pnlTamMaterial.Visible = true;
                 }
 
-                if (dtContent.Rows[0]["short_material"].ToParseStr().Length != 0)
+                if (dtContent.Rows[0]["short_material_"+lang].ToParseStr().Length != 0)
                 {
                     pnlShortMaterial.Visible = true;
                 }

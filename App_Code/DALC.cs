@@ -4101,7 +4101,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
     }
 
     public Utils.MethodType NationalReportsUpdate(int id, string title_az, string title_en, string content_az, string content_en,
-        DateTime date, string full_material, string short_material, string image_filename_az
+        DateTime date, string full_material_az, string full_material_en, string short_material_az, string short_material_en, string image_filename_az
         , string image_filename_en
         , string content_short_az
         , string content_short_en)
@@ -4116,8 +4116,10 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
                                                 date=@date,
                                                 image_filename_az=@image_filename_az,
                                                 image_filename_en=@image_filename_en,   
-                                                full_material=@full_material,
-                                                short_material=@short_material
+                                                full_material_az=@full_material_az,
+                                                full_material_en=@full_material_en,
+                                                short_material_az=@short_material_az,
+                                                short_material_en=@short_material_en
                                               WHERE Id=@id;", SqlConn);
 
         cmd.Parameters.AddWithValue("@title_az", title_az);
@@ -4129,10 +4131,12 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         cmd.Parameters.AddWithValue("@content_short_en", content_short_en);
 
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
         cmd.Parameters.AddWithValue("@image_filename_az", image_filename_az);
         cmd.Parameters.AddWithValue("@image_filename_en", image_filename_en);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@id", id);
 
         try
@@ -4178,13 +4182,13 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
     }
 
     public Utils.MethodType NationalReportInsert(string title_az, string title_en, string content_az, string content_en,
-        DateTime date, string full_material, string short_material, string image_filename_az
+        DateTime date, string full_material_az, string full_material_en, string short_material_az, string short_material_en, string image_filename_az
         , string image_filename_en
         , string content_short_az
         , string content_short_en)
     {
-        MySqlCommand cmd = new MySqlCommand(@"insert into national_reports (content_short_az,content_short_en,image_filename_az,image_filename_en,title_az,title_en,content_az,content_en,date,full_material,short_material,add_dt) 
-                            values (@content_short_az,@content_short_en,@image_filename_az,@image_filename_en,@title_az,@title_en,@content_az,@content_en,@date,@full_material,@short_material,@add_dt)   ", SqlConn);
+        MySqlCommand cmd = new MySqlCommand(@"insert into national_reports (content_short_az,content_short_en,image_filename_az,image_filename_en,title_az,title_en,content_az,content_en,date,full_material_az,full_material_en,short_material_az,short_material_en,add_dt) 
+                            values (@content_short_az,@content_short_en,@image_filename_az,@image_filename_en,@title_az,@title_en,@content_az,@content_en,@date,@full_material_az,@full_material_en,@short_material_az,@short_material_en,@add_dt)   ", SqlConn);
 
         cmd.Parameters.AddWithValue("@title_az", title_az);
         cmd.Parameters.AddWithValue("@title_en", title_en);
@@ -4193,8 +4197,10 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         cmd.Parameters.AddWithValue("@content_short_az", content_short_az);
         cmd.Parameters.AddWithValue("@content_short_en", content_short_en);
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@image_filename_az", image_filename_az);
         cmd.Parameters.AddWithValue("@image_filename_en", image_filename_en);
 

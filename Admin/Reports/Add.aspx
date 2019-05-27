@@ -914,23 +914,42 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal2" runat="server" Text="Tam material"></asp:Literal>
+                            <asp:Literal ID="ltrltammaterialaz" runat="server" Text="Tam material az"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:FileUpload runat="server" ID="fuTamMaterial" />
+                            <asp:FileUpload runat="server" ID="fuTamMaterialAz" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal4" runat="server" Text="Qısa material"></asp:Literal>
+                            <asp:Literal ID="ltrltammaterialen" runat="server" Text="Tam material en"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:FileUpload runat="server" ID="fuShortMaterial" />
+                            <asp:FileUpload runat="server" ID="fuTamMaterialEn" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="ltrlqisamaterialaz" runat="server" Text="Qısa material az"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuShortMaterialAz" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="ltrlqisamaterialen" runat="server" Text="Qısa material en"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuShortMaterialEn" />
                         </div>
                     </div>
 
-                    <asp:HiddenField ID="hf_tam_material" runat="server" />
-                    <asp:HiddenField ID="hf_short_material" runat="server" />
+                    <asp:HiddenField ID="hf_tam_material_az" runat="server" />
+
+                    <asp:HiddenField ID="hf_tam_material_en" runat="server" />
+                    <asp:HiddenField ID="hf_short_material_az" runat="server" />
+                    <asp:HiddenField ID="hf_short_material_en" runat="server" />
                     <asp:HiddenField ID="hf_image_filename_az" runat="server" />
                     <asp:HiddenField ID="hf_image_filename_en" runat="server" />
 
