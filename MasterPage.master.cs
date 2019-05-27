@@ -85,7 +85,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         rptPartners.DataBind();
 
 
-        ltrFollow.Text = DALC.GetStaticValue("social_text");
+        //ltrFollow.Text = DALC.GetStaticValue("social_text");
 
         hp_face.NavigateUrl = DALC.GetStaticValue_Url("social_fb_url");
         hp_linkedin.NavigateUrl = DALC.GetStaticValue_Url("social_linkedin_url");

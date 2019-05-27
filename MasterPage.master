@@ -17,6 +17,120 @@
     <link rel="stylesheet" href="/css/style.css?v=77" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="/css/newstyle.css" />
+    <style>
+        /* Slider */
+
+        .slick-slide {
+            margin: 0px 20px;
+        }
+
+            .slick-slide img {
+                width: 59%;
+            }
+
+        .slick-slider {
+            position: relative;
+            display: block;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -khtml-user-select: none;
+            -ms-touch-action: pan-y;
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .slick-list {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+            .slick-list:focus {
+                outline: none;
+            }
+
+            .slick-list.dragging {
+                cursor: pointer;
+                cursor: hand;
+            }
+
+        .slick-slider .slick-track,
+        .slick-slider .slick-list {
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .slick-track {
+            position: relative;
+            top: 0;
+            left: 0;
+            display: block;
+        }
+
+            .slick-track:before,
+            .slick-track:after {
+                display: table;
+                content: '';
+            }
+
+            .slick-track:after {
+                clear: both;
+            }
+
+        .slick-loading .slick-track {
+            visibility: hidden;
+        }
+
+        .slick-slide {
+            display: none;
+            float: left;
+            height: 100%;
+            min-height: 1px;
+        }
+
+        [dir='rtl'] .slick-slide {
+            float: right;
+        }
+
+        .slick-slide img {
+            display: block;
+        }
+
+        .slick-slide.slick-loading img {
+            display: none;
+        }
+
+        .slick-slide.dragging img {
+            pointer-events: none;
+        }
+
+        .slick-initialized .slick-slide {
+            display: block;
+        }
+
+        .slick-loading .slick-slide {
+            visibility: hidden;
+        }
+
+        .slick-vertical .slick-slide {
+            display: block;
+            height: auto;
+            border: 1px solid transparent;
+        }
+
+        .slick-arrow.slick-hidden {
+            display: none;
+        }
+    </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -29,42 +143,72 @@
                 <nav class="up2">
                     <div class="container">
                         <div class="row">
-                            <ul class="nav navbar-nav navbar-right">
-                                <asp:Repeater ID="rptHeaderMenu" runat="server">
-                                    <ItemTemplate>
-
-                                        <li <%#Eval("SubCount").ToParseInt()>0?"class='dropdown'":"" %>>
-                                            <a <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
-                                                href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
-                                                <%#Eval("Name") %>
-
-                                                <%#Eval("SubCount").ToParseInt()>0?" <span class='caret'></span>":"" %>
-
-                                                <%#Eval("SubCount").ToParseInt()>0?" <ul class='dropdown-menu'>":"" %>
-
-                                                <asp:Repeater ID="rptHeaderSub" runat="server">
-                                                    <ItemTemplate>
-                                                        <li>
-                                                            <a href="<%#"/"+Config.getLang(Page)+Eval("URL").ToParseStr() %>">
-                                                                <%#Eval("Name") %>
-                                                            </a>
-                                                        </li>
-                                                    </ItemTemplate>
-                                                </asp:Repeater>
-                                                <%#Eval("SubCount").ToParseInt()>0?" </ul>":"" %>
-
-                                            </a>
+                            <div class="col-md-4">
+                                <div style="padding:6px;padding-left:20px;">
+<%--                                    <div class="footer-social-text" style="margin-bottom: 10px;">
+                                        <asp:Literal ID="ltrFollow" Text="" runat="server" />
+                                    </div>--%>
+                                    <ul class="footer-social-links">
+                                        <li class="li-facebook">
+                                            <asp:HyperLink ID="hp_face" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-facebook"></i>
+                                            </asp:HyperLink>
                                         </li>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                        <li class="li-linkedin">
+                                            <asp:HyperLink ID="hp_linkedin" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-linkedin"></i>
+                                            </asp:HyperLink>
+                                        </li>
+                                        <li class="li-twitter">
+                                            <asp:HyperLink ID="hp_twt" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-twitter"></i>
+                                            </asp:HyperLink>
+                                        </li>
+                                        <li class="li-youtube">
+                                            <asp:HyperLink ID="hp_youtube" NavigateUrl="#" runat="server">
+                                        <i class="fa fa-youtube-play"></i>
+                                            </asp:HyperLink>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <asp:Repeater ID="rptHeaderMenu" runat="server">
+                                        <ItemTemplate>
 
-                                <asp:Label ID="ltrLink" runat="server" Text="" style="margin-right:12px;"></asp:Label>
-                              
-                             <%--   <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
+                                            <li <%#Eval("SubCount").ToParseInt()>0?"class='dropdown'":"" %>>
+                                                <a <%#Eval("SubCount").ToParseInt()>0?"class='dropdown-toggle' data-toggle='dropdown'":"" %>
+                                                    href="<%#"/"+Config.getLang(Page)+Eval("URL") %>">
+                                                    <%#Eval("Name") %>
+
+                                                    <%#Eval("SubCount").ToParseInt()>0?" <span class='caret'></span>":"" %>
+
+                                                    <%#Eval("SubCount").ToParseInt()>0?" <ul class='dropdown-menu'>":"" %>
+
+                                                    <asp:Repeater ID="rptHeaderSub" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="<%#"/"+Config.getLang(Page)+Eval("URL").ToParseStr() %>">
+                                                                    <%#Eval("Name") %>
+                                                                </a>
+                                                            </li>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                    <%#Eval("SubCount").ToParseInt()>0?" </ul>":"" %>
+
+                                                </a>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                    <asp:Label ID="ltrLink" runat="server" Text=""></asp:Label>
+
+                                    <%--   <a href="http://etsim.az/db/sdg/loginsdg.php"><submit class="btn btn-login">Daxil ol</submit></a>  
                                 <a href="http://etsim.az/db/sdg/registration.php"><submit class="btn btn-register">Qeydiyyat</submit></a>
-                          --%>
-
-                            </ul>
+                                    --%>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -74,7 +218,7 @@
 
                 <nav class="navbar navbar-first">
                     <div class="container-fluid" style="padding: 0 20px 0 0px;">
-                        <div class="navbar-header" >
+                        <div class="navbar-header">
                             <a class="navbar-brand" href="/<%=Config.getLang(Page) %>/home">
                                 <img src="/images/logo_<%=Config.getLang(Page) %>.png" class="logo-<%=Config.getLang(Page) %>" />
                             </a>
@@ -136,14 +280,14 @@
                         <div class="navbar-form navbar-right">
                             <div class="search-form  ">
                                 <div class="search-form-container clear">
-                                    <div class="arrow-container search-form-item ">
+                                    <%--                                    <div class="arrow-container search-form-item ">
                                         <div class="form-control arrow-down">
                                             <i class="fa fa-arrow-down"></i>
                                         </div>
                                         <div class="form-control arrow-up">
                                             <i class="fa fa-arrow-up"></i>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="search-form-input  search-form-item">
                                         <asp:TextBox runat="server" class="form-control" ID="txtSearch" ClientIDMode="Static" />
                                     </div>
@@ -175,7 +319,33 @@
         <footer class="not-printable">
             <div class="container site-info main-container">
                 <div class="row">
+                    <div class="col-md-12">
+                        <section class="customer-logos slider">
+                            <div class="slide">
+                                <a href="http://etsim.az/" target="_blank">
+                                    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"></a>
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                            <div class="slide">
+                                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                            </div>
+                        </section>
 
+                    </div>
                     <%-- <ul class="footer-menu-2">
                         <asp:Repeater ID="rptFooterMenu2" runat="server">
                             <ItemTemplate>
@@ -188,7 +358,7 @@
                         </asp:Repeater>
                     </ul>--%>
 
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <ul class="partners">
                             <asp:Repeater runat="server" ID="rptPartners">
                                 <ItemTemplate>
@@ -201,36 +371,7 @@
                             </asp:Repeater>
                         </ul>
                     </div>
-                    <div class="col-md-4">
-                        <div class="footer-social ">
-                            <div class="footer-social-text" style="margin-bottom: 10px;">
-                                <asp:Literal ID="ltrFollow" Text="" runat="server" />
-                            </div>
-                            <ul class="footer-social-links">
-                                <li class="li-facebook">
-                                    <asp:HyperLink ID="hp_face" NavigateUrl="#" runat="server">
-                                        <i class="fa fa-facebook"></i>
-                                    </asp:HyperLink>
-                                </li>
-                                <li class="li-linkedin">
-                                    <asp:HyperLink ID="hp_linkedin" NavigateUrl="#" runat="server">
-                                        <i class="fa fa-linkedin"></i>
-                                    </asp:HyperLink>
-                                </li>
-                                <li class="li-twitter">
-                                    <asp:HyperLink ID="hp_twt" NavigateUrl="#" runat="server">
-                                        <i class="fa fa-twitter"></i>
-                                    </asp:HyperLink>
-                                </li>
-                                <li class="li-youtube">
-                                    <asp:HyperLink ID="hp_youtube" NavigateUrl="#" runat="server">
-                                        <i class="fa fa-youtube-play"></i>
-                                    </asp:HyperLink>
-                                </li>
-                            </ul>
-                        </div>
 
-                    </div>
                 </div>
                 <div class="line" style="margin-top: 30px;"></div>
                 <div class="row">
@@ -256,7 +397,39 @@
             </div>
         </footer>
 
-        <script type="text/javascript" src="/js/jquery.min.js"></script>
+
+
+
+        <!-- #footer -->
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/slick.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.customer-logos').slick({
+                    slidesToShow: 6,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 1500,
+                    arrows: false,
+                    dots: false,
+                    pauseOnHover: false,
+                    responsive: [{
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 4
+                        }
+                    }, {
+                        breakpoint: 520,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }]
+                });
+            });
+        </script>
+
+
+
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
         <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
