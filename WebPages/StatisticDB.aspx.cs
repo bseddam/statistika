@@ -48,7 +48,22 @@ public partial class WebPages_StatisticDB : System.Web.UI.Page
         pnlResult.Visible = false;
         pnlIndicator.Style["display"] = "none";
     }
-
+    protected void lnkchkSelectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected = true;
+        }
+       
+    }
+    protected void lnkchkUnselectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected = false;
+        }
+    
+    }
     private void _loadGoals(string lang)
     {
         string goal = DALC.GetStaticValue("goal_value");

@@ -39,12 +39,38 @@ public partial class WebPages_Compare : System.Web.UI.Page
         btnHesabat.Text = DALC.GetStaticValue("compare_btn_hesabat");
         BtnSearch.Text = DALC.GetStaticValue("compare_search_btn");
 
+        btnSelectAll.Text = "<i class='fa fa-check-circle-o'></i> " + DALC.GetStaticValue("statistical_database_select_all");
+        btnUnselectAll.Text = "<i class='fa fa-times-circle-o'></i> " + DALC.GetStaticValue("statistical_database_unselect_all");
+
 
         pnlResult.Visible = false;
         pnlIndicator.Style["display"] = "none";
 
     }
+    protected void btnSelectAll_Click(object sender, EventArgs e)
+    {
+        treeList1.SelectAll();
+    }
+    protected void btnUnselectAll_Click(object sender, EventArgs e)
+    {
+        treeList1.UnselectAll();
+    }
+    protected void lnkchkSelectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected = true;
+        }
 
+    }
+    protected void lnkchkUnselectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < chkYears.Items.Count; i++)
+        {
+            chkYears.Items[i].Selected = false;
+        }
+
+    }
     private void _loadGoals(string lang)
     {
         string goal = DALC.GetStaticValue("goal_value");

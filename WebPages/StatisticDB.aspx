@@ -18,6 +18,19 @@
         }
 
         */
+          .btn-select {
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color: green;
+            display: inline-block;
+            color: #fff;
+            font-size: 10px;
+        }
+
+            .btn-select:hover {
+                color: #fff;
+            }
         .dxtlSelectionCell_MetropolisBlue {
             padding-left: 1px;
         }
@@ -246,7 +259,7 @@
                             </div>
                             <div class="row">
 
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <br />
                                     <h4>
                                         <asp:Literal ID="lblYearTitle" Text="" runat="server" />
@@ -256,7 +269,18 @@
                                         CssClass="year-list form-control"
                                         DataTextField="year" DataValueField="year">
                                     </asp:CheckBoxList>
+                                    <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_select_all") %>
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="lnkunselectallchk" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_unselect_all") %>
+                                    </asp:LinkButton>
                                 </div>
+                                   <div class="col-md-8">
+
+                                   </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
@@ -315,7 +339,7 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-12">
-                                    
+
                                     <dx:ASPxGridViewExporter ID="gridExporter" runat="server"
                                         Landscape="true" PaperKind="A4">
                                     </dx:ASPxGridViewExporter>
@@ -324,7 +348,7 @@
                                         Width="100%"
                                         SettingsBehavior-ConfirmDelete="true"
                                         KeyFieldName="id">
-                                        <ClientSideEvents  BeginCallback="grid_cell"/>
+                                        <ClientSideEvents BeginCallback="grid_cell" />
                                         <Settings GridLines="Both" />
                                         <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
                                         <Columns>

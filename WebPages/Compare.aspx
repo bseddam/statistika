@@ -16,6 +16,19 @@
         }
 
         */
+           .btn-select {
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 5px 10px;
+            background-color: green;
+            display: inline-block;
+            color: #fff;
+            font-size: 10px;
+        }
+
+            .btn-select:hover {
+                color: #fff;
+            }
         .dxtlSelectionCell_MetropolisBlue {
             padding-left: 1px;
         }
@@ -39,6 +52,30 @@
         .info-column-9 {
             width: 59%;
         }
+          .btn-select-all {
+            margin-bottom: 10px;
+            padding: 1px;
+            display: block;
+            text-align: left;
+            padding-left: 44%;
+            background-color: green;
+        }
+
+            .btn-select-all:hover {
+                background-color: #009400;
+            }
+
+        .btn-unselect-all {
+            padding: 1px;
+            display: block;
+            text-align: left;
+            padding-left: 44%;
+            background-color: #a92a2a;
+        }
+
+            .btn-unselect-all:hover {
+                background-color: #d03a3a;
+            }
     </style>
 
 </asp:Content>
@@ -167,12 +204,32 @@
                                         <SettingsText CommandNew="Yeni" CommandDelete="Sil" CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla" LoadingPanelText="Yüklənir&hellip;" CustomizationWindowCaption="Sütun seçin" ConfirmDelete="Silmək istəditinizə əminsiniz?" />
 
                                     </dx:ASPxTreeList>
+                                       <div>
+                                        <div class="btn btn-success btn-select-all">
+                                            <asp:LinkButton ID="btnSelectAll"
+                                                OnClick="btnSelectAll_Click"
+                                                runat="server"
+                                                ForeColor="White"
+                                                Style="display: block; padding: 1px; font-size: 14px;">
+                                            </asp:LinkButton>
+                                        </div>
+                                        <div class="btn btn-danger btn-unselect-all">
+
+                                            <asp:LinkButton ID="btnUnselectAll"
+                                                Style="display: block; font-size: 14px;"
+                                                OnClick="btnUnselectAll_Click"
+                                                ForeColor="White"
+                                                runat="server">
+                                            </asp:LinkButton>
+
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
                             <div class="row">
 
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <h4>
                                         <asp:Literal ID="lblYearTitle" Text="" runat="server" />
                                     </h4>
@@ -181,7 +238,18 @@
                                         CssClass="year-list form-control"
                                         DataTextField="year" DataValueField="year">
                                     </asp:CheckBoxList>
+                                      <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_select_all") %>
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="lnkunselectallchk" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                    <%=DALC.GetStaticValue("indicator_unselect_all") %>
+                                    </asp:LinkButton>
                                 </div>
+                                   <div class="col-md-8">
+
+                                   </div>
 
                             </div>
                             <div class="row">
