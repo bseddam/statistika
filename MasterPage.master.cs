@@ -24,12 +24,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
         if (lang == "en")
         {
             ltrLink.Text = string.Format("<a href='{0}'><submit class='btn btn-az'>AZ</submit></a> " +
-                "<a href='{1}'><submit class='btn btn-en' style='background-color: #026BA2;color:white;'>EN</submit></a>", getURL, getURL);
+                "<a href='{1}'><submit class='btn btn-en' style='background-color: #026BA2;color:white;'>EN</submit></a>", getURLaz, getURLen);
         }
         else
         {
             ltrLink.Text = string.Format("<a href='{0}'><submit class='btn btn-az' style='background-color: #026BA2;color:white;'>AZ</submit></a> " +
-                 "<a href='{1}'><submit class='btn btn-en'>EN</submit></a>", getURL, getURL);
+                 "<a href='{1}'><submit class='btn btn-en'>EN</submit></a>", getURLaz, getURLen);
         }
 
         //if (lang == "en")
@@ -95,7 +95,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         hpSearch.NavigateUrl = string.Format("/{0}/search/detailed", lang);
         hpSearch.Text = DALC.GetStaticValue_Url("search_detailed");
     }
-    public string getURL
+    public string getURLaz
     {
         get
         {
@@ -107,14 +107,26 @@ public partial class MasterPage : System.Web.UI.MasterPage
             }
             else
             {
-                result = url.Replace("/az/", "/en/");
+                result = url.Replace("/az/", "/az/");
             }
-
-
-
             return result;
         }
-
     }
-
+    public string getURLen
+    {
+        get
+        {
+            string url = Request.Url.ToString();
+            string result = "";
+            if (url.IndexOf("/en/") > -1)
+            {
+                result = url.Replace("/en/", "/en/");
+            }
+            else
+            {
+                result = url.Replace("/az/", "/en/");
+            }
+            return result;
+        }
+    }
 }
