@@ -20,6 +20,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             datatable.Visible = false;
             lblclasschart.Text = "class='active'";
             lblclassdatatable.Text = "";
+            hdncharttype.Value = "2";
             _hide_empty_labels();
         }
         _loadFromViewState();
@@ -277,7 +278,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
             //Response.Write("aaa" + years[j] + years[j+1] + years[j + 2]);
-            loadChartMutipleIndicator(lang, new List<int> { indicatoridnational },"2");
+            loadChartMutipleIndicator(lang, new List<int> { indicatoridnational },hdncharttype.Value);
         }
         if (lblGoalName.Text.Length > 235)
         {
