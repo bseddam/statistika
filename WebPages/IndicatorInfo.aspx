@@ -696,7 +696,7 @@
                                                 <asp:Repeater ID="rptGlobalMetada" runat="server">
                                                     <ItemTemplate>
                                                         <tr data-id="<%#Eval(" list_id ") %>" class="parent">
-                                                            <td style="font-weight: bold; width: 175px;">
+                                                            <td style="font-weight: bold; width: 300px;">
                                                                 <%#Eval("l_name")%>
                                                             </td>
                                                             <td>
