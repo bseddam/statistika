@@ -4311,7 +4311,7 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
     }
     public Utils.MethodType ResearchUpdate(int id, string title_az, string title_en, string content_az, string content_en,
-     DateTime date, string full_material, string short_material)
+     DateTime date, string full_material_az, string short_material_az, string full_material_en, string short_material_en)
     {
         MySqlCommand cmd = new MySqlCommand(@"UPDATE researches SET 
                                                 title_az=@title_az,
@@ -4319,8 +4319,10 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
                                                 content_az=@content_az,
                                                 content_en=@content_en,
                                                 date=@date,
-                                                full_material=@full_material,
-                                                short_material=@short_material
+                                                full_material_az=@full_material_az,
+                                                short_material_az=@short_material_az,
+                                                full_material_en=@full_material_en,
+                                                short_material_en=@short_material_en
                                               WHERE Id=@id;", SqlConn);
 
         cmd.Parameters.AddWithValue("@title_az", title_az);
@@ -4328,8 +4330,10 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         cmd.Parameters.AddWithValue("@content_az", content_az);
         cmd.Parameters.AddWithValue("@content_en", content_en);
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@add_dt", DateTime.Now);
 
         cmd.Parameters.AddWithValue("@id", id);
@@ -4354,18 +4358,20 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
 
 
     public Utils.MethodType ResearchInsert(string title_az, string title_en, string content_az, string content_en,
-        DateTime date, string full_material, string short_material)
+        DateTime date, string full_material_az, string short_material_az, string full_material_en, string short_material_en)
     {
-        MySqlCommand cmd = new MySqlCommand(@"insert into researches (title_az,title_en,content_az,content_en,date,full_material,short_material,add_dt) 
-                            values (@title_az,@title_en,@content_az,@content_en,@date,@full_material,@short_material,@add_dt)   ", SqlConn);
+        MySqlCommand cmd = new MySqlCommand(@"insert into researches (title_az,title_en,content_az,content_en,date,full_material_az,short_material_az,full_material_en,short_material_en,add_dt) 
+                            values (@title_az,@title_en,@content_az,@content_en,@date,@full_material_az,@short_material_az,@full_material_en,@short_material_en,@add_dt)   ", SqlConn);
 
         cmd.Parameters.AddWithValue("@title_az", title_az);
         cmd.Parameters.AddWithValue("@title_en", title_en);
         cmd.Parameters.AddWithValue("@content_az", content_az);
         cmd.Parameters.AddWithValue("@content_en", content_en);
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@add_dt", DateTime.Now);
 
 
