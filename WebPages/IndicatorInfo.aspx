@@ -224,17 +224,18 @@
 
         });
 
-        $(document).on('click', '.chart-btn', function () {
-            _type = $(this).attr('data-type');
-            drawChart(_type);
-            return false;
-        });
+        //$(document).on('click', '.chart-btn', function () {
+        //    _type = $(this).attr('data-type');
+        //    drawChart(_type);
+        //    return false;
+        //});
                     //$(document).on('click', '.chart-down', function () {
                     //    var url = img.src.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
                     //    window.open(url);
                     //});
 
     </script>
+
 
     <style>
         #chkIndicators label {
@@ -432,15 +433,16 @@
 
 
                                                 <div class="chart-styles clear">
-                                                    <a href="#" class="chart-btn" data-type="1">
-                                                        <img src="/images/chart_1.png" alt="" />
-                                                    </a>
-                                                    <a href="#" class="chart-btn" data-type="3">
-                                                        <img src="/images/chart_2.png" alt="" />
-                                                    </a>
-                                                    <a href="#" class="chart-btn" data-type="2">
-                                                        <img src="/images/chart_3.png" alt="" />
-                                                    </a>
+                                                    <asp:HiddenField ID="hdncharttype" runat="server" />
+                                                  <asp:ImageButton ID="imgbchart1" runat="server" 
+                                                        ImageUrl="/images/chart_1.png" Width="25px" Height="28px" BorderWidth="1" 
+                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart1_Click"  />
+                                                    <asp:ImageButton ID="imgbchart2" runat="server" 
+                                                        ImageUrl="/images/chart_2.png" Width="25px" Height="28px" BorderWidth="1" 
+                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart2_Click" />
+                                                   <asp:ImageButton ID="imgbchart3" runat="server" 
+                                                        ImageUrl="/images/chart_3.png" Width="25px" Height="28px" BorderWidth="1" 
+                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart3_Click" />
 
                                                 </div>
                                                 <div class="chart-container">

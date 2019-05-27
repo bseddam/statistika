@@ -277,7 +277,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
 
             //Response.Write("aaa" + years[j] + years[j+1] + years[j + 2]);
-            loadChartMutipleIndicator(lang, new List<int> { indicatoridnational });
+            loadChartMutipleIndicator(lang, new List<int> { indicatoridnational },"2");
         }
         if (lblGoalName.Text.Length > 235)
         {
@@ -341,7 +341,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     }
 
 
-    void loadChartMutipleIndicator(string lang, List<int> indicators)
+    void loadChartMutipleIndicator(string lang, List<int> indicators,string charttype)
     {
         int j = 0;
         int[] years = new int[10];
@@ -480,7 +480,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         data = data.Trim(',');
         data += " ]);";
 
-        _loadChart(data, dtYears.Rows.Count);
+        _loadChart(data, dtYears.Rows.Count,charttype);
     }
     string removeNewLine(string s)
     {
@@ -542,12 +542,12 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     }
 
-    void _loadChart(string data, int row_count)
+    void _loadChart(string data, int row_count, string type)
     {
         string script = @"google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart(type) {
+        function drawChart() {
             var data = new google.visualization.DataTable();
                " + data + @"
             var options = 
@@ -572,20 +572,23 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             };
 
             var chart;
-            if (type=='1') {
+            if ("+ type + @"==1) {
                  chart = new google.visualization.BarChart(document.getElementById('chart_div'));
             }
-            else if (type=='2') {
+            else if (" + type + @"==2) {
+
                 chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             }
-            else if (type=='3') {
+            else if (" + type + @"==3) {
                 chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             }
-            else if (type=='4') {
+            else if (" + type + @"==4) {
                 chart = new google.visualization.PieChart(document.getElementById('chart_div'));
             }else {
                chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
             }
+
             chart.draw(data, options);
         $('.chart-down-indicator').attr('href',chart.getImageURI());
             };";
@@ -646,7 +649,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblFootNote.Visible = false;
             lblNote.Visible = true;
             lblNoteLabel.Visible = true;
-            loadChartMutipleIndicator(lang, indicators);
+            loadChartMutipleIndicator(lang, indicators, hdncharttype.Value);
             _hide_empty_labels();
         }
         else if(datatable.Visible == true)
@@ -1186,6 +1189,27 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         btnIndicator_Click(null, null);
        
     }
+
+    protected void imgbchart1_Click(object sender, ImageClickEventArgs e)
+    {
+        hdncharttype.Value = "1";
+        btnIndicator_Click(null, null);
+    }
+    protected void imgbchart2_Click(object sender, ImageClickEventArgs e)
+    {
+        hdncharttype.Value = "3";
+        btnIndicator_Click(null, null);
+    }
+    protected void imgbchart3_Click(object sender, ImageClickEventArgs e)
+    {
+
+        hdncharttype.Value = "2";
+        btnIndicator_Click(null, null);
+    }
+
+
+
+
 }
 
 class Footnote_Id1
