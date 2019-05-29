@@ -37,7 +37,7 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
         {
             _loadDataByID(_dataID);
 
-            LtrPageTitle.Text = "Səhifə məlumatlarını yenilə";
+            LtrPageTitle.Text = "Faydalı link məlumatlarını yenilə";
         }
 
 
@@ -158,6 +158,12 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
         }
         else
         {
+            returnVal = _db.UsefullinkInsert(ddlheaderlink.SelectedValue.ToParseInt(),
+              useful_links_name_az.Html,
+              useful_links_name_en.Html,
+              useful_links_url_az.Text.Trim(),
+              useful_links_url_en.Text.Trim(),
+              OrderBy.Value.ToParseInt());
             //returnVal = _db.SliderInsert(ddlheaderlink.SelectedValue.ToParseInt(),
             //    useful_links_name_az.Html,
             //    useful_links_name_en.Html,

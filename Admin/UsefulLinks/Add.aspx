@@ -54,18 +54,18 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal10" runat="server" Text="Link adı  (AZ)"></asp:Literal>
+                            <asp:Literal ID="Literal10" runat="server" Text="Keçid linki  (AZ)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="useful_links_url_az" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
+                            <asp:TextBox ID="useful_links_url_az" runat="server" CssClass="form-control " data-type="note" MaxLength="1000"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal11" runat="server" Text="Link adı  (EN)"></asp:Literal>
+                            <asp:Literal ID="Literal11" runat="server" Text="Keçid linki  (EN)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="useful_links_url_en" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
+                            <asp:TextBox ID="useful_links_url_en" runat="server" CssClass="form-control " data-type="note" MaxLength="1000"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">

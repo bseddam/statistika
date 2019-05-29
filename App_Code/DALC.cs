@@ -2467,8 +2467,8 @@ inner join useful_links ul on ulh.id=ul.useful_links_header_id where ul.id=@id O
             return null;
         }
     }
-    public Utils.MethodType UsefullinkUpdate(int id, int useful_links_header_id, string useful_links_name_az, 
-        string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
+    public Utils.MethodType UsefullinkUpdate(int id, int useful_links_header_id, string useful_links_name_az,
+    string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
     {
         MySqlCommand cmd = new MySqlCommand(@"UPDATE useful_links SET useful_links_header_id=@useful_links_header_id,
 useful_links_name_az=@useful_links_name_az,useful_links_name_en=@useful_links_name_en,useful_links_url_az=@useful_links_url_az,
@@ -2491,7 +2491,42 @@ useful_links_url_en=@useful_links_url_en,orderby=@orderby WHERE id=@id;", SqlCon
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.pages, Utils.LogType.update, String.Format("UsefullinkUpdate () "), ex.Message, "", true);
+            LogInsert(Utils.Tables.usefulllink, Utils.LogType.update, String.Format("UsefullinkUpdate () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+    public Utils.MethodType UsefullinkInsert(int useful_links_header_id, string useful_links_name_az, 
+        string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
+    {
+     
+        MySqlCommand cmd = new MySqlCommand(@"insert into useful_links (useful_links_header_id,
+useful_links_name_az,useful_links_name_en,useful_links_url_az,
+useful_links_url_en,orderby) values (@useful_links_header_id,
+@useful_links_name_az,@useful_links_name_en,@useful_links_url_az,
+@useful_links_url_en,@orderby)", SqlConn);
+        cmd.Parameters.AddWithValue("@useful_links_header_id", useful_links_header_id);
+        cmd.Parameters.AddWithValue("@useful_links_name_az", useful_links_name_az);
+        cmd.Parameters.AddWithValue("@useful_links_name_en", useful_links_name_en);
+        cmd.Parameters.AddWithValue("@useful_links_url_az", useful_links_url_az);
+        cmd.Parameters.AddWithValue("@useful_links_url_en", useful_links_url_en);
+        cmd.Parameters.AddWithValue("@orderby", orderby);
+        //cmd.Parameters.AddWithValue("@ip", HttpContext.Current.Request.UserHostAddress);
+        //cmd.Parameters.AddWithValue("@dt", DateTime.Now);
+        //update_dt=@dt,update_ip=@ip
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.usefulllink, Utils.LogType.insert, String.Format("UsefullinkInsert () "), ex.Message, "", true);
             return Utils.MethodType.Error;
         }
         finally
