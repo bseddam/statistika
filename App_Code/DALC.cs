@@ -2209,7 +2209,10 @@ content_en=@content_en,page_dt=@page_dt,page_id=@page_id,more_url=@more_url WHER
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * FROM `useful_links_headers` ORDER BY `orderby` ASC ", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT *, CASE when orderby=1 THEN ' active' ELSE '' end active , 
+CASE when orderby=1 THEN ' active in' ELSE ' fade' end activefade , 
+CASE when orderby=1 THEN 'true' ELSE 'false' end truefalse  
+FROM `useful_links_headers` ORDER BY `orderby` ASC ", SqlConn);
 
             da.Fill(dt);
             return dt;
