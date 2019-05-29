@@ -105,6 +105,8 @@
 
         routes.MapPageRoute("usefullinks", "{lang}/useful-links", "~/webpages/usefullinks.aspx");
         routes.MapPageRoute("usefullinks1", "{lang}/useful-links/{goalId}/{goalname}", "~/webpages/usefullinks.aspx");
+        routes.MapPageRoute("useful_links", "{lang}/usefullinks", "~/webpages/useful_links.aspx");
+
 
         routes.MapPageRoute("map", "{lang}/map", "~/webpages/map.aspx");
         routes.MapPageRoute("statisticDb", "{lang}/statical-database", "~/webpages/statisticdb.aspx");

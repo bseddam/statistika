@@ -26,24 +26,30 @@ public partial class WebPages_UsefulLinks : System.Web.UI.Page
 
 
 
-        DataTable dt = _db.getlinkheader();
-        rplinkheader.DataSource = dt;
+        DataTable dtlinkheader = _db.getlinkheader();
+        rplinkheader.DataSource = dtlinkheader;
         rplinkheader.DataBind();
+        
         string linkstr = "";
-        for (int i = 0; i < dt.Rows.Count; i++)
+        string linkler = "";
+        for (int i = 0; i < dtlinkheader.Rows.Count; i++)
         {
-
-      
-         linkstr = linkstr+ @"<div id='h" + dt.Rows[i]["id"] + @"' class='container tab-pane"+ dt.Rows[i]["activefade"]+ @"'>
+            DataTable dtlinkler = _db.GetUsefullLinks(dtlinkheader.Rows[i]["id"].ToParseInt());
+            for (int j = 0; j < dtlinkler.Rows.Count; j++)
+            {
+                linkler = linkler+ "<li><a href = '" + dtlinkler.Rows[j]["useful_links_url_"+ lang] + "'>" + dtlinkler.Rows[j]["useful_links_name_"+ lang] + "</a></li>";
+            }
+            linkstr = linkstr + @"<div id='h" + dtlinkheader.Rows[i]["id"] + @"' class='container tab-pane" + dtlinkheader.Rows[i]["activefade"] + @"'>
                                         <br />
                                         <div class='row'>
                                             <div class='col-md-12'>
                                                 <ul class='list-unstyled'>
-                                                    <li><a href = ''>aaaa</a></li>
+                                                   "+ linkler + @"
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>";
+            linkler = "";
         }
         lbllinkler.Text = linkstr;
 

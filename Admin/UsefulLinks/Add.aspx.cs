@@ -70,7 +70,7 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
 
         if (dt == null && dt.Rows.Count < 1) return;
 
-        ddlheaderlink.SelectedValue = dt.Rows[0]["id1"].ToParseStr();
+        ddlheaderlink.SelectedValue = dt.Rows[0]["useful_links_header_id1"].ToParseStr();
 
 
         useful_links_url_az.Text = dt.Rows[0]["useful_links_url_az"].ToParseStr();
