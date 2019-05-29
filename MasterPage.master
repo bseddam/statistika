@@ -130,6 +130,10 @@
         .slick-arrow.slick-hidden {
             display: none;
         }
+
+
+
+
     </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -363,6 +367,7 @@
                             </ul>
                         </nav>
                     </div>
+
                     <div class="col-md-3 " style="text-align: right">
                         <%=DateTime.Now.Year %> ©  <%=DALC.GetStaticValue("footer_rights") %>
                     </div>
@@ -407,7 +412,9 @@
         <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
         <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="/js/script.js?v=81"></script>
-
+  
+        
+        
         <asp:ContentPlaceHolder ID="script" runat="server">
         </asp:ContentPlaceHolder>
     </form>
