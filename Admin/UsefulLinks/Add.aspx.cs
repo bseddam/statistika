@@ -73,15 +73,15 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
         ddlheaderlink.SelectedValue = dt.Rows[0]["id1"].ToParseStr();
 
 
-        usefullink_az.Text = dt.Rows[0]["useful_links_url_az"].ToParseStr();
-        usefullink_en.Text = dt.Rows[0]["useful_links_url_en"].ToParseStr();
+        useful_links_url_az.Text = dt.Rows[0]["useful_links_url_az"].ToParseStr();
+        useful_links_url_en.Text = dt.Rows[0]["useful_links_url_en"].ToParseStr();
 
-        Content_az.Html = dt.Rows[0]["useful_links_name_az"].ToParseStr();
-        Content_en.Html = dt.Rows[0]["useful_links_name_en"].ToParseStr();
-
+        useful_links_name_az.Html = dt.Rows[0]["useful_links_name_az"].ToParseStr();
+        useful_links_name_en.Html = dt.Rows[0]["useful_links_name_en"].ToParseStr();
+        OrderBy.Value = dt.Rows[0]["orderBy"].ToParseStr();
         //chkShowHomeSlider.Checked = dt.Rows[0]["show_home_slider"].ToParseStr() == "1";
         //btnSave.CommandName = dt.Rows[0]["image_url_az"].ToParseStr();
-        btnSave.CommandName = "update";
+        //btnSave.CommandName = "update";
         btnSave.CommandArgument = "update";
 
         // ScriptManager.RegisterClientScriptBlock(Page, Page.GetType(), "aa", "setTimeout(_calculate_diplomCount(), 500);", true);
@@ -125,11 +125,11 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
 
         #region validation
 
-        if (usefullink_az.Text.Trim().Length < 3)
+        if (useful_links_url_az.Text.Trim().Length < 3)
         {
             _infoText += " - Başlıq qeyd olunmuyub <br/>";
         }
-        if (Content_az.Html.Trim().Length < 10)
+        if (useful_links_name_az.Html.Trim().Length < 3)
         {
             _infoText += " - Mətn qeyd olunmuyub <br/>";
         }
@@ -148,31 +148,30 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
 
         if (btnSave.CommandArgument == "update")
         {
-            returnVal = _db.SliderUpdate(_getIDFromQuery,
+            returnVal = _db.UsefullinkUpdate(_getIDFromQuery,
                 ddlheaderlink.SelectedValue.ToParseInt(),
-                usefullink_az.Text.Trim(),
-                usefullink_en.Text.Trim(),
-                Content_az.Html,
-                Content_en.Html,
-                "",
-                "",true);
+                useful_links_name_az.Html,
+                useful_links_name_en.Html,
+                useful_links_url_az.Text.Trim(),
+                useful_links_url_en.Text.Trim(),
+                OrderBy.Value.ToParseInt());
         }
         else
         {
-            returnVal = _db.SliderInsert(ddlheaderlink.SelectedValue.ToParseInt(),
-                usefullink_az.Text.Trim(),
-                usefullink_en.Text.Trim(),
-                Content_az.Html,
-                Content_en.Html,
-                "",
-                "", true);
+            //returnVal = _db.SliderInsert(ddlheaderlink.SelectedValue.ToParseInt(),
+            //    useful_links_name_az.Html,
+            //    useful_links_name_en.Html,
+            //    useful_links_url_az.Text.Trim(),
+            //    useful_links_url_en.Text.Trim(),
+
+            //    OrderBy.Value.ToParseInt());
 
             int pageId = _db.getSliderId.ToParseInt();
 
             SubscribeContent content = new SubscribeContent();
             content.Id = pageId;
-            content.Name = usefullink_az.Text.Trim();
-            content.Content = Content_az.Html;
+            content.Name = useful_links_url_az.Text.Trim();
+            content.Content = useful_links_name_az.Html;
             content.Type = Utils.PageType.Slider;
 
             SubscribeEmailSender emailSender = new SubscribeEmailSender(content);

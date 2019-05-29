@@ -9,7 +9,6 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="content" runat="Server">
-
     <div class="portlet box green-haze">
         <div class="portlet-title">
             <div class="caption">
@@ -33,14 +32,14 @@
                             </asp:DropDownList>
                         </div>
                     </div>
-                  
+
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">
                             <asp:Literal ID="Literal12" runat="server" Text="Link adı  (AZ)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <dx:ASPxHtmlEditor ID="Content_az" runat="server" SettingsImageUpload-UploadImageFolder="~/uploads/pages">
+                            <dx:ASPxHtmlEditor ID="useful_links_name_az" runat="server" SettingsImageUpload-UploadImageFolder="~/uploads/pages">
                             </dx:ASPxHtmlEditor>
                         </div>
                     </div>
@@ -49,16 +48,16 @@
                             <asp:Literal ID="Literal13" runat="server" Text="Link adı  (EN)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <dx:ASPxHtmlEditor ID="Content_en" runat="server" SettingsImageUpload-UploadImageFolder="~/uploads/pages">
+                            <dx:ASPxHtmlEditor ID="useful_links_name_en" runat="server" SettingsImageUpload-UploadImageFolder="~/uploads/pages">
                             </dx:ASPxHtmlEditor>
                         </div>
                     </div>
-                      <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-3 control-label">
                             <asp:Literal ID="Literal10" runat="server" Text="Link adı  (AZ)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="usefullink_az" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
+                            <asp:TextBox ID="useful_links_url_az" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
@@ -66,10 +65,19 @@
                             <asp:Literal ID="Literal11" runat="server" Text="Link adı  (EN)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="usefullink_en" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
+                            <asp:TextBox ID="useful_links_url_en" runat="server" CssClass="form-control " data-type="note" TextMode="MultiLine" Height="100" MaxLength="1000"></asp:TextBox>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="Literal6" runat="server" Text="Sıra nömrəsi"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <dx:ASPxSpinEdit ID="OrderBy" runat="server" MinValue="0" AllowMouseWheel="false"
+                                Width="100%" Height="30px">
+                            </dx:ASPxSpinEdit>
+                        </div>
+                    </div>
                     <div class="form-group has-success">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-4">
