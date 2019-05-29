@@ -34,7 +34,7 @@ public partial class WebPages_UsefulLinks : System.Web.UI.Page
         string linkler = "";
         for (int i = 0; i < dtlinkheader.Rows.Count; i++)
         {
-            DataTable dtlinkler = _db.GetUsefullLinks(dtlinkheader.Rows[i]["id"].ToParseInt());
+            DataTable dtlinkler = _db.GetUsefullLinksforheaderid(dtlinkheader.Rows[i]["id"].ToParseInt());
             for (int j = 0; j < dtlinkler.Rows.Count; j++)
             {
                 linkler = linkler+ "<li><a href = '" + dtlinkler.Rows[j]["useful_links_url_"+ lang] + "'>" + dtlinkler.Rows[j]["useful_links_name_"+ lang] + "</a></li>";

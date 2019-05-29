@@ -2470,6 +2470,26 @@ inner join useful_links ul on ulh.id=ul.useful_links_header_id where ul.id=@id O
             return null;
         }
     }
+
+
+    public DataTable GetUsefullLinksforheaderid(int headerid)
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT *,ul.id as id1,
+useful_links_header_id as useful_links_header_id1  FROM `useful_links_headers` ulh 
+inner join useful_links ul on ulh.id=ul.useful_links_header_id where ul.useful_links_header_id=@headerid ORDER BY ulh.orderby, ul.orderby ", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("headerid", headerid);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.select, String.Format("GetUsefullLinks()"), ex.Message, "", true);
+            return null;
+        }
+    }
     public Utils.MethodType UsefullinkUpdate(int id, int useful_links_header_id, string useful_links_name_az,
     string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
     {
