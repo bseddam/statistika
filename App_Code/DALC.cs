@@ -2203,6 +2203,23 @@ content_en=@content_en,page_dt=@page_dt,page_id=@page_id,more_url=@more_url WHER
 
     #endregion
 
+
+    public DataTable getlinkheader()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * FROM `useful_links_headers` ORDER BY `orderby` ASC ", SqlConn);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("getlinkheader()"), ex.Message, "", true);
+            return null;
+        }
+    }
     #region Goals
 
     public DataTable GetGoals()
@@ -2413,6 +2430,60 @@ group by GoalName , GoalId order by g.priority", SqlConn);
         }
     }
 
+    public DataTable GetUsefullLinks()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT *,ul.id as id1,
+useful_links_header_id as useful_links_header_id1  FROM `useful_links_headers` ulh 
+inner join useful_links ul on ulh.id=ul.useful_links_header_id ORDER BY ulh.orderby, ul.orderby ", SqlConn);
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.select, String.Format("GetUsefullLinks()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
+    public DataTable GetUsefullLinks(int id)
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT *,ul.id as id1,
+useful_links_header_id as useful_links_header_id1  FROM `useful_links_headers` ulh 
+inner join useful_links ul on ulh.id=ul.useful_links_header_id where ul.id=@id ORDER BY ulh.orderby, ul.orderby ", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("id", id);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.select, String.Format("GetUsefullLinks()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    //public DataTable getlinkheader(int id)
+    //{
+    //    try
+    //    {
+    //        DataTable dt = new DataTable();
+    //        MySqlDataAdapter da = new MySqlDataAdapter("SELECT * FROM `useful_links_headers` where id=@id " +
+    //            "ORDER BY `orderby` ASC ", SqlConn);
+    //        da.SelectCommand.Parameters.AddWithValue("id", id);
+    //        da.Fill(dt);
+    //        return dt;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("getlinkheader()"), ex.Message, "", true);
+    //        return null;
+    //    }
+    //}
     public DataTable GetSlider()
     {
         try

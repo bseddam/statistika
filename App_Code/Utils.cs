@@ -40,6 +40,7 @@ public class Utils
         Nesrler,
         Slider,
         Maragliterefler,
+        Faydalilink,
         Researches = 1000,
         Publications = 2000,
     }
