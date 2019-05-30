@@ -17,7 +17,8 @@
                         <div class="col-md-12">
                             <div class="borderAll paddingLR10">
                                 <!-- Nav tabs -->
-                                <h2>Faydalı keçidlər</h2>
+                                <h2>
+                                    <asp:Label ID="lbltitle" runat="server"></asp:Label></h2>
                                 <hr>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <asp:Repeater ID="rplinkheader" runat="server">
@@ -34,7 +35,7 @@
 
                                 </ul>
                                 <!-- Tab panes -->
-                                <div class="tab-content">
+                                <div class="tab-content" style="min-height:300px;">
                                     <asp:Literal ID="lbllinkler" runat="server"></asp:Literal>
                                   
 

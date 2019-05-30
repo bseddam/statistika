@@ -43,7 +43,7 @@
                     <a href="<%=string.Format("/{0}/national-priority/1",Config.getLang(Page))%>" class="mybutton"><%=DALC.GetStaticValue("home_box_1") %></a>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
-                    <a href="<%=string.Format("/{0}/interesting-sides",Config.getLang(Page))%>" class="mybutton"><%=DALC.GetStaticValue("home_box_2") %></a>
+                    <a href="<%=string.Format("/{0}/usefullinks",Config.getLang(Page))%>" class="mybutton"><%=DALC.GetStaticValue("goal_info_tab3_title") %></a>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <a href="<%=string.Format("/{0}/national-reports",Config.getLang(Page))%>" class="mybutton"><%=DALC.GetStaticValue("home_box_3") %></a>

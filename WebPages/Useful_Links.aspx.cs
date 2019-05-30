@@ -14,14 +14,14 @@ public partial class WebPages_UsefulLinks : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string lang = Config.getLang(Page);
-        string pageTitle = DALC.GetStaticValue("usefullinks_page_title");
+        string pageTitle = DALC.GetStaticValue("goal_info_tab3_title");
         Page.Title = pageTitle + " - " + Config.GetAppSetting("ProjectName");
 
         if (IsPostBack)
         {
             return;
         }
-
+        lbltitle.Text= DALC.GetStaticValue("goal_info_tab3_title");
 
 
 
