@@ -350,7 +350,7 @@
                         </asp:Repeater>
                     </ul>--%>
                 </div>
-                <div class="line" style="margin-top: 30px;"></div>
+                <div class="line" style="margin-top: 20px;"></div>
                 <div class="row">
                     <div class="col-md-9">
                         <nav>
