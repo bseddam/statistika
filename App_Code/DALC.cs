@@ -4699,7 +4699,8 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         }
     }
     public Utils.MethodType PublicationUpdate(int id, string title_az, string title_en, string content_az, string content_en,
-        DateTime date, string full_material, string short_material, string image_filename, int category_id)
+        DateTime date, string full_material_az, string full_material_en, string short_material_az, string short_material_en, 
+        string image_filename_az, string image_filename_en, int category_id)
     {
         MySqlCommand cmd = new MySqlCommand(@"UPDATE publications SET 
                                                 title_az=@title_az,
@@ -4707,9 +4708,12 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
                                                 content_az=@content_az,
                                                 content_en=@content_en,
                                                 date=@date,
-                                                image_filename=@image_filename,
-                                                full_material=@full_material,
-                                                short_material=@short_material,
+                                                image_filename_az=@image_filename_az,
+                                                image_filename_en=@image_filename_en,
+                                                full_material_az=@full_material_az,
+                                                full_material_en=@full_material_en,
+                                                short_material_az=@short_material_az,
+                                                short_material_en=@short_material_en,
                                                 category_id=@category_id
                                               WHERE Id=@id;", SqlConn);
 
@@ -4718,9 +4722,12 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         cmd.Parameters.AddWithValue("@content_az", content_az);
         cmd.Parameters.AddWithValue("@content_en", content_en);
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
-        cmd.Parameters.AddWithValue("@image_filename", image_filename);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
+        cmd.Parameters.AddWithValue("@image_filename_az", image_filename_az);
+        cmd.Parameters.AddWithValue("@image_filename_en", image_filename_en);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@add_dt", DateTime.Now);
         cmd.Parameters.AddWithValue("@category_id", category_id);
 
@@ -4770,19 +4777,25 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
 
     }
     public Utils.MethodType PublicationInsert(string title_az, string title_en, string content_az, string content_en,
-        DateTime date, string full_material, string short_material, string image_filename, int category_id)
+        DateTime date, string full_material_az, string full_material_en, string short_material_az, string short_material_en,
+        string image_filename_az, string image_filename_en, int category_id)
     {
-        MySqlCommand cmd = new MySqlCommand(@"insert into publications (image_filename,title_az,title_en,content_az,content_en,date,full_material,short_material,add_dt,category_id) 
-                            values (@image_filename,@title_az,@title_en,@content_az,@content_en,@date,@full_material,@short_material,@add_dt,@category_id)   ", SqlConn);
+        MySqlCommand cmd = new MySqlCommand(@"insert into publications (image_filename_az,image_filename_en,title_az,title_en,
+content_az,content_en,date,full_material_az,full_material_en,short_material_az,short_material_en,add_dt,category_id) 
+                            values (@image_filename_az,@image_filename_en,@title_az,@title_en,
+@content_az,@content_en,@date,@full_material_az,@full_material_en,@short_material_az,@short_material_en,@add_dt,@category_id)   ", SqlConn);
 
         cmd.Parameters.AddWithValue("@title_az", title_az);
         cmd.Parameters.AddWithValue("@title_en", title_en);
         cmd.Parameters.AddWithValue("@content_az", content_az);
         cmd.Parameters.AddWithValue("@content_en", content_en);
         cmd.Parameters.AddWithValue("@date", date);
-        cmd.Parameters.AddWithValue("@full_material", full_material);
-        cmd.Parameters.AddWithValue("@short_material", short_material);
-        cmd.Parameters.AddWithValue("@image_filename", image_filename);
+        cmd.Parameters.AddWithValue("@image_filename_az", image_filename_az);
+        cmd.Parameters.AddWithValue("@image_filename_en", image_filename_en);
+        cmd.Parameters.AddWithValue("@full_material_az", full_material_az);
+        cmd.Parameters.AddWithValue("@full_material_en", full_material_en);
+        cmd.Parameters.AddWithValue("@short_material_az", short_material_az);
+        cmd.Parameters.AddWithValue("@short_material_en", short_material_en);
         cmd.Parameters.AddWithValue("@category_id", category_id);
         cmd.Parameters.AddWithValue("@add_dt", DateTime.Now);
 

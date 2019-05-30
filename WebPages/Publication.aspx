@@ -139,7 +139,7 @@
                                                 href="<%# string.Format("/{0}/publication/{1}/{2}",Config.getLang(Page),  Eval("id"),Config.Slug( Eval("title_"+Config.getLang(Page)).ToParseStr())) %>">
                                                 <div class="row">
                                                     <div class="col-md-2">
-                                                        <img class="img-responsive" src="/uploads/pages/<%#Eval("image_filename") %>" alt="" />
+                                                        <img class="img-responsive" src="/uploads/pages/<%#Eval("image_filename_"+Config.getLang(Page)) %>" alt="" />
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div style="font-size: 20px;"><%# Eval("title_"+Config.getLang(Page)) %></div>

@@ -92,7 +92,7 @@
 
                                                     <div class="col-md-4">
                                                         <div>
-                                                            <img src="<%#string.Format("/uploads/pages/{0}", Eval("image_filename")) %>" alt="" class="img-responsive" />
+                                                            <img src="<%#string.Format("/uploads/pages/{0}", Eval("image_filename_"+Config.getLang(Page))) %>" alt="" class="img-responsive" />
                                                         </div>
                                                         <p style="text-align: center;">
                                                             <%# (Eval("title_"+Config.getLang(Page)).ToParseStr()) %>

@@ -69,9 +69,12 @@ public partial class Admin_Publications_Add : System.Web.UI.Page
 
         page_dt.Date = DateTime.Parse(dt.Rows[0]["date"].ToParseStr());
 
-        hf_image_filename.Value = dt.Rows[0]["image_filename"].ToParseStr();
-        hf_short_material.Value = dt.Rows[0]["short_material"].ToParseStr();
-        hf_tam_material.Value = dt.Rows[0]["full_material"].ToParseStr();
+        hf_image_filename_az.Value = dt.Rows[0]["image_filename_az"].ToParseStr();
+        hf_image_filename_en.Value = dt.Rows[0]["image_filename_en"].ToParseStr();
+        hf_short_material_az.Value = dt.Rows[0]["short_material_az"].ToParseStr();
+        hf_short_material_en.Value = dt.Rows[0]["short_material_en"].ToParseStr();
+        hf_tam_material_az.Value = dt.Rows[0]["full_material_az"].ToParseStr();
+        hf_tam_material_en.Value = dt.Rows[0]["full_material_en"].ToParseStr();
         Category.Value = dt.Rows[0]["category_id"].ToParseStr();
         btnSave.CommandArgument = "update";
     }
@@ -98,9 +101,12 @@ public partial class Admin_Publications_Add : System.Web.UI.Page
         string _infoText = "";
         Utils.MethodType _type = Utils.MethodType.Error;
 
-        string full_material = "full-material-" + DateTime.Now.Ticks;
-        string short_material = "short_material-" + DateTime.Now.Ticks;
-        string image_filename = "image-" + DateTime.Now.Ticks;
+        string full_material_az = "full-material-az-" + DateTime.Now.Ticks;
+        string full_material_en = "full-material-en-" + DateTime.Now.Ticks;
+        string short_material_az = "short_material-az-" + DateTime.Now.Ticks;
+        string short_material_en = "short_material-en-" + DateTime.Now.Ticks;
+        string image_filename_az = "image-az-" + DateTime.Now.Ticks;
+        string image_filename_en = "image-en-" + DateTime.Now.Ticks;
         #region validation
 
         if (title_az.Html.Trim().Length < 3)
@@ -133,34 +139,76 @@ public partial class Admin_Publications_Add : System.Web.UI.Page
 
 
 
-        if (fuTamMaterial.HasFile)
+        if (fuTamMaterialAz.HasFile)
         {
-            full_material += Path.GetExtension(fuTamMaterial.FileName);
-            fuTamMaterial.SaveAs(rootFolder + full_material);
+            full_material_az += Path.GetExtension(fuTamMaterialAz.FileName);
+            fuTamMaterialAz.SaveAs(rootFolder + full_material_az);
         }
         else
         {
-            full_material = hf_tam_material.Value;
+            full_material_az = hf_tam_material_az.Value;
         }
 
-        if (fuShortMaterial.HasFile)
+        if (fuTamMaterialEn.HasFile)
         {
-            short_material += Path.GetExtension(fuShortMaterial.FileName);
-            fuShortMaterial.SaveAs(rootFolder + short_material);
+            full_material_en += Path.GetExtension(fuTamMaterialEn.FileName);
+            fuTamMaterialEn.SaveAs(rootFolder + full_material_en);
         }
         else
         {
-            short_material = hf_short_material.Value;
+            full_material_en = hf_tam_material_en.Value;
         }
-        if (fuImage.HasFile)
+
+
+
+
+        if (fuShortMaterialAz.HasFile)
         {
-            image_filename += Path.GetExtension(fuImage.FileName);
-            fuImage.SaveAs(rootFolder + image_filename);
+            short_material_az += Path.GetExtension(fuShortMaterialAz.FileName);
+            fuShortMaterialAz.SaveAs(rootFolder + short_material_az);
         }
         else
         {
-            image_filename = hf_image_filename.Value;
+            short_material_az = hf_short_material_az.Value;
         }
+        if (fuShortMaterialEn.HasFile)
+        {
+            short_material_en += Path.GetExtension(fuShortMaterialEn.FileName);
+            fuShortMaterialEn.SaveAs(rootFolder + short_material_en);
+        }
+        else
+        {
+            short_material_en = hf_short_material_en.Value;
+        }
+
+
+
+
+
+
+        if (fuImageaz.HasFile)
+        {
+            image_filename_az += Path.GetExtension(fuImageaz.FileName);
+            fuImageaz.SaveAs(rootFolder + image_filename_az);
+        }
+        else
+        {
+            image_filename_az = hf_image_filename_az.Value;
+        }
+        if (fuImageen.HasFile)
+        {
+            image_filename_en += Path.GetExtension(fuImageen.FileName);
+            fuImageen.SaveAs(rootFolder + image_filename_en);
+        }
+        else
+        {
+            image_filename_en = hf_image_filename_en.Value;
+        }
+
+
+
+
+
 
 
         if (btnSave.CommandArgument == "update")
@@ -170,9 +218,12 @@ public partial class Admin_Publications_Add : System.Web.UI.Page
                 Content_az.Html,
                 Content_en.Html,
                 page_dt.Date,
-                full_material,
-                short_material,
-                image_filename,
+                full_material_az,
+                full_material_en,
+                short_material_az,
+                short_material_en,
+                image_filename_az,
+                image_filename_en,
                 Category.Value.ToParseInt());
         }
         else
@@ -182,9 +233,12 @@ public partial class Admin_Publications_Add : System.Web.UI.Page
                 Content_az.Html,
                 Content_en.Html,
                 page_dt.Date,
-                full_material,
-                short_material,
-                image_filename,
+                full_material_az,
+                full_material_en,
+                short_material_az,
+                short_material_en,
+                image_filename_az,
+                image_filename_en,
                 Category.Value.ToParseInt());
 
             pageId = _db.getLastPublicationId.ToParseInt();

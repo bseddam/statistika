@@ -176,7 +176,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-8" style="padding-right:10px;">
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:Repeater ID="rptHeaderMenu" runat="server">
                                         <ItemTemplate>

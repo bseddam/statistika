@@ -48,21 +48,21 @@ public partial class WebPages_Publication : System.Web.UI.Page
                 lblDate.Text = dtContent.Rows[0]["pageDt"].ToParseStr();
                 lblContent.Text = dtContent.Rows[0]["content_" + lang].ToParseStr();
                 lblContentTitle.Text = dtContent.Rows[0]["title_" + lang].ToParseStr();
-                imgContent.ImageUrl = imageURl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["image_filename"]);
+                imgContent.ImageUrl = imageURl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["image_filename_"+ lang]);
 
                 linkDownloadReport.Text = DALC.GetStaticValue("publications_download");
                 linkTamMaterial.Text = DALC.GetStaticValue("full_material");
                 linkShortMaterial.Text = DALC.GetStaticValue("short_material");
-                linkTamMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["full_material"]);
+                linkTamMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["full_material_"+lang]);
 
-                linkShortMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["short_material"]);
+                linkShortMaterial.NavigateUrl = string.Format("/uploads/pages/{0}", dtContent.Rows[0]["short_material_"+lang]);
 
-                if (dtContent.Rows[0]["full_material"].ToParseStr().Length != 0)
+                if (dtContent.Rows[0]["full_material_"+lang].ToParseStr().Length != 0)
                 {
                     pnlTamMaterial.Visible = true;
                 }
 
-                if (dtContent.Rows[0]["short_material"].ToParseStr().Length != 0)
+                if (dtContent.Rows[0]["short_material_" + lang].ToParseStr().Length != 0)
                 {
                     pnlShortMaterial.Visible = true;
                 }

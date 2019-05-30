@@ -627,33 +627,67 @@
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal3" runat="server" Text="Şəkil"></asp:Literal>
+                            <asp:Literal ID="Literal3" runat="server" Text="Şəkil (AZ)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:FileUpload runat="server" ID="fuImage" />
+                            <asp:FileUpload runat="server" ID="fuImageaz" />
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="Literal5" runat="server" Text="Şəkil (EN)"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuImageen" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal2" runat="server" Text="Tam material"></asp:Literal>
+                            <asp:Literal ID="Literal2" runat="server" Text="Tam material (AZ)"></asp:Literal>
                         </label>
                         <div class="col-md-4">
-                            <asp:FileUpload runat="server" ID="fuTamMaterial" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">
-                            <asp:Literal ID="Literal4" runat="server" Text="Qısa material"></asp:Literal>
-                        </label>
-                        <div class="col-md-4">
-                            <asp:FileUpload runat="server" ID="fuShortMaterial" />
+                            <asp:FileUpload runat="server" ID="fuTamMaterialAz" />
                         </div>
                     </div>
 
-                    <asp:HiddenField ID="hf_tam_material" runat="server" />
-                    <asp:HiddenField ID="hf_short_material" runat="server" />
-                    <asp:HiddenField ID="hf_image_filename" runat="server" />
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="Literal6" runat="server" Text="Tam material (EN)"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuTamMaterialEn" />
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="Literal4" runat="server" Text="Qısa material (AZ)"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuShortMaterialAz" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <asp:Literal ID="Literal7" runat="server" Text="Qısa material (EN)"></asp:Literal>
+                        </label>
+                        <div class="col-md-4">
+                            <asp:FileUpload runat="server" ID="fuShortMaterialEn" />
+                        </div>
+                    </div>
+
+                    <asp:HiddenField ID="hf_tam_material_az" runat="server" />
+
+                    <asp:HiddenField ID="hf_tam_material_en" runat="server" />
+                    <asp:HiddenField ID="hf_short_material_az" runat="server" />
+                    <asp:HiddenField ID="hf_short_material_en" runat="server" />
+                    <asp:HiddenField ID="hf_image_filename_az" runat="server" />
+
+                    <asp:HiddenField ID="hf_image_filename_en" runat="server" />
 
                     <div class="form-group has-success">
                         <label class="col-md-3 control-label"></label>
