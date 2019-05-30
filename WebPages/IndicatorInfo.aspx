@@ -186,8 +186,6 @@
             .aucun:hover {
                 text-decoration: none;
             }
-
-
     </style>
 </asp:Content>
 <asp:Content ID="fdf" ContentPlaceHolderID="script" runat="server">
@@ -262,7 +260,7 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
 
-            
+
             <section>
                 <div class="container main-container">
                     <div class="breadcrumb not-printable">
@@ -352,32 +350,25 @@
 
 
 
-                                    
-                                    
-                                        <h4>
-                                            <asp:Literal ID="lblYearTitle" Text="" runat="server" />
-                                        </h4>
-                                        <asp:CheckBoxList runat="server" ID="chkYears"
-                                            RepeatDirection="Horizontal"
-                                            CssClass="year-list form-control"
-                                            DataTextField="year" DataValueField="year" AutoPostBack="True" OnSelectedIndexChanged="chkYears_SelectedIndexChanged">
-                                        </asp:CheckBoxList>
-                                        <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+
+
+                                    <h4>
+                                        <asp:Literal ID="lblYearTitle" Text="" runat="server" />
+                                    </h4>
+                                    <asp:CheckBoxList runat="server" ID="chkYears"
+                                        RepeatDirection="Horizontal"
+                                        CssClass="year-list form-control"
+                                        DataTextField="year" DataValueField="year" AutoPostBack="True" OnSelectedIndexChanged="chkYears_SelectedIndexChanged">
+                                    </asp:CheckBoxList>
+                                    <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
                                                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_select_all") %>
-                                        </asp:LinkButton>
-                                        <asp:LinkButton ID="lnkunselectallchk" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="lnkunselectallchk" Text="" OnClick="lnkchkUnselectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%; background-color: #a92a2a;">
                                                     <i class="fa fa-times-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
-                                        </asp:LinkButton>
-                                        <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
-                                  
-                                  
-
-
-
-
-
+                                    </asp:LinkButton>
+                                    <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
                                 </asp:Panel>
                                 <asp:Panel runat="server" ID="pnlContent" class="col-md-8">
                                     <asp:Label ID="lblclasschart" runat="server" Text="" Visible="false"></asp:Label>
@@ -434,15 +425,15 @@
 
                                                 <div class="chart-styles clear">
                                                     <asp:HiddenField ID="hdncharttype" runat="server" />
-                                                  <asp:ImageButton ID="imgbchart1" runat="server" 
-                                                        ImageUrl="/images/chart_1.png" Width="25px" Height="28px" BorderWidth="1" 
-                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart1_Click"  />
-                                                    <asp:ImageButton ID="imgbchart2" runat="server" 
-                                                        ImageUrl="/images/chart_2.png" Width="25px" Height="28px" BorderWidth="1" 
-                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart2_Click" />
-                                                   <asp:ImageButton ID="imgbchart3" runat="server" 
-                                                        ImageUrl="/images/chart_3.png" Width="25px" Height="28px" BorderWidth="1" 
-                                                        BorderColor="Gray" style="padding:2px;padding-top:3px" OnClick="imgbchart3_Click" />
+                                                    <asp:ImageButton ID="imgbchart1" runat="server"
+                                                        ImageUrl="/images/chart_1.png" Width="25px" Height="28px" BorderWidth="1"
+                                                        BorderColor="Gray" Style="padding: 2px; padding-top: 3px" OnClick="imgbchart1_Click" />
+                                                    <asp:ImageButton ID="imgbchart2" runat="server"
+                                                        ImageUrl="/images/chart_2.png" Width="25px" Height="28px" BorderWidth="1"
+                                                        BorderColor="Gray" Style="padding: 2px; padding-top: 3px" OnClick="imgbchart2_Click" />
+                                                    <asp:ImageButton ID="imgbchart3" runat="server"
+                                                        ImageUrl="/images/chart_3.png" Width="25px" Height="28px" BorderWidth="1"
+                                                        BorderColor="Gray" Style="padding: 2px; padding-top: 3px" OnClick="imgbchart3_Click" />
 
                                                 </div>
                                                 <div class="chart-container">
@@ -594,7 +585,8 @@
 
                                             </div>
                                             <div>
-                                                <asp:Label ID="lblFootNoteLabel" Text="" runat="server" Visible="false" /></div>
+                                                <asp:Label ID="lblFootNoteLabel" Text="" runat="server" Visible="false" />
+                                            </div>
                                             <ul>
                                                 <asp:Label ID="lblFootNote" Text="" runat="server" Visible="false" />
                                             </ul>
@@ -624,71 +616,77 @@
 
                                 <div class="indicator-nav-wrapper">
                                     <ul class="indicator-nav">
-                                        <li class="active" data-content="#national-meta">
+                                        <li <%=lblglobalmetadataactive.Text %> data-content="#national-meta">
                                             <asp:Label ID="lblNationalMetadata" Text="" runat="server" />
                                         </li>
-                                        <li data-content="#global-meta">
+                                        <li <%=lblglobalmetadataactive1.Text %> data-content="#global-meta">
                                             <asp:Label ID="lblGlobalMetadata" Text="" runat="server" Visible="false" />
                                         </li>
                                     </ul>
                                     <div id="national-meta" class="indicator-tab">
-                                        <div class="info-box">
-                                            <asp:Label ID="indicator_national_metadata_info" Text="" runat="server" />
-                                        </div>
+                                        <asp:Panel runat="server" ID="pnlnationalmetadata">
+                                            <div class="info-box">
+                                                <asp:Label ID="indicator_national_metadata_info" Text="" runat="server" />
+                                              
+                                            </div>
 
-                                        <div style="text-align: right;">
-                                            <asp:LinkButton ID="btnExport" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="pdf" Text="" runat="server">
+                                            <div style="text-align: right;">
+                                                <asp:LinkButton ID="btnExport" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="pdf" Text="" runat="server">
                                                             <i class="fa fa-file-o"></i> PDF
-                                            </asp:LinkButton>
-                                            <asp:LinkButton ID="btnExport2" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="doc" Text="" runat="server">
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="btnExport2" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="doc" Text="" runat="server">
                                                             <i class="fa fa-file-o"></i> Doc
-                                            </asp:LinkButton>
-                                        </div>
-                                        <asp:Panel runat="server" ID="PnlExport">
-                                            <table class="table table-bordered" style="width: 100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td colspan="3">
-                                                            <asp:Label ID="lblIndicatorName" Text="" runat="server" />
-                                                            <asp:Label ID="lblIndicatorName_1" Text="" runat="server" />
-                                                        </td>
-                                                    </tr>
-                                                    <asp:Repeater ID="rptMetaData" runat="server">
-                                                        <ItemTemplate>
-                                                            <tr data-id="<%#Eval(" list_id ") %>" class="parent" style="background-color: #DCEAF3; font-weight: bold;">
-                                                                <td style="width: 50px">
-                                                                    <%=++_noM%>
-                                                                    <span style="display: none"><%=_noM_Sub = 1%></span>
-                                                                </td>
-                                                                <td style="width: 300px">
-                                                                    <%#Eval("l_name")%>
-                                                                </td>
-                                                                <td>
-                                                                    <%#Eval("name_"+Config.getLang(Page)) %>
-                                                                </td>
-                                                            </tr>
-                                                            <asp:Repeater ID="rptMetadataSub" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr data-id="<%#Eval(" sub_id ") %>">
-                                                                        <td style="width: 50px">
-                                                                            <%=string.Format("{0}.{1}", _noM,_noM_Sub++)%>
-                                                                        </td>
-                                                                        <td style="width: 300px">
-                                                                            <%#Eval("l_name") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%#Eval("name_"+Config.getLang(Page)) %>
-                                                                        </td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                        </ItemTemplate>
-                                                    </asp:Repeater>
-                                                </tbody>
-                                            </table>
+                                                </asp:LinkButton>
+                                            </div>
+                                            <asp:Panel runat="server" ID="PnlExport">
+                                                <table class="table table-bordered" style="width: 100%">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="3">
+                                                                <asp:Label ID="lblIndicatorName" Text="" runat="server" />
+                                                                <asp:Label ID="lblIndicatorName_1" Text="" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                        <asp:Repeater ID="rptMetaData" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr data-id="<%#Eval(" list_id ") %>" class="parent" style="background-color: #DCEAF3; font-weight: bold;">
+                                                                    <td style="width: 50px">
+                                                                        <%=++_noM%>
+                                                                        <span style="display: none"><%=_noM_Sub = 1%></span>
+                                                                    </td>
+                                                                    <td style="width: 300px">
+                                                                        <%#Eval("l_name")%>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%#Eval("name_"+Config.getLang(Page)) %>
+                                                                    </td>
+                                                                </tr>
+                                                                <asp:Repeater ID="rptMetadataSub" runat="server">
+                                                                    <ItemTemplate>
+                                                                        <tr data-id="<%#Eval(" sub_id ") %>">
+                                                                            <td style="width: 50px">
+                                                                                <%=string.Format("{0}.{1}", _noM,_noM_Sub++)%>
+                                                                            </td>
+                                                                            <td style="width: 300px">
+                                                                                <%#Eval("l_name") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%#Eval("name_"+Config.getLang(Page)) %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </tbody>
+                                                </table>
+                                            </asp:Panel>
                                         </asp:Panel>
                                     </div>
-                                    <div id="global-meta" class="indicator-tab" style="display: none">
+                                      <asp:Label ID="lblstyyeglobalmetadata" Visible="false" runat="server"></asp:Label>
+                                    <asp:Label ID="lblglobalmetadataactive" Visible="false" runat="server"></asp:Label>
+                                     <asp:Label ID="lblglobalmetadataactive1" Visible="false" runat="server"></asp:Label>
+                                    <div id="global-meta" class="indicator-tab" <%=lblstyyeglobalmetadata.Text %> >
                                         <div class="info-box">
                                             <asp:Label ID="indicator_global_metadata_info" Text="" runat="server" />
                                         </div>

@@ -6167,7 +6167,7 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  ml.sub_id,m.*,ml.name_" + lang + @" as l_name from metadata  as m 
                 inner join metadata_list as ml on m.list_id=ml.id 
                 where ml.sub_id=@sub_id and m.indicator_id=@indicator_id and m.is_active=1 and ml.is_active=1
-                order by list_id ", SqlConn);
+                order by list_id", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.SelectCommand.Parameters.AddWithValue("sub_id", parentId);
             da.Fill(dt);
@@ -6324,7 +6324,7 @@ select @user_id,@indicator_id,id,@year,@add_dt,@add_ip,'',0 from regions where i
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  m.*,ml.name_" + lang + @" as l_name from metadata_global  as m 
                 inner join metadata_global_list as ml on m.list_id=ml.id 
                 where  m.indicator_id=@indicator_id and ml.is_active=1 and m.is_active=1
-                order by cast( ml.code as unsigned ) ", SqlConn);
+                order by cast( ml.code as unsigned ),list_id ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("indicator_id", indicator_id);
             da.Fill(dt);
             return dt;

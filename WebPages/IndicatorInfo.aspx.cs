@@ -22,6 +22,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblclassdatatable.Text = "";
             hdncharttype.Value = "2";
             _hide_empty_labels();
+
         }
         _loadFromViewState();
         if (IsPostBack)
@@ -114,16 +115,25 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
 
     private void _loadMetadata(int indicatorid, string lang)
     {
+        int a =0;
         int indicatoridnational = _db.indiqatoryoxla(indicatorid);
         DataTable dtMetadata = _db.GetMetaDataClient(indicatoridnational, 0, lang);
+
         rptMetaData.DataSource = dtMetadata;
         rptMetaData.DataBind();
 
         for (int i = 0; i < dtMetadata.Rows.Count; i++)
         {
             DataTable dtMsub = _db.GetMetaDataClient(indicatoridnational, dtMetadata.Rows[i]["list_id"].ToParseInt(), lang);
-
-
+            for (int j = 0; j < dtMsub.Rows.Count; j++)
+            {
+                string aa = dtMsub.Rows[j]["name_" + lang].ToParseStr();
+                if (dtMsub.Rows[j]["name_" + lang].ToParseStr() != "" && dtMsub.Rows[j]["name_" + lang]!=null)
+                {
+                    a++;
+                }
+            }
+           
             if (dtMsub.Rows.Count > 0)
             {
                 _noM_Sub = 1;
@@ -131,6 +141,20 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 rptMetadataSub.DataSource = dtMsub;
                 rptMetadataSub.DataBind();
             }
+        }
+        if(a>0)
+        {
+            pnlnationalmetadata.Visible = true;
+            lblstyyeglobalmetadata.Text = "style='display:none'";
+            lblglobalmetadataactive.Text = "class='active'";
+            lblglobalmetadataactive1.Text = "";
+        }
+        else
+        {
+            pnlnationalmetadata.Visible = false;
+            lblstyyeglobalmetadata.Text = "style=''";
+            lblglobalmetadataactive.Text = "";
+            lblglobalmetadataactive1.Text = "class='active'";
         }
     }
 
@@ -460,11 +484,13 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                             );
 
                     values += string.Format("{0},'{1}',", value, _tooltip);
+                    
                 }
                 else
                 {
                     values += string.Format("null,' ',", value, _tooltip);
                     //values += "";
+                    
                 }
             }
 
@@ -473,6 +499,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 data += string.Format(" ['{0}',{1}],",
                    dtYears.Rows[i_year]["year"].ToParseInt(),
                    values.Trim(','));
+                
             }
 
 
