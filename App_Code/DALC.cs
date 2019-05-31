@@ -2223,6 +2223,26 @@ FROM `useful_links_headers` ORDER BY `orderby` ASC ", SqlConn);
             return null;
         }
     }
+
+    public DataTable getlinkheader(int id)
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT *, CASE when orderby=1 THEN ' active' ELSE '' end active , 
+CASE when orderby=1 THEN ' active in' ELSE ' fade' end activefade , 
+CASE when orderby=1 THEN 'true' ELSE 'false' end truefalse  
+FROM `useful_links_headers` where id=@id ORDER BY `orderby` ASC ", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("id", id);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("getlinkheader()"), ex.Message, "", true);
+            return null;
+        }
+    }
     #region Goals
 
     public DataTable GetGoals()
@@ -2490,6 +2510,46 @@ inner join useful_links ul on ulh.id=ul.useful_links_header_id where ul.useful_l
             return null;
         }
     }
+
+
+
+
+    public Utils.MethodType UsefullinkheaderUpdate(int id, string useful_links_header_az,
+   string useful_links_header_en, int orderby)
+    {
+        MySqlCommand cmd = new MySqlCommand(@"UPDATE useful_links_headers SET 
+useful_links_header_az=@useful_links_header_az,useful_links_header_en=@useful_links_header_en,
+orderby=@orderby WHERE id=@id;", SqlConn);
+        cmd.Parameters.AddWithValue("@id", id);
+        cmd.Parameters.AddWithValue("@useful_links_header_az", useful_links_header_az);
+        cmd.Parameters.AddWithValue("@useful_links_header_en", useful_links_header_en);
+        cmd.Parameters.AddWithValue("@orderby", orderby);
+        //cmd.Parameters.AddWithValue("@ip", HttpContext.Current.Request.UserHostAddress);
+        //cmd.Parameters.AddWithValue("@dt", DateTime.Now);
+        //update_dt=@dt,update_ip=@ip
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.usefulllinkheader, Utils.LogType.update, String.Format("UsefullinkheaderUpdate () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+
+
+
+
+
+
     public Utils.MethodType UsefullinkUpdate(int id, int useful_links_header_id, string useful_links_name_az,
     string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
     {
@@ -2523,6 +2583,48 @@ useful_links_url_en=@useful_links_url_en,orderby=@orderby WHERE id=@id;", SqlCon
             cmd.Dispose();
         }
     }
+
+
+
+
+
+
+    public Utils.MethodType UsefullinkheaderInsert(string useful_links_header_az,
+   string useful_links_header_en, int orderby)
+    {
+
+        MySqlCommand cmd = new MySqlCommand(@"insert into useful_links_headers (
+useful_links_header_az,useful_links_header_en,orderby) values (
+@useful_links_header_az,@useful_links_header_en,@orderby)", SqlConn);
+        cmd.Parameters.AddWithValue("@useful_links_header_az", useful_links_header_az);
+        cmd.Parameters.AddWithValue("@useful_links_header_en", useful_links_header_en);
+        cmd.Parameters.AddWithValue("@orderby", orderby);
+        //cmd.Parameters.AddWithValue("@ip", HttpContext.Current.Request.UserHostAddress);
+        //cmd.Parameters.AddWithValue("@dt", DateTime.Now);
+        //update_dt=@dt,update_ip=@ip
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.usefulllinkheader, Utils.LogType.insert, String.Format("UsefullinkheaderInsert () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+
+
+
+
+
+
     public Utils.MethodType UsefullinkInsert(int useful_links_header_id, string useful_links_name_az, 
         string useful_links_name_en, string useful_links_url_az, string useful_links_url_en, int orderby)
     {
@@ -2617,6 +2719,49 @@ useful_links_url_en,orderby) values (@useful_links_header_id,
         catch (Exception ex)
         {
             LogInsert(Utils.Tables.pages, Utils.LogType.update, String.Format("PageUpdate () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+
+    public Utils.MethodType UsefullHeaderLinkDelete(int id)
+    {
+        MySqlCommand cmd = new MySqlCommand("delete from useful_links_headers where id=@id ", SqlConn);
+        cmd.Parameters.AddWithValue("@id", id);
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.delete, String.Format("useful_links_headers () "), ex.Message, "", true);
+            return Utils.MethodType.Error;
+        }
+        finally
+        {
+            cmd.Connection.Close();
+            cmd.Dispose();
+        }
+    }
+    public Utils.MethodType UsefullLinkDelete(int id)
+    {
+        MySqlCommand cmd = new MySqlCommand("delete from useful_links where id=@id ", SqlConn);
+        cmd.Parameters.AddWithValue("@id", id);
+        try
+        {
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            return Utils.MethodType.Succes;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.slider, Utils.LogType.delete, String.Format("UsefullLinkDelete () "), ex.Message, "", true);
             return Utils.MethodType.Error;
         }
         finally

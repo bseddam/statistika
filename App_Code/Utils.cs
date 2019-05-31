@@ -79,7 +79,8 @@ public class Utils
         researches = 22,
         users = 23,
         indicator_size = 24,
-        usefulllink=30
+        usefulllinkheader = 29,
+        usefulllink =30
     }
 
     public enum LogType

@@ -163,7 +163,7 @@ public partial class Admin_Slider_Default : System.Web.UI.Page
     }
     protected void delete_Click(object sender, EventArgs e)
     {
-        _db.SliderDelete((sender as LinkButton).CommandArgument.ToParseInt());
+        _db.UsefullLinkDelete((sender as LinkButton).CommandArgument.ToParseInt());
 
         //_db.PageDelete(e.Keys["id"].ToParseInt());
         _loadGridFromDb();

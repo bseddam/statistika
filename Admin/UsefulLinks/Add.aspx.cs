@@ -127,7 +127,7 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
 
         if (useful_links_url_az.Text.Trim().Length < 3)
         {
-            _infoText += " - Başlıq qeyd olunmuyub <br/>";
+            _infoText += " - Link qeyd olunmuyub <br/>";
         }
         if (useful_links_name_az.Html.Trim().Length < 3)
         {
@@ -172,16 +172,16 @@ public partial class Admin_Slider_Add : System.Web.UI.Page
 
             //    OrderBy.Value.ToParseInt());
 
-            int pageId = _db.getSliderId.ToParseInt();
+            //int pageId = _db.getSliderId.ToParseInt();
 
-            SubscribeContent content = new SubscribeContent();
-            content.Id = pageId;
-            content.Name = useful_links_url_az.Text.Trim();
-            content.Content = useful_links_name_az.Html;
-            content.Type = Utils.PageType.Slider;
+            //SubscribeContent content = new SubscribeContent();
+            //content.Id = pageId;
+            //content.Name = useful_links_url_az.Text.Trim();
+            //content.Content = useful_links_name_az.Html;
+            //content.Type = Utils.PageType.Slider;
 
-            SubscribeEmailSender emailSender = new SubscribeEmailSender(content);
-            emailSender.Send();
+            //SubscribeEmailSender emailSender = new SubscribeEmailSender(content);
+            //emailSender.Send();
 
 
         }
