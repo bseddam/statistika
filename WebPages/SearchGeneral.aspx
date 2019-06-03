@@ -27,8 +27,8 @@
                                 <asp:Literal ID="ltrSearchLabel" Text=" " runat="server" />
                                 <asp:Label ID="ltrSearchText" Text="" runat="server" Font-Bold="true" />
                                 <br />
-                                <asp:Literal ID="ltrSearchResultLabel" Text=" " runat="server" />
-                                <asp:Label ID="ltrSearchResult" Text="" runat="server" Font-Bold="true" />
+                                <asp:Literal ID="ltrSearchResultLabel" Text=" " runat="server" Visible="false" />
+                                <asp:Label ID="ltrSearchResult" Text="" runat="server" Font-Bold="true" Visible="false"/>
                             </asp:Panel>
                             <br /><br />
                              <asp:Label ID="lblSearchInfo" Text="" runat="server"  ForeColor="red" />

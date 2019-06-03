@@ -7245,7 +7245,7 @@ where h.is_active=1 and h.value is not null and length(h.value)> 0 and h.value n
 
 
 
-    public DataTable GetSearchGeneral_Groups(string searchText)
+    public DataTable GetSearchGeneral_Groups(string searchText,string lang)
     {
         try
         {
@@ -7253,18 +7253,17 @@ where h.is_active=1 and h.value is not null and length(h.value)> 0 and h.value n
             MySqlDataAdapter da = new MySqlDataAdapter(@"
 select 
 ptg.id as group_id,
-ptg.name_az as group_name_az,
-ptg.name_en as group_name_en,
+ptg.name_" + lang + @" as group_name_" + lang + @",
 ptg.orderby
  from pages as p 
 inner join pages_type as pt on p.type_id=pt.id
 inner join pages_type_group as ptg on ptg.id=pt.group_id
-where (title_az like @searchText or title_en like @searchText or content_az like @searchText or content_en like @searchText)
+where (title_" + lang + @" like @searchText  or content_" + lang + @" like @searchText)
 and pt.searchable=1
 group by ptg.id
 order by ptg.orderby
 ", SqlConn);
-            da.SelectCommand.Parameters.AddWithValue("searchText", "%" + searchText + "%");
+            da.SelectCommand.Parameters.AddWithValue("searchText", "% " + searchText + "%");
             da.Fill(dt);
             return dt;
         }
@@ -7312,20 +7311,20 @@ order by ptg.orderby
         }
     }
 
-    public DataTable GetSearchGeneral_Pub_Res(string searchText)
+    public DataTable GetSearchGeneral_Pub_Res(string searchText, string lang)
     {
         try
         {
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"
-select 1000 as type_id,0 as page_id,0 as goal_id,id,title_az,title_en,content_az,content_en from researches as r 
-where (title_az like @searchText or title_en like @searchText or content_az like @searchText or content_en like @searchText)
+select 1000 as type_id,0 as page_id,0 as goal_id,id,title_"+ lang + @",content_"+ lang + @" from researches as r 
+where (title_"+ lang + @" like @searchText or content_"+ lang + @" like @searchText)
 union
-select 2000 as type_id,0 as page_id,0 as goal_id,id,title_az,title_en,content_az,content_en from publications as p 
-where (title_az like @searchText or title_en like @searchText or content_az like @searchText or content_en like @searchText)
+select 2000 as type_id,0 as page_id,0 as goal_id,id,title_"+ lang + @",content_" + lang + @" from publications as p 
+where (title_" + lang + @" like @searchText  or content_" + lang + @" like @searchText)
 
 ", SqlConn);
-            da.SelectCommand.Parameters.AddWithValue("searchText", "%" + searchText + "%");
+            da.SelectCommand.Parameters.AddWithValue("searchText", "% " + searchText + "%");
             da.Fill(dt);
             return dt;
         }

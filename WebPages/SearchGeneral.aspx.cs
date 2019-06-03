@@ -38,21 +38,20 @@ public partial class WebPages_SearchGeneral : System.Web.UI.Page
         ltrSearchResultLabel.Text = DALC.GetStaticValue("search_result_label");
 
         Page.Title = Config.HtmlRemoval.StripTagsRegex(ltrPageName.Text) + " - " + Config.GetAppSetting("ProjectName");
-        ltrBreadCrumb.Text = string.Format("<a href=\"/{0}/home\"> {1}</a> / {2} ",
-                lang,
+        ltrBreadCrumb.Text = string.Format("<a href=\"/{0}/home\"> {1}</a> / {2} ", lang,
                 DALC.GetStaticValue("home_breadcrumb_title"),
                Config.HtmlRemoval.StripTagsRegex(ltrPageName.Text));
 
 
-        DataTable dt = _db.GetSearchGeneral_Groups(searchText);
-        DataTable dtPubRes = _db.GetSearchGeneral_Pub_Res(searchText);
+        DataTable dt = _db.GetSearchGeneral_Groups(searchText, lang);
+        DataTable dtPubRes = _db.GetSearchGeneral_Pub_Res(searchText, lang);
 
-        if (dtPubRes.Rows.Count > 0)
+        if (dtPubRes.Rows.Count > 0 )
         {
             DataRow dr = dt.NewRow();
             dr["group_id"] = 100;
-            dr["group_name_az"] = DALC.GetStaticValue("home_box_4");
-            dr["group_name_en"] = DALC.GetStaticValue("home_box_4");
+            dr["group_name_"+lang] = DALC.GetStaticValue("home_box_4");
+            //dr["group_name_en"] = DALC.GetStaticValue("home_box_4");
             dt.Rows.Add(dr);
         }
 

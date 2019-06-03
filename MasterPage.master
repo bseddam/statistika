@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/css/style.css?v=77" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link rel="stylesheet" href="/css/newstyle.css" />
+    <link rel="stylesheet" href="/css/newstyle.css" />
+
+
     <style>
         /* Slider */
 
@@ -130,7 +133,33 @@
         .slick-arrow.slick-hidden {
             display: none;
         }
-
+        html
+        {
+            scroll-behavior:smooth;
+        }
+        .gotopbtn
+        {
+            position:fixed;
+            width:50px;
+            height:50px;
+            background:#026BA2;
+            bottom:40px;
+            right:50px;
+            text-decoration:none;
+            text-align:center;
+            line-height:50px;
+            color:white;
+            font-size:18px;
+            z-index:999;
+        }
+        .gotopbtn:hover
+        {
+            color:white;
+        }
+        .gotopbtn:visited
+        {
+            color:white;
+        }
 
 
 
@@ -141,7 +170,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+    
         <header class="not-printable">
             <div class="navbar navbar-mini">
                 <nav class="up2">
@@ -406,14 +435,14 @@
             });
         </script>
 
-
+        
 
         <script type="text/javascript" src="/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/js/owl.carousel.min.js"></script>
         <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="/js/script.js?v=81"></script>
   
-        
+        <a class="gotopbtn" href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
         
         <asp:ContentPlaceHolder ID="script" runat="server">
         </asp:ContentPlaceHolder>
