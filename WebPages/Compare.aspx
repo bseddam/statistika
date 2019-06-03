@@ -353,7 +353,43 @@
                             </div>
                         </asp:Panel>
                     </div>
-            
+              <br />
+                    <div class="share-box">
+                        <asp:Literal ID="share_text" Text="" runat="server" />
+                        <div class="social-icons">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0)" class="print-page">
+                                        <i class="fa fa-print" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+
+                                    <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
+                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    </asp:HyperLink>
+
+                                </li>
+                                <li>
+
+                                    <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </asp:HyperLink>
+
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </asp:HyperLink>
+                                </li>
+                                <li>
+                                    <asp:HyperLink ID="shareMail" runat="server">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    </asp:HyperLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
