@@ -45,10 +45,10 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item active">
-                        <a class="nav-link active" data-toggle="tab" href="#home" aria-expanded="true">Məlumat bazaları</a>
+                        <a class="nav-link active" data-toggle="tab" href="#home" aria-expanded="true">Məlumatın mövcudluq vəziyyəti</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Bilik platformaları</a>
+                        <a class="nav-link" data-toggle="tab" href="#menu1">Priotetlik vəziyyəti</a>
                     </li>
                 </ul>
                 <br />
@@ -164,24 +164,18 @@
                                             <asp:Label ID="lblgostericinote2" runat="server" Text=""></asp:Label></span></h5>
                                     <p>
                                         <span class="label label-success">
-                                            <asp:Label ID="lblmovcuddur2" runat="server" Text=""></asp:Label></span>
-                                        <asp:Label ID="lblmovcuddurnote2" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblpiroritetdir" runat="server" Text=""></asp:Label></span>
+                                        <asp:Label ID="lblpiroritetdirnote" runat="server" Text=""></asp:Label>
                                         <b>
-                                            <asp:Label ID="lblmovcuddurfaiz2" runat="server" Text=""></asp:Label>% </b>
+                                            <asp:Label ID="lblpiroritetdirfaiz" runat="server" Text=""></asp:Label>% </b>
                                     </p>
-                                    <p>
-                                        <span class="label label-warning">
-                                            <asp:Label ID="lblplan2" runat="server" Text=""></asp:Label></span>
-                                        <asp:Label ID="lblplannote2" runat="server" Text=""></asp:Label>
-                                        <b>
-                                            <asp:Label ID="lblplanfaiz2" runat="server" Text=""></asp:Label>% </b>
-                                    </p>
+
                                     <p>
                                         <span class="label label-danger">
-                                            <asp:Label ID="lblmelumatyoxdur2" runat="server" Text=""></asp:Label></span>
-                                        <asp:Label ID="lblmelumatyoxdurnote2" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblpiroritetdeyil" runat="server" Text=""></asp:Label></span>
+                                        <asp:Label ID="lblpiroritetdeyilnote" runat="server" Text=""></asp:Label>
                                         <b>
-                                            <asp:Label ID="lblmelumatyoxdurfaiz2" runat="server" Text=""></asp:Label>% </b>
+                                            <asp:Label ID="lblpiroritetdeyilfaiz" runat="server" Text=""></asp:Label>% </b>
                                     </p>
                                 </div>
                             </div>
@@ -210,7 +204,8 @@
                                     <div class="row">
                                         <!-- ROW STARTS -->
                                         <div class="col-md-1 col-xs-12" style="padding: 0px;">
-                                            <a href="<%#string.Format("/{0}/goals/{1}/{2}/indicators",Config.getLang(Page),Eval("goal_id"),Config.Slug(Eval("name_short_"+Config.getLang(Page)).ToParseStr()))%>">
+                                            <a href="<%#string.Format("/{0}/national-priority/{1}/{2}",Config.getLang(Page),Eval("goal_id"),Config.Slug(Eval("name_short_"+Config.getLang(Page)).ToParseStr()))%>">
+                 
                                                 <img style="margin-left: 15px;" src="/images/goals-<%=Config.getLang(Page) %>/goal-<%#Eval("goal_id").ToParseStr().PadLeft(2,'0') %>.png" alt="" />
                                             </a>
                                         </div>
@@ -218,17 +213,15 @@
                                         <div class="col-md-11 col-xs-12 re">
                                             <div class="dfdfd">
                                                 <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> <%#DALC.GetStaticValue("indicator_value") %></span></h5>
-                                                <p><span class="label label-success"><%#Eval("movcuddur")%></span> <%#Eval("movcudname_"+Config.getLang(Page)) %> <b><%#Eval("faizmovcud")%>% </b></p>
-                                                <p><span class="label label-warning"><%#Eval("plan")%></span> <%#Eval("planname_"+Config.getLang(Page)) %> <b><%#Eval("faizplan")%>% </b></p>
-                                                <p><span class="label label-danger"><%#Eval("arasdirilir")%></span> <%#Eval("arasdirilirname_"+Config.getLang(Page)) %> <b><%#Eval("faizarasdirilir")%>% </b></p>
+                                                <p><span class="label label-success"><%#Eval("prioritetdir")%></span> <%#Eval("prioritetdir_"+Config.getLang(Page)) %> <b><%#Eval("faizprioritetdir")%>% </b></p>
+                            
+                                                <p><span class="label label-danger"><%#Eval("prioritetdeyil")%></span> <%#Eval("prioritetdeyil_"+Config.getLang(Page)) %> <b><%#Eval("faizprioritetdeyil")%>% </b></p>
                                             </div>
                                             <div class="progress">
 
-                                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizmovcud")+"%"%>'>
+                                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizprioritetdir")+"%"%>'>
                                                 </div>
-                                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizplan")+"%"%>'>
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizarasdirilir")+"%"%>'>
+                                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%#Eval("faizprioritetdeyil")+"%"%>'>
                                                 </div>
                                             </div>
                                         </div>

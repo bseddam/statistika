@@ -34,14 +34,14 @@ public partial class WebPages_Law : System.Web.UI.Page
         rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
         rptIndicators.DataBind();
         
-        lblgostericinote.Text= DALC.GetStaticValue("indicator_value") ;
-        lblcemi.Text= DALC.GetStaticValue("reportingstatuscemi_value");
+        lblgostericinote.Text= lblgostericinote2.Text = DALC.GetStaticValue("indicator_value") ;
+        lblcemi.Text= lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
         lblmeqseduzrenote.Text= DALC.GetStaticValue("reportingstatuspurpose_value");
 
         DataTable dt = _db.GetIndicatorsReportingStatusSum();
         if (dt != null)
         {
-            lblgostericicemi.Text = dt.Rows[0]["say"].ToParseStr();
+            lblgostericicemi.Text=lblgostericicemi2.Text = dt.Rows[0]["say"].ToParseStr();
         }
         DataTable dt1 = _db.GetIndicatorsReportingStatusSumMovcud();
         if (dt1 != null)
@@ -74,38 +74,28 @@ public partial class WebPages_Law : System.Web.UI.Page
 
 
 
-        rptIndicators2.DataSource = _db.GetIndicatorsReportingStatus();
+        rptIndicators2.DataSource = _db.GetIndicatorsReportingStatus2();
         rptIndicators2.DataBind();
 
-        lblgostericinote2.Text = DALC.GetStaticValue("indicator_value");
-        lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
+  
+
         lblmeqseduzrenote2.Text = DALC.GetStaticValue("reportingstatuspurpose_value");
 
-        DataTable dty = _db.GetIndicatorsReportingStatusSum();
-        if (dty != null)
-        {
-            lblgostericicemi.Text = dty.Rows[0]["say"].ToParseStr();
-        }
-        DataTable dty1 = _db.GetIndicatorsReportingStatusSumMovcud();
+
+        DataTable dty1 = _db.GetIndicatorsReportingStatusSumPrioritetdir();
         if (dty1 != null)
         {
-            lblmovcuddur.Text = dty1.Rows[0]["say"].ToParseStr();
-            lblmovcuddurfaiz.Text = dty1.Rows[0]["faiz"].ToParseStr();
-            lblmovcuddurnote.Text = dty1.Rows[0]["name_" + lang].ToParseStr();
+            lblpiroritetdir.Text = dty1.Rows[0]["say"].ToParseStr();
+            lblpiroritetdirfaiz.Text = dty1.Rows[0]["faiz"].ToParseStr();
+            lblpiroritetdirnote.Text = dty1.Rows[0]["name_" + lang].ToParseStr();
         }
-        DataTable dty2 = _db.GetIndicatorsReportingStatusSumPlan();
-        if (dty2 != null)
-        {
-            lblplan.Text = dty2.Rows[0]["say"].ToParseStr();
-            lblplanfaiz.Text = dty2.Rows[0]["faiz"].ToParseStr();
-            lblplannote.Text = dty2.Rows[0]["name_" + lang].ToParseStr();
-        }
-        DataTable dty3 = _db.GetIndicatorsReportingStatusSumArasdirilir();
+
+        DataTable dty3 = _db.GetIndicatorsReportingStatusSumPrioritetDeyil();
         if (dty3 != null)
         {
-            lblmelumatyoxdur.Text = dty3.Rows[0]["say"].ToParseStr();
-            lblmelumatyoxdurfaiz.Text = dty3.Rows[0]["faiz"].ToParseStr();
-            lblmelumatyoxdurnote.Text = dty3.Rows[0]["name_" + lang].ToParseStr(); ;
+            lblpiroritetdeyil.Text = dty3.Rows[0]["say"].ToParseStr();
+            lblpiroritetdeyilfaiz.Text = dty3.Rows[0]["faiz"].ToParseStr();
+            lblpiroritetdeyilnote.Text = dty3.Rows[0]["name_" + lang].ToParseStr(); ;
         }
 
 
