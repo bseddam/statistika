@@ -37,8 +37,6 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content" style="min-height:300px;">
                                     <asp:Literal ID="lbllinkler" runat="server"></asp:Literal>
-                                  
-
                                 </div>
                             </div>
                         </div>

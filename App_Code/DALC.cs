@@ -3126,7 +3126,8 @@ where code like @code and goal_id=@goal_id and id<>@indicatorId and isActive=1 o
         {
 
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(@"select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,
+            MySqlDataAdapter da = new MySqlDataAdapter(@"
+select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,
 i1.name_en movcudname_en,i2.name_en planname_en,i3.name_en arasdirilirname_en,i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
 cast(i1.movcuddur*100/i.cemisay as decimal(6,1)) faizmovcud,cast(i2.plan*100/i.cemisay as decimal(6,1)) faizplan,
 cast(i3.arasdirilir*100/i.cemisay as decimal(6,1))  faizarasdirilir
@@ -3420,14 +3421,20 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
             return null;
         }
     }
+
     public DataTable GetIndicatorsForNationaPriority(int goal_id)
     {
         try
         {
-
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT  *  from indicators where goal_id=@goal_id  
-            and parent_id=0 and uygunluq_id=1  and isActive=1 order by code", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select * from 
+(SELECT  *  from indicators  where parent_id=0 and uygunluq_id=1 and type_id=1 and isActive=1 and goal_id=@goal_id 
+and concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8))  not in 
+(select  concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8)) from indicators  
+where parent_id=0 and uygunluq_id=1 and type_id=2 and isActive=1 and goal_id=@goal_id)
+UNION
+select  * from indicators  where parent_id=0 and uygunluq_id=1 and type_id=2 and isActive=1 and goal_id=@goal_id) as c 
+order by code", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
 
 

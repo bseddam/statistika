@@ -28,9 +28,6 @@ public partial class WebPages_Law : System.Web.UI.Page
              DALC.GetStaticValue("home_breadcrumb_title"),
              DALC.GetStaticValue("reportingstatus_page_title"));
 
-
-
-
         rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
         rptIndicators.DataBind();
         
@@ -64,57 +61,6 @@ public partial class WebPages_Law : System.Web.UI.Page
             lblmelumatyoxdurfaiz.Text = dt3.Rows[0]["faiz"].ToParseStr();
             lblmelumatyoxdurnote.Text = dt3.Rows[0]["name_"+ lang].ToParseStr(); ;
         }
-
-
-
-
-
-
-
-
-
-
-        rptIndicators2.DataSource = _db.GetIndicatorsReportingStatus();
-        rptIndicators2.DataBind();
-
-        lblgostericinote2.Text = DALC.GetStaticValue("indicator_value");
-        lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
-        lblmeqseduzrenote2.Text = DALC.GetStaticValue("reportingstatuspurpose_value");
-
-        DataTable dty = _db.GetIndicatorsReportingStatusSum();
-        if (dty != null)
-        {
-            lblgostericicemi.Text = dty.Rows[0]["say"].ToParseStr();
-        }
-        DataTable dty1 = _db.GetIndicatorsReportingStatusSumMovcud();
-        if (dty1 != null)
-        {
-            lblmovcuddur.Text = dty1.Rows[0]["say"].ToParseStr();
-            lblmovcuddurfaiz.Text = dty1.Rows[0]["faiz"].ToParseStr();
-            lblmovcuddurnote.Text = dty1.Rows[0]["name_" + lang].ToParseStr();
-        }
-        DataTable dty2 = _db.GetIndicatorsReportingStatusSumPlan();
-        if (dty2 != null)
-        {
-            lblplan.Text = dty2.Rows[0]["say"].ToParseStr();
-            lblplanfaiz.Text = dty2.Rows[0]["faiz"].ToParseStr();
-            lblplannote.Text = dty2.Rows[0]["name_" + lang].ToParseStr();
-        }
-        DataTable dty3 = _db.GetIndicatorsReportingStatusSumArasdirilir();
-        if (dty3 != null)
-        {
-            lblmelumatyoxdur.Text = dty3.Rows[0]["say"].ToParseStr();
-            lblmelumatyoxdurfaiz.Text = dty3.Rows[0]["faiz"].ToParseStr();
-            lblmelumatyoxdurnote.Text = dty3.Rows[0]["name_" + lang].ToParseStr(); ;
-        }
-
-
-
-
-
-
-
-
         DataTable dtx = _db.GetPages(Utils.PageType.International);
         string content = dtx.Rows[0]["content_" + lang].ToParseStr();
         string pageTitle = Config.HtmlRemoval.StripTagsRegex(dtx.Rows[0]["title_" + lang].ToParseStr());
