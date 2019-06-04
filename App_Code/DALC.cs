@@ -3319,6 +3319,26 @@ order by code", SqlConn);
             return null;
         }
     }
+
+    public DataTable withoutdiagram(int indicatorid)
+    {
+        try
+        {
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"select * from hesabat where is_active=1 and 
+value in ('-','...','x') and indicator_id=@indicatorid", SqlConn);
+            da.SelectCommand.Parameters.AddWithValue("indicatorid", indicatorid);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("withoutdiagram()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
     public DataTable GetIndicatorsByParentId_3(int parent_id)
     {
         try

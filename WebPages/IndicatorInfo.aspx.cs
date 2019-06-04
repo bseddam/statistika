@@ -342,10 +342,11 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             dtFinal.Merge(dtN);
         }
 
+        DataTable diagramsiz = _db.withoutdiagram(indicatorid);
 
         treeList1.DataSource = dtFinal;
         treeList1.DataBind();
-        if (treeList1.Nodes.Count > 0)
+        if (treeList1.Nodes.Count > 0 && diagramsiz.Rows.Count<1)
         {
             treeList1.Nodes[0].Selected = true;
         }
