@@ -139,10 +139,12 @@
         }
         .gotopbtn
         {
+            display:none;
             border-radius:5px;
             position:fixed;
             width:50px;
             height:50px;
+
             background:#026BA2;
             bottom:3px;
             right:10px;
@@ -156,6 +158,8 @@
         .gotopbtn:hover
         {
             color:white;
+            background:linear-gradient( 59deg, #168BCD, #36D1DC);
+          
         }
         .gotopbtn:visited
         {
@@ -435,6 +439,20 @@
                 });
             });
         </script>
+          <script>
+              $(document).ready(function () {
+
+                  $(window).scroll(function () {
+                      if ($(this).scrollTop() > 40) {
+                          $('.gotopbtn').fadeIn();
+                      }
+                      else {
+                           $('.gotopbtn').fadeOut();
+                      }
+                  })
+            });
+        </script>
+
 
         
 
@@ -443,7 +461,7 @@
         <script type="text/javascript" src="/js/jquery.magnific-popup.min.js"></script>
         <script type="text/javascript" src="/js/script.js?v=81"></script>
   
-        <a class="gotopbtn" href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+        <a class="gotopbtn" href="#" ><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
         
         <asp:ContentPlaceHolder ID="script" runat="server">
         </asp:ContentPlaceHolder>

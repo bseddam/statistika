@@ -16,7 +16,7 @@
         }
 
         */
-           .btn-select {
+        .btn-select {
             margin-top: 10px;
             border-radius: 5px;
             padding: 5px 10px;
@@ -29,6 +29,7 @@
             .btn-select:hover {
                 color: #fff;
             }
+
         .dxtlSelectionCell_MetropolisBlue {
             padding-left: 1px;
         }
@@ -52,7 +53,8 @@
         .info-column-9 {
             width: 59%;
         }
-          .btn-select-all {
+
+        .btn-select-all {
             margin-bottom: 10px;
             padding: 1px;
             display: block;
@@ -204,7 +206,7 @@
                                         <SettingsText CommandNew="Yeni" CommandDelete="Sil" CommandCancel="Ləğv et" CommandEdit="Yenilə" CommandUpdate="Yadda saxla" LoadingPanelText="Yüklənir&hellip;" CustomizationWindowCaption="Sütun seçin" ConfirmDelete="Silmək istəditinizə əminsiniz?" />
 
                                     </dx:ASPxTreeList>
-                                       <div>
+                                    <div>
                                         <div class="btn btn-success btn-select-all">
                                             <asp:LinkButton ID="btnSelectAll"
                                                 OnClick="btnSelectAll_Click"
@@ -238,7 +240,7 @@
                                         CssClass="year-list form-control"
                                         DataTextField="year" DataValueField="year">
                                     </asp:CheckBoxList>
-                                      <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
+                                    <asp:LinkButton ID="lnkselectallchk" Text="" OnClick="lnkchkSelectAll_Click" CssClass="btn-select" runat="server" Style="width: 49%">
                                                     <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                                     <%=DALC.GetStaticValue("indicator_select_all") %>
                                     </asp:LinkButton>
@@ -247,9 +249,8 @@
                                                     <%=DALC.GetStaticValue("indicator_unselect_all") %>
                                     </asp:LinkButton>
                                 </div>
-                                   <div class="col-md-8">
-
-                                   </div>
+                                <div class="col-md-8">
+                                </div>
 
                             </div>
                             <div class="row">
@@ -298,8 +299,35 @@
                             </div>
                             --%>
                             <div class="col-md-12">
-                                <br />
+                                        <div class="share-box" style="background-color: white; margin-left: 100px;">
+                                        <asp:Literal ID="share_text" Text="" runat="server" Visible="false" />
+                                        <div class="social-icons" style="float:left;">
+                                            <ul>
+                                                <li>
+                                                    <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank" BorderWidth="0">
+                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                                    </asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="shareFb" runat="server" Target="_blank" BorderWidth="0">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                    </asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="shareTwt" runat="server" Target="_blank" BorderWidth="0">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                                    </asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="shareMail" runat="server" BorderWidth="0">
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                    </asp:HyperLink>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 <div class="chart-styles clear">
+
                                     <a href="#" class="chart-btn" data-type="1">
                                         <img src="/images/chart_1.png" alt="" />
                                     </a>
@@ -311,7 +339,7 @@
                                     </a>
 
                                 </div>
-                                <div class="chart-container">
+                                <div class="col-md-12 chart-container">
                                     <div id="chart_div"></div>
                                     <div class="chart-menu">
                                         <div class="chart-menu-container">
@@ -353,43 +381,7 @@
                             </div>
                         </asp:Panel>
                     </div>
-              <br />
-                    <div class="share-box">
-                        <asp:Literal ID="share_text" Text="" runat="server" />
-                        <div class="social-icons">
-                            <ul>
-                                <li>
-                                    <a href="javascript:void(0)" class="print-page">
-                                        <i class="fa fa-print" aria-hidden="true"></i>
-                                    </a>
-                                </li>
-                                <li>
 
-                                    <asp:HyperLink ID="shareLinkedin" runat="server" Target="_blank">
-                                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                                    </asp:HyperLink>
-
-                                </li>
-                                <li>
-
-                                    <asp:HyperLink ID="shareFb" runat="server" Target="_blank">
-                                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                                    </asp:HyperLink>
-
-                                </li>
-                                <li>
-                                    <asp:HyperLink ID="shareTwt" runat="server" Target="_blank">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                    </asp:HyperLink>
-                                </li>
-                                <li>
-                                    <asp:HyperLink ID="shareMail" runat="server">
-                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                    </asp:HyperLink>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </section>
 

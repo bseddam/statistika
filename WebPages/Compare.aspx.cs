@@ -47,15 +47,10 @@ public partial class WebPages_Compare : System.Web.UI.Page
         pnlResult.Visible = false;
         pnlIndicator.Style["display"] = "none";
 
-        DataTable dtx = _db.GetPages(Utils.PageType.International);
-        string content = dtx.Rows[0]["content_" + lang].ToParseStr();
-        string pageTitle = Config.HtmlRemoval.StripTagsRegex(dtx.Rows[0]["title_" + lang].ToParseStr());
-        pnlResult.Visible = false;
-        pnlIndicator.Style["display"] = "none";
-        shareBox(pageTitle,
-"compare",
-content.Length > 1000 ? content.Substring(0, 1000) : content,
-"");
+        shareBox(lblIndicatorTitle.Text,
+        "compare",
+        "",
+        "");
 
     }
     private void shareBox(string pageTitle, string PageType, string Description, string image_url)
@@ -63,11 +58,15 @@ content.Length > 1000 ? content.Substring(0, 1000) : content,
         Description = HttpUtility.HtmlDecode(Config.HtmlRemoval.StripTagsRegex(Description));
 
         string pageUrl = Request.Url.ToString();
-        share_text.Text = DALC.GetStaticValue("share_text");
+        //share_text.Text = DALC.GetStaticValue("share_text");
         shareFb.NavigateUrl = "http://www.facebook.com/sharer.php?u=" + pageUrl;
         shareTwt.NavigateUrl = "https://twitter.com/share?url=" + pageUrl;
         shareMail.NavigateUrl = string.Format("mailto:?subject={0}&body={1}", pageTitle, pageUrl);
         shareLinkedin.NavigateUrl = string.Format("http://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}&source={0}", pageUrl, pageTitle, Description);
+        //shareFb1.NavigateUrl = "http://www.facebook.com/sharer.php?u=" + pageUrl;
+        //shareTwt1.NavigateUrl = "https://twitter.com/share?url=" + pageUrl;
+        //shareMail1.NavigateUrl = string.Format("mailto:?subject={0}&body={1}", pageTitle, pageUrl);
+        //shareLinkedin1.NavigateUrl = string.Format("http://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}&source={0}", pageUrl, pageTitle, Description);
 
 
         #region Google
