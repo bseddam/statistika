@@ -146,14 +146,15 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
         {
             pnlnationalmetadata.Visible = true;
             lblstyyeglobalmetadata.Text = "style='display:none'";
-            lblglobalmetadataactive.Text = "class='active'";
+            lblnationalmetadataactive.Text = "class='active'";
             lblglobalmetadataactive1.Text = "";
         }
         else
         {
             pnlnationalmetadata.Visible = false;
+
             lblstyyeglobalmetadata.Text = "style=''";
-            lblglobalmetadataactive.Text = "";
+            lblnationalmetadataactive.Text = "style='display:none'";
             lblglobalmetadataactive1.Text = "class='active'";
         }
     }

@@ -616,7 +616,7 @@
 
                                 <div class="indicator-nav-wrapper">
                                     <ul class="indicator-nav">
-                                        <li <%=lblglobalmetadataactive.Text %> data-content="#national-meta">
+                                        <li <%=lblnationalmetadataactive.Text %> data-content="#national-meta">
                                             <asp:Label ID="lblNationalMetadata" Text="" runat="server" />
                                         </li>
                                         <li <%=lblglobalmetadataactive1.Text %> data-content="#global-meta">
@@ -684,7 +684,7 @@
                                         </asp:Panel>
                                     </div>
                                       <asp:Label ID="lblstyyeglobalmetadata" Visible="false" runat="server"></asp:Label>
-                                    <asp:Label ID="lblglobalmetadataactive" Visible="false" runat="server"></asp:Label>
+                                    <asp:Label ID="lblnationalmetadataactive" Visible="False" runat="server"></asp:Label>
                                      <asp:Label ID="lblglobalmetadataactive1" Visible="false" runat="server"></asp:Label>
                                     <div id="global-meta" class="indicator-tab" <%=lblstyyeglobalmetadata.Text %> >
                                         <div class="info-box">
