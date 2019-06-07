@@ -3185,11 +3185,11 @@ where i.type_id=1 and i.parent_id=0 and i.isActive=1
 group by i.goal_id,g.name_short_az,g.name_short_en) as i 
 
 inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdir FROM `indicators` as i 
-inner join indicator_uygunluq as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
+inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
 i.uygunluq_id=1 and i.isActive=1 group by i.goal_id,s.name_az,s.name_en) as i1 on i.goal_id=i1.goal_id
 
 inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdeyil FROM `indicators` as i 
-inner join indicator_uygunluq as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
+inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
 i.uygunluq_id=2 and i.isActive=1 group by i.goal_id,s.name_az,s.name_en) as i2 on i.goal_id=i2.goal_id", SqlConn);
      
 
@@ -3255,7 +3255,7 @@ where i.type_id=1 and i.parent_id=0 and i.isActive=1 and i.status_id=3 group by 
             MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT s.name_az,s.name_en,count(*) say,
 cast(count(*)*100/(SELECT count(*) say FROM `indicators` where type_id=1 and 
 parent_id=0 and isActive=1 and i.uygunluq_id=1 ) as decimal(6,1)) faiz FROM `indicators` as i 
-inner join indicator_uygunluq as s on i.uygunluq_id=s.id 
+inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id 
 where i.type_id=1 and i.parent_id=0 and i.uygunluq_id=1 and i.isActive=1 group by s.name_az,s.name_en", SqlConn);
 
 
@@ -3276,7 +3276,7 @@ where i.type_id=1 and i.parent_id=0 and i.uygunluq_id=1 and i.isActive=1 group b
             MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT s.name_az,s.name_en,count(*) say,
 cast(count(*)*100/(SELECT count(*) say FROM `indicators` where type_id=1 and 
 parent_id=0 and isActive=1 and i.uygunluq_id=2 ) as decimal(6,1)) faiz FROM `indicators` as i 
-inner join indicator_uygunluq as s on i.uygunluq_id=s.id 
+inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id 
 where i.type_id=1 and i.parent_id=0 and i.uygunluq_id=2 and i.isActive=1 group by s.name_az,s.name_en", SqlConn);
 
 
@@ -3788,14 +3788,15 @@ order by code", SqlConn);
         try
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter da = new MySqlDataAdapter("SELECT * from targetsnational where goal_id=@goalId and is_active=1 order by code ", SqlConn);
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT * from targetsnational where 
+goal_id=@goalId and is_active=1 order by code ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goalId", goal_id);
             da.Fill(dt);
             return dt;
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargets1()"), ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargetsFull1()"), ex.Message, "", true);
             return null;
         }
     }

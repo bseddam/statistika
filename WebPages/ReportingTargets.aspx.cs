@@ -28,39 +28,43 @@ public partial class WebPages_Law : System.Web.UI.Page
              DALC.GetStaticValue("home_breadcrumb_title"),
              DALC.GetStaticValue("reportingstatus_page_title"));
 
-        rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
-        rptIndicators.DataBind();
-        
-        lblgostericinote.Text= DALC.GetStaticValue("indicator_value") ;
-        lblcemi.Text= DALC.GetStaticValue("reportingstatuscemi_value");
-        lblmeqseduzrenote.Text= DALC.GetStaticValue("reportingstatuspurpose_value");
+
+
+        lblgostericinote2.Text = DALC.GetStaticValue("indicator_value");
+        lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
+
+        rptIndicators2.DataSource = _db.GetIndicatorsReportingStatus2();
+        rptIndicators2.DataBind();
+
+
+
+        lblmeqseduzrenote2.Text = DALC.GetStaticValue("reportingstatuspurpose_value");
+
+
 
         DataTable dt = _db.GetIndicatorsReportingStatusSum();
         if (dt != null)
         {
-            lblgostericicemi.Text = dt.Rows[0]["say"].ToParseStr();
+            lblgostericicemi2.Text = dt.Rows[0]["say"].ToParseStr();
         }
-        DataTable dt1 = _db.GetIndicatorsReportingStatusSumMovcud();
-        if (dt1 != null)
+        DataTable dty1 = _db.GetIndicatorsReportingStatusSumPrioritetdir();
+        if (dty1 != null)
         {
-            lblmovcuddur.Text = dt1.Rows[0]["say"].ToParseStr();
-            lblmovcuddurfaiz.Text = dt1.Rows[0]["faiz"].ToParseStr();
-            lblmovcuddurnote.Text = dt1.Rows[0]["name_" + lang].ToParseStr();
+            lblpiroritetdir.Text = dty1.Rows[0]["say"].ToParseStr();
+            lblpiroritetdirfaiz.Text = dty1.Rows[0]["faiz"].ToParseStr();
+            lblpiroritetdirnote.Text = dty1.Rows[0]["name_" + lang].ToParseStr();
         }
-        DataTable dt2 = _db.GetIndicatorsReportingStatusSumPlan();
-        if (dt2 != null)
+
+        DataTable dty3 = _db.GetIndicatorsReportingStatusSumPrioritetDeyil();
+        if (dty3 != null)
         {
-            lblplan.Text = dt2.Rows[0]["say"].ToParseStr();
-            lblplanfaiz.Text = dt2.Rows[0]["faiz"].ToParseStr();
-            lblplannote.Text = dt2.Rows[0]["name_" + lang].ToParseStr();
+            lblpiroritetdeyil.Text = dty3.Rows[0]["say"].ToParseStr();
+            lblpiroritetdeyilfaiz.Text = dty3.Rows[0]["faiz"].ToParseStr();
+            lblpiroritetdeyilnote.Text = dty3.Rows[0]["name_" + lang].ToParseStr(); ;
         }
-        DataTable dt3 = _db.GetIndicatorsReportingStatusSumArasdirilir();
-        if (dt3 != null)
-        {
-            lblmelumatyoxdur.Text = dt3.Rows[0]["say"].ToParseStr();
-            lblmelumatyoxdurfaiz.Text = dt3.Rows[0]["faiz"].ToParseStr();
-            lblmelumatyoxdurnote.Text = dt3.Rows[0]["name_"+ lang].ToParseStr(); ;
-        }
+
+
+
         DataTable dtx = _db.GetPages(Utils.PageType.International);
         string content = dtx.Rows[0]["content_" + lang].ToParseStr();
         string pageTitle = Config.HtmlRemoval.StripTagsRegex(dtx.Rows[0]["title_" + lang].ToParseStr());

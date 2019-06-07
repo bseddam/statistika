@@ -149,7 +149,15 @@
 
 
                     </div>
+
                     <div id="menu1" class="tab-content tab-pane fade">
+
+
+
+
+
+
+
 
 
                         <!--GLOBAL/NATIONAL STARTS-->
@@ -182,11 +190,10 @@
 
                             <div class="progress">
 
-                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%=lblmovcuddurfaiz.Text+"%"%>'>
+                                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style='width: <%=lblpiroritetdirfaiz.Text+"%"%>'>
                                 </div>
-                                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style='width: <%=lblplanfaiz.Text+"%"%>'>
-                                </div>
-                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%=lblmelumatyoxdurfaiz.Text+"%"%>'>
+
+                                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style='width: <%=lblpiroritetdeyilfaiz.Text+"%"%>'>
                                 </div>
                             </div>
 
@@ -232,6 +239,10 @@
                             </asp:Repeater>
                             <!--repeater-->
                         </div>
+
+
+
+
 
 
 
