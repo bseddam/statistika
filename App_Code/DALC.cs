@@ -3166,7 +3166,48 @@ on i.goal_id=i3.goal_id", SqlConn);
         }
     }
 
-    public DataTable GetIndicatorsReportingStatus2()
+
+
+
+    public DataTable GetTargetsReportingStatusPriotet()
+    {
+        try
+        {
+
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"
+select  i1.name_az prioritetdir_az, i2.name_az prioritetdeyil_az,
+i1.name_en prioritetdir_en,
+i2.name_en prioritetdeyil_en,
+i.goal_id,i.name_short_az,i.name_short_en,i.cemisay,i1.prioritetdir,i.cemisay-i1.prioritetdir as prioritetdeyil,
+cast(i1.prioritetdir*100/i.cemisay as decimal(6,1)) faizprioritetdir,
+cast((i.cemisay-i1.prioritetdir)*100/i.cemisay as decimal(6,1)) faizprioritetdeyil
+from (
+SELECT i.goal_id,g.name_short_az,g.name_short_en,count(*) cemisay FROM `targets` i 
+inner join goals g on i.goal_id=g.id where  i.is_Active=1 
+group by i.goal_id,g.name_short_az,g.name_short_en) as i 
+
+inner join (select t.goal_id,s.name_az,s.name_en,count(*) prioritetdir from (select *,1 uygunluq_id from targetsnational where is_active=1) t inner join indicator_uygunluq1 as s on t.uygunluq_id=s.id group by t.goal_id,s.name_az,s.name_en) as i1 on i.goal_id=i1.goal_id
+
+
+inner join (select t.goal_id,s.name_az,s.name_en from (select *,2 uygunluq_id from targets where is_active=1) t inner join indicator_uygunluq1 as s on t.uygunluq_id=s.id group by t.goal_id,s.name_az,s.name_en) as i2 on i.goal_id=i2.goal_id", SqlConn);
+
+
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargetsReportingStatusPriotet()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
+
+
+
+    public DataTable GetIndicatorsReportingStatusPriotet()
     {
         try
         {
@@ -3199,22 +3240,37 @@ i.uygunluq_id=2 and i.isActive=1 group by i.goal_id,s.name_az,s.name_en) as i2 o
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatus2()"), ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusPriotet()"), ex.Message, "", true);
             return null;
         }
     }
+
+
+    public DataTable GetTargetsReportingStatusSum()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say FROM `targets` where is_active=1", SqlConn);
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargetsReportingStatusSum()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
+
+
     public DataTable GetIndicatorsReportingStatusSum()
     {
         try
         {
-
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say FROM `indicators` where type_id=1 and 
 parent_id=0 and isActive=1", SqlConn);
-            //da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
-            //da.SelectCommand.Parameters.AddWithValue("parent_id", parent_id);
-            //da.SelectCommand.Parameters.AddWithValue("typeid", typeid);
-
             da.Fill(dt);
             return dt;
         }
@@ -3268,6 +3324,49 @@ where i.type_id=1 and i.parent_id=0 and i.uygunluq_id=1 and i.isActive=1 group b
             return null;
         }
     }
+
+
+    public DataTable GetTargetsReportingStatusSumPrioritetdir()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT count(*) say,s.name_az,s.name_en, 
+cast(count(*)*100/(SELECT count(*) say FROM `targets` where is_active=1 ) as decimal(6,1)) faiz 
+from (select *,1 uygunluq_id from targetsnational) as i inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id 
+where i.is_active=1 ", SqlConn);
+
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargetsReportingStatusSumPrioritetdir()"), ex.Message, "", true);
+            return null;
+        }
+    }
+    public DataTable GetTargetsReportingStatusSumPrioritetDeyil()
+    {
+        try
+        {
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter(@"SELECT (SELECT count(*) say FROM `targets` where is_active=1)-count(*) say,s.name_az,s.name_en, 
+100-cast(count(*)*100/(SELECT count(*) say FROM `targets` where is_active=1) as decimal(6,1)) faiz 
+from (select *,2 uygunluq_id from targetsnational) as i inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id 
+where i.is_active=1", SqlConn);
+
+
+            da.Fill(dt);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetTargetsReportingStatusSumPrioritetDeyil()"), ex.Message, "", true);
+            return null;
+        }
+    }
+
     public DataTable GetIndicatorsReportingStatusSumPrioritetDeyil()
     {
         try
@@ -3285,7 +3384,7 @@ where i.type_id=1 and i.parent_id=0 and i.uygunluq_id=2 and i.isActive=1 group b
         }
         catch (Exception ex)
         {
-            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSumPrioritetdir()"), ex.Message, "", true);
+            LogInsert(Utils.Tables.goals, Utils.LogType.select, String.Format("GetIndicatorsReportingStatusSumPrioritetDeyil()"), ex.Message, "", true);
             return null;
         }
     }

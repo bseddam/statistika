@@ -26,14 +26,16 @@ public partial class WebPages_Law : System.Web.UI.Page
         ltrBreadCrumb.Text = string.Format("<a href='/{0}/home'> {1}</a> / {2}  ",
              lang,
              DALC.GetStaticValue("home_breadcrumb_title"),
-             DALC.GetStaticValue("reportingstatus_page_title"));
+             DALC.GetStaticValue("goal_info_tab1_title"));
 
 
 
-        lblgostericinote2.Text = DALC.GetStaticValue("indicator_value");
+        lblgostericinote2.Text = DALC.GetStaticValue("goal_info_tab1_title");
         lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
 
-        rptIndicators2.DataSource = _db.GetIndicatorsReportingStatus2();
+
+
+        rptIndicators2.DataSource = _db.GetTargetsReportingStatusPriotet();
         rptIndicators2.DataBind();
 
 
@@ -42,12 +44,12 @@ public partial class WebPages_Law : System.Web.UI.Page
 
 
 
-        DataTable dt = _db.GetIndicatorsReportingStatusSum();
+        DataTable dt = _db.GetTargetsReportingStatusSum();
         if (dt != null)
         {
             lblgostericicemi2.Text = dt.Rows[0]["say"].ToParseStr();
         }
-        DataTable dty1 = _db.GetIndicatorsReportingStatusSumPrioritetdir();
+        DataTable dty1 = _db.GetTargetsReportingStatusSumPrioritetdir();
         if (dty1 != null)
         {
             lblpiroritetdir.Text = dty1.Rows[0]["say"].ToParseStr();
@@ -55,7 +57,7 @@ public partial class WebPages_Law : System.Web.UI.Page
             lblpiroritetdirnote.Text = dty1.Rows[0]["name_" + lang].ToParseStr();
         }
 
-        DataTable dty3 = _db.GetIndicatorsReportingStatusSumPrioritetDeyil();
+        DataTable dty3 = _db.GetTargetsReportingStatusSumPrioritetDeyil();
         if (dty3 != null)
         {
             lblpiroritetdeyil.Text = dty3.Rows[0]["say"].ToParseStr();

@@ -145,7 +145,7 @@
             width:50px;
             height:50px;
 
-            background:#026BA2;
+            background:linear-gradient( 59deg, #168BCD, #36D1DC);
             bottom:3px;
             right:10px;
             text-decoration:none;
@@ -158,7 +158,7 @@
         .gotopbtn:hover
         {
             color:white;
-            background:linear-gradient( 59deg, #168BCD, #36D1DC);
+            background:#026BA2;
           
         }
         .gotopbtn:visited
