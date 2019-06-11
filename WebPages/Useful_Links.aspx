@@ -17,8 +17,8 @@
                         <div class="col-md-12">
                             <div class="borderAll paddingLR10">
                                 <!-- Nav tabs -->
-                                <h2>
-                                    <asp:Label ID="lbltitle" runat="server"></asp:Label></h2>
+                                <h4>
+                                    <asp:Label ID="lbltitle" runat="server"></asp:Label></h4>
                                 <hr>
                                 <ul class="nav nav-tabs" role="tablist">
                                     <asp:Repeater ID="rplinkheader" runat="server">

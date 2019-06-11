@@ -135,10 +135,10 @@
                                             </p>
                                         </div>
                                         <div class="col-md-12" style="text-align: right">
-                                            <a
+                                            <a 
                                                 href="<%# string.Format("/{0}/national-reports/{1}/{2}",Config.getLang(Page), Eval("id"),Config.Slug( Eval("title_"+Config.getLang(Page)).ToParseStr())) %>">
 
-                                                <div class="list-more-btn">
+                                                <div class="list-more-btn" style="background: linear-gradient( 59deg, #168BCD, #36D1DC);">
                                                     <%=DALC.GetStaticValue("publication_more") %>
                                                 </div>
                                             </a>

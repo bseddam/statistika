@@ -33,7 +33,10 @@ public partial class WebPages_Law : System.Web.UI.Page
 
         rptIndicators.DataSource = _db.GetIndicatorsReportingStatus();
         rptIndicators.DataBind();
-        
+
+        ltrlgostericiadi.Text = DALC.GetStaticValue("indicator_value");
+        ltrlpriotetlikveziyyeti.Text = DALC.GetStaticValue("indicator_value");
+
         lblgostericinote.Text= lblgostericinote2.Text = DALC.GetStaticValue("indicator_value") ;
         lblcemi.Text= lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
         lblmeqseduzrenote.Text= DALC.GetStaticValue("reportingstatuspurpose_value");

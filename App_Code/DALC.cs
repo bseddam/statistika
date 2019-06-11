@@ -3009,10 +3009,10 @@ left join indicator_size as i_s on i_s.id=i.size_id
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  (select mg.name_" + lang + @" from metadata as mg
 inner join metadata_list as mgl on mg.list_id=mgl.id
 where mg.indicator_id=i.id and mgl.code='DATA_DESCR'
-) as descr,i_s.code as size_code,i.*  from indicators as i 
+) as descr,i_s.code as size_code,i.*,concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8)) code1  from indicators as i 
 inner join hesabat as h on h.indicator_id=i.id 
 left join indicator_size as i_s on i_s.id=i.size_id 
-where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>0 group by i.code order by i.code ", SqlConn);
+where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>0 group by i.code order by code1 ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
 
             da.Fill(dt);
@@ -3032,10 +3032,10 @@ where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>
             MySqlDataAdapter da = new MySqlDataAdapter("SELECT  (select mg.name_" + lang + @" from metadata as mg
 inner join metadata_list as mgl on mg.list_id=mgl.id
 where mg.indicator_id=i.id and mgl.code='DATA_DESCR'
-) as descr,i_s.code as size_code,i.*  from indicators as i 
+) as descr,i_s.code as size_code,i.*,concat(SUBSTRING(i.code, 1, 9),SUBSTRING(i.code, 11, 8)) code1  from indicators as i 
 inner join hesabat as h on h.indicator_id=i.id 
 left join indicator_size as i_s on i_s.id=i.size_id 
-where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>0 and i_s.code !=35 group by i.code order by i.code ", SqlConn);
+where i.goal_id=@goal_id and i.isActive=1 and h.is_active=1 and length(h.value)>0 and i_s.code !=35 group by i.code order by code1 ", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
 
             da.Fill(dt);
@@ -3128,28 +3128,29 @@ where code like @code and goal_id=@goal_id and id<>@indicatorId and isActive=1 o
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"
 select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirname_az,
-i1.name_en movcudname_en,i2.name_en planname_en,i3.name_en arasdirilirname_en,i.*,i1.movcuddur,i2.plan,i3.arasdirilir,
-cast(i1.movcuddur*100/i.cemisay as decimal(6,1)) faizmovcud,cast(i2.plan*100/i.cemisay as decimal(6,1)) faizplan,
-cast(i3.arasdirilir*100/i.cemisay as decimal(6,1))  faizarasdirilir
+i1.name_en movcudname_en,i2.name_en planname_en,i3.name_en arasdirilirname_en,i.*,IFNULL(i1.movcuddur, 0) movcuddur,IFNULL(i2.plan,0) plan,IFNULL(i3.arasdirilir,0) arasdirilir,
+IFNULL(cast(i1.movcuddur*100/i.cemisay as decimal(6,1)),0) faizmovcud,
+IFNULL(cast(i2.plan*100/i.cemisay as decimal(6,1)),0) faizplan,
+IFNULL(cast(i3.arasdirilir*100/i.cemisay as decimal(6,1)),0)  faizarasdirilir
 
 from (SELECT i.goal_id,g.name_short_az,g.name_short_en,count(*) cemisay FROM `indicators` i 
 inner join goals g on i.goal_id=g.id 
 where i.type_id=1 and i.parent_id=0 and i.isActive=1 
 group by i.goal_id,g.name_short_az,g.name_short_en) as i 
 
-inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) movcuddur FROM `indicators` as i 
+left join (SELECT i.goal_id,s.name_az,s.name_en,count(*) movcuddur FROM `indicators` as i 
 inner join indicators_status as s on i.status_id=s.id
 where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
 i.status_id=3 group by i.goal_id,s.name_az,s.name_en) as i1 
 on i.goal_id=i1.goal_id
 
-inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) plan FROM `indicators` as i 
+left join (SELECT i.goal_id,s.name_az,s.name_en,count(*) plan FROM `indicators` as i 
 inner join indicators_status as s on i.status_id=s.id
 where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
 i.status_id=2 group by i.goal_id,s.name_az,s.name_en) as i2 
 on i.goal_id=i2.goal_id
 
-inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) arasdirilir FROM `indicators` as i 
+left join (SELECT i.goal_id,s.name_az,s.name_en,count(*) arasdirilir FROM `indicators` as i 
 inner join indicators_status as s on i.status_id=s.id
 where i.type_id=1 and i.parent_id=0 and i.isActive=1 and 
 i.status_id=1 group by i.goal_id,s.name_az,s.name_en) as i3 
@@ -3636,13 +3637,13 @@ left join indicators_status as s on i.status_id=s.id where i.goal_id=@goal_id  a
         {
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"select * from 
-(SELECT  *  from indicators  where parent_id=0 and uygunluq_id=1 and type_id=1 and isActive=1 and goal_id=@goal_id 
+(SELECT  *,concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8)) code1  from indicators  where parent_id=0 and uygunluq_id=1 and type_id=1 and isActive=1 and goal_id=@goal_id 
 and concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8))  not in 
 (select  concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8)) from indicators  
 where parent_id=0 and uygunluq_id=1 and type_id=2 and isActive=1 and goal_id=@goal_id)
 UNION
-select  * from indicators  where parent_id=0 and uygunluq_id=1 and type_id=2 and isActive=1 and goal_id=@goal_id) as c 
-order by code", SqlConn);
+select  *,concat(SUBSTRING(code, 1, 9),SUBSTRING(code, 11, 8)) code1 from indicators  where parent_id=0 and uygunluq_id=1 and type_id=2 and isActive=1 and goal_id=@goal_id) as c 
+order by code1", SqlConn);
             da.SelectCommand.Parameters.AddWithValue("goal_id", goal_id);
 
 

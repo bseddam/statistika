@@ -45,10 +45,12 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item active">
-                        <a class="nav-link active" data-toggle="tab" href="#home" aria-expanded="true">Məlumatın mövcudluq vəziyyəti</a>
+                        <a class="nav-link active" data-toggle="tab" href="#home" aria-expanded="true">
+                            <asp:Literal ID="ltrlgostericiadi" runat="server"></asp:Literal></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#menu1">Priotetlik vəziyyəti</a>
+                        <a class="nav-link" data-toggle="tab" href="#menu1">
+                            <asp:Literal ID="ltrlpriotetlikveziyyeti" runat="server"></asp:Literal></a>
                     </li>
                 </ul>
                 <br />

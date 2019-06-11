@@ -181,7 +181,7 @@
                 <nav class="up2">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-sm-1 col-md-3">
                                 <div style="padding: 6px; padding-left: 20px;">
                                     <%--                                    <div class="footer-social-text" style="margin-bottom: 10px;">
                                         <asp:Literal ID="ltrFollow" Text="" runat="server" />
@@ -210,7 +210,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-8" style="padding-right:10px;">
+                            <div class="col-sm-11 col-md-9" style="padding-right:10px;">
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:Repeater ID="rptHeaderMenu" runat="server">
                                         <ItemTemplate>
