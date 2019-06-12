@@ -631,10 +631,10 @@
                                             </div>
 
                                             <div style="text-align: right;">
-                                                <asp:LinkButton ID="btnExport" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="pdf" Text="" runat="server">
+                                                <asp:LinkButton Visible="false" ID="btnExport" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="pdf" Text="" runat="server">
                                                             <i class="fa fa-file-o"></i> PDF
                                                 </asp:LinkButton>
-                                                <asp:LinkButton ID="btnExport2" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="doc" Text="" runat="server">
+                                                <asp:LinkButton Visible="false" ID="btnExport2" CssClass="export-item" OnClick="LnkExport_Click" CommandArgument="doc" Text="" runat="server">
                                                             <i class="fa fa-file-o"></i> Doc
                                                 </asp:LinkButton>
                                             </div>

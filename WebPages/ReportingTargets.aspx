@@ -109,7 +109,7 @@
                                         <!--   	 -->
                                         <div class="col-md-11 col-xs-12 re">
                                             <div class="dfdfd">
-                                                <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> <%#DALC.GetStaticValue("goal_info_tab1_title") %></span></h5>
+                                                <h5><%#Eval("name_short_"+Config.getLang(Page)) %> <span class="label dddd"><%#Eval("cemisay") %> <%#DALC.GetStaticValue("target_report") %></span></h5>
                                                 <p><span class="label label-success"><%#Eval("prioritetdir")%></span> <%#Eval("prioritetdir_"+Config.getLang(Page)) %> <b><%#Eval("faizprioritetdir")%>% </b></p>
                             
                                                 <p><span class="label label-danger"><%#Eval("prioritetdeyil")%></span> <%#Eval("prioritetdeyil_"+Config.getLang(Page)) %> <b><%#Eval("faizprioritetdeyil")%>% </b></p>

@@ -3175,18 +3175,22 @@ on i.goal_id=i3.goal_id", SqlConn);
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter(@"
 select i1.name_az prioritetdir_az,i2.name_az prioritetdeyil_az,
-i1.name_en prioritetdir_en,i2.name_en prioritetdeyil_en,i.*,i1.prioritetdir,i2.prioritetdeyil,
-cast(i1.prioritetdir*100/i.cemisay as decimal(6,1)) faizprioritetdir,
-cast(i2.prioritetdeyil*100/i.cemisay as decimal(6,1)) faizprioritetdeyil
+i1.name_en prioritetdir_en,i2.name_en prioritetdeyil_en,i.*,IFNULL(i1.prioritetdir,0) prioritetdir,
+IFNULL(i2.prioritetdeyil,0) prioritetdeyil,
+cast(IFNULL(i1.prioritetdir*100/i.cemisay,0) as decimal(6,1)) faizprioritetdir,
+cast(IFNULL(i2.prioritetdeyil*100/i.cemisay,0) as decimal(6,1)) faizprioritetdeyil
 from (
 SELECT i.goal_id,g.name_short_az,g.name_short_en,count(*) cemisay FROM `indicators` i 
 inner join goals g on i.goal_id=g.id 
 where i.type_id=1 and i.parent_id=0 and i.isActive=1 
 group by i.goal_id,g.name_short_az,g.name_short_en) as i 
-inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdir FROM `indicators` as i 
+
+left join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdir FROM `indicators` as i 
 inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
 i.uygunluq_id=1 and i.isActive=1 group by i.goal_id,s.name_az,s.name_en) as i1 on i.goal_id=i1.goal_id
-inner join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdeyil FROM `indicators` as i 
+
+
+left join (SELECT i.goal_id,s.name_az,s.name_en,count(*) prioritetdeyil FROM `indicators` as i 
 inner join indicator_uygunluq1 as s on i.uygunluq_id=s.id where i.type_id=1 and i.parent_id=0 and 
 i.uygunluq_id=2 and i.isActive=1 group by i.goal_id,s.name_az,s.name_en) as i2 on i.goal_id=i2.goal_id", SqlConn);
 

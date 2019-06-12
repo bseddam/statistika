@@ -51,14 +51,14 @@
                         </div>
 
                         <div class="page-gallery-container">
-                            <asp:Panel ID="pnlImages" runat="server">
+                            <asp:Panel ID="pnlImages" Visible="false" runat="server">
 
                                 <h5 class="border-bottom" style="padding-bottom: 10px;">
                                     <asp:Literal ID="PagesImagesTitle" Text="" runat="server" />
 
                                 </h5>
 
-                                <asp:Repeater ID="rptImages" runat="server">
+                                <asp:Repeater ID="rptImages"  runat="server">
                                     <ItemTemplate>
                                         <a class="page-gallery-item" href="/uploads/pages/<%#Eval("name") %>">
                                             <img src="/uploads/pages/<%#Eval("name") %>" />

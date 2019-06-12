@@ -21,7 +21,7 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblclasschart.Text = "class='active'";
             lblclassdatatable.Text = "";
             hdncharttype.Value = "2";
-            _hide_empty_labels();
+            
 
         }
         _loadFromViewState();
@@ -43,6 +43,17 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
                 "indicator",
                 LtrIndicatorInfo.Text,
                 "");
+        if (!IsPostBack)
+        {
+            lblFootNoteLabel.Visible = false;
+            lblFootNote.Visible = false;
+            lblNote.Visible = true;
+            lblNoteLabel.Visible = true;
+            lblSource.Visible = true;
+            lblSourceLabel.Visible = true;
+       
+            _hide_empty_labels();
+        }
     }
     void _helper_hide_empty_label(Label value, Label label)
     {
@@ -55,6 +66,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
     {
         //_helper_hide_empty_label(lblSize, lblSizeLabel);
         _helper_hide_empty_label(lblSource, lblSourceLabel);
+        _helper_hide_empty_label(lblSource1, lblSourceLabel1);
+        _helper_hide_empty_label(lblNote1, lblNoteLabel1);
         _helper_hide_empty_label(lblNote, lblNoteLabel);
         _helper_hide_empty_label(lblFootNote, lblFootNoteLabel);
     }
@@ -679,6 +692,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblFootNote.Visible = false;
             lblNote.Visible = true;
             lblNoteLabel.Visible = true;
+            lblSource.Visible = true;
+            lblSourceLabel.Visible = true;
             loadChartMutipleIndicator(lang, indicators, hdncharttype.Value);
             _hide_empty_labels();
         }
@@ -691,6 +706,8 @@ public partial class WebPages_IndicatorInfo : System.Web.UI.Page
             lblFootNote.Visible = true;
             lblNote.Visible = false;
             lblNoteLabel.Visible = false;
+            lblSource.Visible = false;
+            lblSourceLabel.Visible = false;
             cedvelgoster();
             _hide_empty_labels();
         }

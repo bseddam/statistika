@@ -30,7 +30,7 @@ public partial class WebPages_Law : System.Web.UI.Page
 
 
 
-        lblgostericinote2.Text = DALC.GetStaticValue("goal_info_tab1_title");
+        lblgostericinote2.Text = DALC.GetStaticValue("target_report");
         lblcemi2.Text = DALC.GetStaticValue("reportingstatuscemi_value");
 
 
