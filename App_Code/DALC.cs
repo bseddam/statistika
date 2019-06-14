@@ -3131,7 +3131,13 @@ select i1.name_az movcudname_az,i2.name_az planname_az,i3.name_az arasdirilirnam
 i1.name_en movcudname_en,i2.name_en planname_en,i3.name_en arasdirilirname_en,i.*,IFNULL(i1.movcuddur, 0) movcuddur,IFNULL(i2.plan,0) plan,IFNULL(i3.arasdirilir,0) arasdirilir,
 IFNULL(cast(i1.movcuddur*100/i.cemisay as decimal(6,1)),0) faizmovcud,
 IFNULL(cast(i2.plan*100/i.cemisay as decimal(6,1)),0) faizplan,
-IFNULL(cast(i3.arasdirilir*100/i.cemisay as decimal(6,1)),0)  faizarasdirilir
+IFNULL( 
+100-
+(IFNULL(cast(i1.movcuddur*100/i.cemisay as decimal(6,1)),0)
++
+IFNULL(cast(i2.plan*100/i.cemisay as decimal(6,1)),0))
+
+,0)  faizarasdirilir
 
 from (SELECT i.goal_id,g.name_short_az,g.name_short_en,count(*) cemisay FROM `indicators` i 
 inner join goals g on i.goal_id=g.id 
@@ -6956,7 +6962,8 @@ from hesabat  as h
 inner join indicators as i on i.id=h.indicator_id
 inner join goals as g on g.id=i.goal_id
 inner join indicator_size as isx on isx.id=i.size_id
-where h.is_active=1 and h.value is not null and length(h.value)> 0 and h.value not in ('-', '...', 'x')  and h.indicator_id in (" + indicator_ids + 
+where h.is_active=1 and h.value is not null and length(h.value)> 0 and 
+h.value not in ('-', '...', 'x')  and h.indicator_id in (" + indicator_ids + 
 ") and h.year in (" + years + ") group by i.name_az order by i.code", lang), SqlConn);
               
                

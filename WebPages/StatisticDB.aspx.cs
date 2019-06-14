@@ -475,7 +475,7 @@ public partial class WebPages_StatisticDB : System.Web.UI.Page
             Grid.Columns.Add(columnF);
         }
 
-        DataTable dtH = _db.GetHesabat2(_indicators.Trim(','), _years.Trim(','), lang);
+        DataTable dtH = _db.GetHesabat21(_indicators.Trim(','), _years.Trim(','), lang);
         string footnote_title = DALC.GetStaticValue("statistical_database_footnote_title");
 
         Footnote_Id _footnote_id = new Footnote_Id();

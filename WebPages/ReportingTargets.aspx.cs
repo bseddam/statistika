@@ -26,7 +26,7 @@ public partial class WebPages_Law : System.Web.UI.Page
         ltrBreadCrumb.Text = string.Format("<a href='/{0}/home'> {1}</a> / {2}  ",
              lang,
              DALC.GetStaticValue("home_breadcrumb_title"),
-             DALC.GetStaticValue("goal_info_tab1_title"));
+             DALC.GetStaticValue("reporting_targets_h"));
 
 
 
